@@ -1,0 +1,78 @@
+<div class="page-card">
+
+  <div class="section-title">
+    📋 Ingresos Activos
+  </div>
+
+  <div class="timeline">
+
+    <div
+      class="timeline-item"
+      *ngFor="let ingreso of ingresos"
+      (click)="abrirIngreso(ingreso.id)">
+
+      <div class="timeline-dot"></div>
+
+      <div class="ingreso-card">
+
+        <div class="avatar">
+
+          <mat-icon>
+            person_outline
+          </mat-icon>
+
+
+        </div>
+
+        <div class="ingreso-info">
+
+          <h3>
+            Número Ingreso:
+            <span>{{ ingreso.numeroIngreso }}</span>
+          </h3>
+
+          <h2>
+            {{ ingreso.nombrePaciente }}
+          </h2>
+
+          <p>
+            {{ ingreso.nombreEps }}
+          </p>
+
+        </div>
+
+        <div class="ingreso-fecha">
+
+          <p class="fecha-principal">
+            📅 {{ ingreso.fechaIngreso | date:'dd MMM yyyy' }}
+            &nbsp;
+            🕒 {{ ingreso.fechaIngreso | date:'HH:mm' }}
+          </p>
+
+          <p class="usuario-registro">
+            Registrado por
+            <strong>{{ ingreso.usuario }}</strong>
+          </p>
+
+        </div>
+
+        <div class="ingreso-estado">
+
+          <span
+            class="estado-badge"
+            [class.activo]="ingreso.estado === 'ACTIVO'"
+            [class.cerrado]="ingreso.estado !== 'ACTIVO'">
+
+            ● {{ ingreso.estado }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

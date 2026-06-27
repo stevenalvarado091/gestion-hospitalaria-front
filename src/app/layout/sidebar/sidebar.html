@@ -1,0 +1,106 @@
+<div class="sidebar">
+
+  <div class="logo">
+
+    <div class="logo-icon">
+      ❤
+    </div>
+
+    <div class="logo-text">
+      <span>SISTEMA</span>
+      <span>HOSPITALARIO</span>
+    </div>
+
+  </div>
+
+  <nav class="menu">
+
+    @if (!detalleIngreso) {
+
+    <a
+      routerLink="/nuevo-ingreso"
+      routerLinkActive="active">
+
+      <mat-icon>add_circle</mat-icon>
+
+      <span>Nuevo Ingreso</span>
+
+    </a>
+
+    <a
+      routerLink="/ingresos"
+      routerLinkActive="active">
+
+      <mat-icon>description</mat-icon>
+
+      <span>Ingresos</span>
+
+    </a>
+
+    }
+
+    @if (detalleIngreso) {
+
+    <a routerLink="/ingresos">
+
+      <mat-icon>arrow_back</mat-icon>
+
+      <span>Volver a Ingresos</span>
+
+    </a>
+
+    <a
+      [routerLink]="['/ingresos', ingresoId, 'resumen']"
+      routerLinkActive="active">
+
+      <mat-icon>dashboard</mat-icon>
+
+      <span>Resumen</span>
+
+    </a>
+
+    <a
+      [routerLink]="['/ingresos', ingresoId, 'observaciones']"
+      routerLinkActive="active">
+
+      <mat-icon>edit_note</mat-icon>
+
+      <span>Observaciones</span>
+
+    </a>
+
+    <a
+      [routerLink]="['/ingresos', ingresoId, 'autorizaciones']"
+      routerLinkActive="active">
+
+      <mat-icon>verified</mat-icon>
+
+      <span>Autorizaciones</span>
+
+    </a>
+
+    <a
+      [routerLink]="['/ingresos', ingresoId, 'correos']"
+      routerLinkActive="active">
+
+      <mat-icon>mail</mat-icon>
+
+      <span>Correos</span>
+
+    </a>
+
+    <a
+      [routerLink]="['/ingresos', ingresoId, 'documentos']"
+      routerLinkActive="active">
+
+      <mat-icon>folder</mat-icon>
+
+      <span>Documentos</span>
+
+    </a>
+
+    }
+
+  </nav>
+
+</div>

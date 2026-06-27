@@ -1,0 +1,113 @@
+<div class="observaciones-container">
+
+  <div class="observaciones-header">
+
+    <h2>Observaciones</h2>
+
+    <button
+      class="btn-nueva-observacion"
+      (click)="abrirFormulario()">
+
+      <mat-icon>add</mat-icon>
+      Nueva observación
+
+    </button>
+
+  </div>
+
+  <div class="observaciones-filtros">
+
+    <select>
+
+      <option>Todas las categorías</option>
+      <option>GENERAL</option>
+      <option>MEDICA</option>
+      <option>ADMINISTRATIVA</option>
+
+    </select>
+
+  </div>
+
+  <div
+    class="nueva-observacion-card"
+    *ngIf="mostrarFormulario">
+
+    <div class="form-title">
+      Nueva observación
+    </div>
+
+    <textarea
+      [(ngModel)]="nuevaObservacion.descripcion"
+      placeholder="Escribir observación...">
+    </textarea>
+
+    <div class="form-footer">
+
+      <select
+        [(ngModel)]="nuevaObservacion.tipoObservacion">
+
+        <option
+          *ngFor="let tipo of tiposObservacion"
+          [value]="tipo">
+
+          {{ tipo }}
+
+        </option>
+
+      </select>
+
+      <div class="acciones">
+
+        <button
+          class="btn-cancelar"
+          (click)="cerrarFormulario()">
+
+          Cancelar
+
+        </button>
+
+        <button
+          class="btn-guardar"
+          (click)="crearObservacion()">
+
+          Guardar observación
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div
+    class="observacion-card"
+    *ngFor="let observacion of observaciones">
+
+    <div class="observacion-header">
+
+      <div class="observacion-info">
+
+        <strong>
+          {{ observacion.usuario }}
+        </strong>
+
+        <span class="observacion-tipo">
+          {{ observacion.tipoObservacion }}
+        </span>
+
+      </div>
+
+      <span class="observacion-fecha">
+        {{ observacion.fechaCreacion | date:'dd/MM/yyyy HH:mm' }}
+      </span>
+
+    </div>
+
+    <div class="observacion-texto">
+      {{ observacion.descripcion }}
+    </div>
+
+  </div>
+
+</div>

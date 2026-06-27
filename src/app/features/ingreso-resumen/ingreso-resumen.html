@@ -1,0 +1,256 @@
+<ng-container *ngIf="ingreso">
+
+  <!-- INGRESO -->
+  <!--<div class="detalle-card">
+
+    <div class="detalle-header">
+
+      <div class="header-line">
+
+        <mat-icon class="icon">assignment</mat-icon>
+
+        <span class="item strong">{{ ingreso.numeroIngreso }}</span>
+
+        <span class="sep">|</span>
+
+        <span class="item">{{ ingreso.nombrePaciente }}</span>
+
+        <span class="sep">|</span>
+
+        <span class="item">{{ ingreso.nombreEps }}</span>
+
+        <span class="sep">|</span>
+
+        <span class="item">
+      {{ ingreso.fechaCreacion | date:'dd/MM/yyyy HH:mm' }}
+    </span>
+
+        <span class="sep">|</span>
+
+        <span class="estado"
+              [ngClass]="ingreso.estado?.toLowerCase()">
+      ● {{ ingreso.estado }}
+    </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-divider"></div>
+
+    <h3 class="section-title">INFORMACIÓN DEL PACIENTE</h3>
+
+    <div class="patient-grid">
+
+      <div class="patient-box">
+        <div class="patient-icon"><mat-icon>badge</mat-icon></div>
+        <div>
+          <label>Documento</label>
+          <strong>{{ ingreso.tipoDocumento }} - {{ ingreso.numeroDocumento }}</strong>
+        </div>
+      </div>
+
+      <div class="patient-box">
+        <div class="patient-icon"><mat-icon>person</mat-icon></div>
+        <div>
+          <label>Sexo</label>
+          <strong>{{ ingreso.sexo }}</strong>
+        </div>
+      </div>
+
+      <div class="patient-box">
+        <div class="patient-icon"><mat-icon>event</mat-icon></div>
+        <div>
+          <label>Fecha Nacimiento</label>
+          <strong>{{ ingreso.fechaNacimiento | date:'dd/MM/yyyy' }}</strong>
+        </div>
+      </div>
+
+      <div class="patient-box">
+        <div class="patient-icon"><mat-icon>health_and_safety</mat-icon></div>
+        <div>
+          <label>EPS</label>
+          <strong>{{ ingreso.nombreEps }}</strong>
+        </div>
+      </div>
+
+    </div>
+
+  </div> -->
+
+  <!-- TIMELINE -->
+
+
+
+  <div class="timeline-card">
+
+    <div class="timeline-header">
+      <mat-icon>history</mat-icon>
+      <div>
+        <h2>TRAZABILIDAD DEL INGRESO</h2>
+        <span>Historial completo de eventos</span>
+      </div>
+    </div>
+
+    <div class="timeline-body">
+
+      <div class="timeline-item"
+           *ngFor="let evento of timeline">
+
+        <div class="timeline-line">
+          <div class="timeline-dot"
+               [ngClass]="getTipoClase(evento.tipo)">
+          </div>
+        </div>
+
+        <div class="timeline-content"
+             (click)="toggleEvento(evento)">
+
+          <div class="timeline-badge"
+               [ngClass]="getTipoClase(evento.tipo)">
+            {{ evento.tipo }}
+          </div>
+
+          <div class="timeline-description">
+            {{ evento.descripcion }}
+          </div>
+
+          <div class="timeline-meta">
+
+            <span>
+              <mat-icon>calendar_month</mat-icon>
+              {{ evento.fecha | date:'dd/MM/yyyy hh:mm a' }}
+            </span>
+
+            <span>
+              <mat-icon>person_outline</mat-icon>
+              {{ evento.usuario }}
+            </span>
+
+          </div>
+
+          <div class="timeline-action">
+            {{ evento.expandido ? 'Ocultar detalle' : 'Ver detalle' }}
+          </div>
+
+          <!-- DETALLE REAL (NO JSON) -->
+          <div class="timeline-expandido" *ngIf="evento.expandido">
+
+            <div class="detalle-evento">
+
+              <!-- CORREO -->
+              <div *ngIf="evento.tipo === 'CORREO'">
+
+                <div class="evento-section">
+                  <strong>Asunto:</strong>
+                  <div>{{ evento.detalle.asunto }}</div>
+                </div>
+
+                <div class="evento-section">
+                  <strong>Destinatarios:</strong>
+
+                  <div *ngIf="evento.detalle.destinatarios?.length">
+                    <div *ngFor="let d of evento.detalle.destinatarios">
+                      {{ d }}
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="evento-section">
+                  <strong>Mensaje:</strong>
+                  <pre>{{ evento.detalle.mensaje }}</pre>
+                </div>
+
+                <!-- ADJUNTOS -->
+                <div class="evento-section">
+
+                  <strong>Adjuntos:</strong>
+
+                  <ng-container *ngIf="evento.detalle?.adjuntos?.length > 0; else sinAdjuntos">
+
+                    <div class="adjuntos-lista">
+                      <div class="adjunto-item"
+                           *ngFor="let a of evento.detalle.adjuntos">
+                        📎 {{ a.nombreArchivo }}
+                      </div>
+                    </div>
+
+                  </ng-container>
+
+                  <ng-template #sinAdjuntos>
+                    <div style="color:#94a3b8; font-size:13px;">
+                      Sin adjuntos
+                    </div>
+                  </ng-template>
+
+                </div>
+
+                <div class="evento-section"
+                     *ngIf="evento.detalle.envios?.length">
+
+                  <strong>Trazabilidad de Envíos:</strong>
+
+                  <div class="envios-lista">
+
+                    <div class="envio-item"
+                         *ngFor="let envio of evento.detalle.envios">
+
+                      <div class="envio-header">
+
+        <span class="envio-intento">
+          Intento {{ envio.intento }}
+        </span>
+
+                        <span class="envio-estado">
+          {{ envio.estado }}
+        </span>
+
+                      </div>
+
+                      <div class="envio-fecha">
+                        {{ envio.fechaEnvio | date:'dd/MM/yyyy hh:mm a' }}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- DOCUMENTO -->
+              <div *ngIf="evento.tipo === 'DOCUMENTO'">
+                <p><strong>Nombre:</strong> {{ evento.detalle.nombre }}</p>
+                <p><strong>Usuario:</strong> {{ evento.detalle.usuario }}</p>
+              </div>
+
+              <!-- OBSERVACION -->
+              <div *ngIf="evento.tipo === 'OBSERVACION'">
+                <p><strong>Usuario:</strong> {{ evento.detalle.usuario }}</p>
+                <p><strong>Detalle:</strong></p>
+                <pre>{{ evento.detalle.descripcion }}</pre>
+              </div>
+
+              <!-- AUTORIZACION -->
+              <div *ngIf="evento.tipo === 'AUTORIZACION'">
+                <p><strong>Usuario:</strong> {{ evento.detalle.usuario }}</p>
+                <p><strong>Detalle:</strong></p>
+                <pre>{{ evento.detalle.asunto }}</pre>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ng-container>

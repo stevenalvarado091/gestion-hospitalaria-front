@@ -1,0 +1,467 @@
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family:Inter, sans-serif;
+  background:#f5f7fb;
+}
+
+.layout{
+  height:100vh;
+}
+
+.sidebar{
+  width:280px;
+  background:#153556;
+  color:white;
+  border-radius:0 !important;
+}
+
+.sidebar-top{
+  padding:20px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.toggle-btn{
+  color:white !important;
+  margin-bottom:25px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo{
+  width:50px;
+  height:50px;
+  border-radius:14px;
+  background:#214a75;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:700;
+  font-size:18px;
+}
+
+.brand-info{
+  display:flex;
+  flex-direction:column;
+}
+
+.brand-title{
+  font-size:16px;
+  font-weight:700;
+}
+
+.brand-subtitle{
+  font-size:14px;
+  opacity:.8;
+}
+
+.menu{
+  padding:20px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.menu a{
+  height:54px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+  color:white;
+  padding:0 18px;
+  border-radius:14px;
+  transition:.2s;
+}
+
+.menu a:hover{
+  background:rgba(255,255,255,.08);
+}
+
+.menu a.active{
+  background:#285f96;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.topbar{
+  height:80px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 35px;
+  border-bottom:1px solid #e8edf3;
+}
+
+.breadcrumb{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+}
+
+.separator{
+  color:#94a3b8;
+}
+
+.current{
+  color:#153556;
+  font-weight:600;
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.notification-btn{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#f4f7fb;
+}
+
+.user-card{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.user-info{
+  text-align:right;
+}
+
+.user-name{
+  font-size:14px;
+  font-weight:700;
+}
+
+.user-role{
+  font-size:12px;
+  color:#64748b;
+}
+
+.avatar{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#dbeafe;
+  color:#153556;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.main-content{
+  padding:30px;
+  background:#f5f7fb;
+  min-height:calc(100vh - 80px);
+}
+
+.left-section{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.menu-button{
+  color:#153556 !important;
+}
+
+.mat-drawer-inner-container{
+  border-radius:0 !important;
+}
+
+.mat-drawer{
+  border-radius:0 !important;
+}
+
+.mat-drawer-side{
+  border-radius:0 !important;
+}
+
+/* ========================================
+   TARJETA GLOBAL INGRESO
+======================================== */
+
+.detalle-card-global{
+  background:#ffffff;
+  border-radius:20px;
+  border:1px solid #eef2f7;
+  box-shadow:0 6px 18px rgba(15,23,42,.05);
+
+  margin:24px;
+  margin-bottom:0;
+
+  overflow:hidden;
+}
+
+/* ========================================
+   CABECERA INGRESO
+======================================== */
+
+.detalle-superior{
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:16px;
+
+  padding:18px 24px;
+
+  border-bottom:1px solid #edf2f7;
+}
+
+.info-principal{
+  flex:1;
+}
+
+.titulo-ingreso{
+
+  display:block;
+
+  font-size:11px;
+  font-weight:600;
+
+  letter-spacing:.5px;
+
+  color:#64748b;
+
+  margin-bottom:4px;
+
+  text-transform:uppercase;
+}
+
+.info-principal h1{
+
+  margin:0;
+
+  font-size:24px;
+
+  font-weight:700;
+
+  color:#2563eb;
+
+  line-height:1.1;
+}
+
+.info-principal h2{
+
+  margin:6px 0 10px;
+
+  font-size:16px;
+
+  font-weight:600;
+
+  color:#0f172a;
+}
+
+.datos-secundarios{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:18px;
+}
+
+.datos-secundarios span{
+
+  display:flex;
+  align-items:center;
+
+  gap:6px;
+
+  font-size:12px;
+
+  color:#64748b;
+}
+
+.datos-secundarios mat-icon{
+
+  width:16px;
+  height:16px;
+  font-size:16px;
+
+  color:#94a3b8;
+}
+
+/* ========================================
+   ICONO INGRESO
+======================================== */
+
+.icono-ingreso{
+
+  width:58px;
+  height:58px;
+
+  border-radius:14px;
+
+  background:#eef4ff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  flex-shrink:0;
+}
+
+.icono-ingreso mat-icon{
+
+  width:28px;
+  height:28px;
+  font-size:28px;
+
+  color:#2563eb;
+}
+
+/* ========================================
+   ESTADO
+======================================== */
+
+.estado-badge{
+
+  display:flex;
+  align-items:center;
+
+  gap:6px;
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  font-size:12px;
+
+  font-weight:700;
+}
+
+.estado-badge.activo{
+
+  background:#dcfce7;
+
+  color:#16a34a;
+}
+
+.estado-badge.cerrado{
+
+  background:#f1f5f9;
+
+  color:#64748b;
+}
+
+.estado-badge mat-icon{
+
+  width:12px;
+  height:12px;
+  font-size:12px;
+}
+
+/* ========================================
+   DATOS PACIENTE
+======================================== */
+
+.paciente-grid{
+
+  padding:16px 24px;
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:12px;
+}
+
+.dato-card{
+
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+
+  padding:14px;
+
+  border:1px solid #e2e8f0;
+
+  border-radius:14px;
+
+  background:#ffffff;
+}
+
+.dato-icono{
+
+  width:42px;
+  height:42px;
+
+  border-radius:50%;
+
+  background:#f1f5f9;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.dato-icono mat-icon{
+
+  width:20px;
+  height:20px;
+  font-size:20px;
+
+  color:#2563eb;
+}
+
+.dato-card label{
+
+  display:block;
+
+  font-size:11px;
+
+  color:#64748b;
+
+  margin-bottom:3px;
+}
+
+.dato-card strong{
+
+  font-size:13px;
+
+  color:#0f172a;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width:1200px){
+
+  .paciente-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media (max-width:768px){
+
+  .detalle-superior{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .paciente-grid{
+    grid-template-columns:1fr;
+  }
+
+}

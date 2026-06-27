@@ -1,0 +1,354 @@
+<div class="page-card">
+
+  <form [formGroup]="form">
+
+    <div class="section-title">
+      📋 Datos del Ingreso
+    </div>
+
+    <div class="row row-2">
+
+      <!-- EPS -->
+      <div class="field">
+        <label>
+          EPS <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>
+            search
+          </mat-icon>
+
+          <input
+            type="text"
+            matInput
+            placeholder="Buscar EPS por nombre o código"
+            [formControl]="epsControl"
+            [matAutocomplete]="auto">
+
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            [displayWith]="mostrarEps"
+            (optionSelected)="seleccionarEps($event.option.value)">
+
+            <mat-option
+              *ngFor="let eps of epsFiltradas"
+              [value]="eps">
+
+              {{ eps.nombre }}
+
+            </mat-option>
+
+          </mat-autocomplete>
+
+        </mat-form-field>
+      </div>
+
+      <!-- NÚMERO INGRESO -->
+      <div class="field">
+        <label>
+          Número Ingreso <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>
+            #
+          </mat-icon>
+
+          <input
+            matInput
+            placeholder="Digite el número de ingreso"
+            formControlName="numeroIngreso"
+            (keypress)="soloNumeros($event)">
+
+          <mat-error *ngIf="form.get('numeroIngreso')?.hasError('required')">
+            El número de ingreso es obligatorio
+          </mat-error>
+
+          <mat-error *ngIf="form.get('numeroIngreso')?.hasError('pattern')">
+            Solo se permiten números
+          </mat-error>
+
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <div class="section-title">
+      👤 Datos del Paciente
+    </div>
+
+    <div class="row row-2">
+
+      <!-- TIPO DOCUMENTO -->
+      <div class="field">
+        <label>
+          Tipo de Documento <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>
+            contact_page
+          </mat-icon>
+
+          <mat-select formControlName="tipoDocumento"
+                      placeholder="Seleccione tipo documento">
+
+            <mat-error
+              *ngIf=" form.get('tipoDocumento') ?.hasError('edadDocumento') ">
+              El tipo de documento no corresponde con la edad
+            </mat-error>
+
+            <mat-option
+              *ngFor="let tipo of tiposDocumento"
+              [value]="tipo">
+
+              {{ tipo }}
+
+            </mat-option>
+
+          </mat-select>
+
+        </mat-form-field>
+
+      </div>
+
+      <!-- DOCUMENTO -->
+      <div class="field">
+        <label>
+          Número de Documento <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>
+            person
+          </mat-icon>
+
+          <input
+            matInput
+            placeholder="Ingrese número de documento"
+            formControlName="numeroDocumento"
+            (keypress)="soloNumeros($event)"
+            (blur)="buscarPaciente()">
+
+          <mat-error *ngIf="form.get('numeroDocumento')?.hasError('required')">
+            El documento es obligatorio
+          </mat-error>
+
+          <mat-error *ngIf="form.get('numeroDocumento')?.hasError('pattern')">
+            Solo se permiten números
+          </mat-error>
+
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <div class="row row-2">
+
+      <!-- PRIMER NOMBRE -->
+      <div class="field">
+        <label>
+          Primer Nombre <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>person</mat-icon>
+
+          <input
+            matInput
+            formControlName="primerNombre"
+            placeholder="Ingrese el primer nombre"
+            (keypress)="soloLetras($event)">
+
+          <mat-error *ngIf="form.get('primerNombre')?.hasError('required')">
+            El primer nombre es obligatorio
+          </mat-error>
+
+          <mat-error *ngIf="form.get('primerNombre')?.hasError('pattern')">
+            Solo se permiten letras
+          </mat-error>
+
+        </mat-form-field>
+
+      </div>
+
+      <!-- SEGUNDO NOMBRE -->
+      <div class="field">
+        <label>Segundo Nombre</label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>person</mat-icon>
+
+          <input
+            matInput
+            formControlName="segundoNombre"
+            placeholder="Ingrese el segundo nombre"
+            (keypress)="soloLetras($event)">
+
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <div class="row row-2">
+
+      <!-- PRIMER APELLIDO -->
+      <div class="field">
+        <label>
+          Primer Apellido <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>person</mat-icon>
+
+          <input
+            matInput
+            formControlName="primerApellido"
+            placeholder="Ingrese primer apellido"
+            (keypress)="soloLetras($event)">
+
+          <mat-error *ngIf="form.get('primerApellido')?.hasError('required')">
+            El primer apellido es obligatorio
+          </mat-error>
+
+          <mat-error *ngIf="form.get('primerApellido')?.hasError('pattern')">
+            Solo se permiten letras
+          </mat-error>
+
+        </mat-form-field>
+
+      </div>
+
+      <!-- SEGUNDO APELLIDO -->
+      <div class="field">
+        <label>Segundo Apellido</label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>person</mat-icon>
+
+          <input
+            matInput
+            formControlName="segundoApellido"
+            placeholder="Ingrese segundo apellido"
+            (keypress)="soloLetras($event)">
+
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <div class="row row-3">
+
+      <!-- FECHA NACIMIENTO -->
+      <div class="field">
+        <label>
+          Fecha Nacimiento <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>calendar_month</mat-icon>
+
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Digite o seleccione la fecha"
+            formControlName="fechaNacimiento">
+
+          <mat-error
+            *ngIf=" form.get('fechaNacimiento')?.invalid &&
+                    (form.get('fechaNacimiento')?.dirty ||
+                    form.get('fechaNacimiento')?.touched) ">
+                    La fecha es obligatoria
+          </mat-error>
+
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+
+        </mat-form-field>
+
+      </div>
+
+      <!-- EDAD -->
+      <div class="field edad-field">
+        <label>Edad</label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>cake</mat-icon>
+
+          <input
+            matInput
+            readonly
+            formControlName="edad"
+            placeholder="Edad">
+
+        </mat-form-field>
+
+      </div>
+
+      <!-- SEXO -->
+      <div class="field sexo-field">
+        <label>
+          Sexo <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-icon matPrefix>wc</mat-icon>
+
+          <mat-select formControlName="sexo"
+                      placeholder="Seleccione sexo">
+
+            <mat-option value="M">Masculino</mat-option>
+            <mat-option value="F">Femenino</mat-option>
+
+          </mat-select>
+
+          <mat-error *ngIf="form.get('sexo')?.hasError('required')">
+            Debe seleccionar una opción
+          </mat-error>
+
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <div class="footer-form">
+
+      <button mat-stroked-button type="button">
+        Cancelar
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="guardarIngreso()">
+     
+
+        Registrar
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
+
+

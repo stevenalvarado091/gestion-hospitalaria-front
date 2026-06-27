@@ -1,0 +1,410 @@
+.detalle-container{
+  padding:24px;
+  background:#f5f7fb;
+}
+
+.volver-btn{
+  margin-bottom:20px;
+}
+
+/* =========================
+   CARDS (ESTILO UNIFICADO)
+========================= */
+
+.detalle-card,
+.timeline-card{
+  background:#ffffff;
+  border-radius:22px;
+  padding:28px; /* reducido */
+  box-shadow:0 8px 25px rgba(15,23,42,.06);
+  border:1px solid #eef2f7;
+  margin-bottom:24px;
+  overflow:hidden;
+}
+
+/* =========================
+   HEADER (COMPACTO EN UNA LÍNEA)
+========================= */
+
+.detalle-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:22px 26px;
+  border-bottom:1px solid #edf2f7;
+}
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  flex-wrap:nowrap;
+}
+
+.header-icon{
+  width:64px;
+  height:64px;
+  border-radius:16px;
+  background:#eef4ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 6px rgba(37,99,235,.08);
+}
+
+.header-icon mat-icon{
+  font-size:30px;
+  width:30px;
+  height:30px;
+  color:#2563eb;
+}
+
+.numero-label{
+  display:none; /* eliminado visualmente para compactación */
+}
+
+.numero-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.numero-row h1{
+  margin:0;
+  font-size:34px;
+  font-weight:700;
+  color:#1e293b;
+}
+
+.header-info{
+  display:flex;
+  gap:18px;
+  font-size:14px;
+  color:#475569;
+  align-items:center;
+}
+
+.header-info span::after{
+  content:"|";
+  margin-left:12px;
+  color:#cbd5e1;
+}
+
+.header-info span:last-child::after{
+  content:"";
+}
+
+.estado-badge{
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  border:1px solid transparent;
+}
+
+.estado-badge.activo{
+  background:#dcfce7;
+  color:#16a34a;
+  border-color:#86efac;
+}
+
+/* CERRADO FUTURO */
+.estado-badge.cerrado{
+  background:#f1f5f9;
+  color:#64748b;
+  border-color:#cbd5e1;
+}
+
+/* NUEVO: HEADER LINEAL */
+.header-line{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  font-size:13px;
+}
+
+.header-line .sep{
+  color:#cbd5e1;
+}
+
+.header-line .item{
+  color:#334155;
+  font-size:13px;
+}
+
+.header-line .strong{
+  font-weight:700;
+  color:#0f172a;
+}
+
+/* =========================
+   SECCIONES
+========================= */
+
+.section-divider{
+  height:1px;
+  background:#edf2f7;
+}
+
+.section-title{
+  font-size:16px;
+  font-weight:700;
+  color:#1f2937;
+  margin-top:20px;
+  margin-bottom:16px;
+  padding-bottom:10px;
+  border-bottom:1px solid #edf2f7;
+}
+
+/* =========================
+   PACIENTE GRID
+========================= */
+
+.patient-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  padding:0;
+  margin-bottom:20px;
+}
+
+.patient-box{
+  border:1px solid #edf2f7;
+  border-radius:14px;
+  padding:12px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  background:#ffffff;
+}
+
+.patient-icon{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#f1f5f9;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.patient-icon mat-icon{
+  color:#64748b;
+}
+
+.patient-box label{
+  display:block;
+  font-size:11px;
+  color:#64748b;
+  margin-bottom:2px;
+}
+
+.patient-box strong{
+  color:#1f2937;
+  font-size:13px;
+}
+
+/* =========================
+   TIMELINE HEADER
+========================= */
+
+.timeline-header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:20px;
+  border-bottom:1px solid #edf2f7;
+}
+
+.timeline-header-icon{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#f1f5f9;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.timeline-header-icon mat-icon{
+  color:#64748b;
+}
+
+.timeline-header h2{
+  margin:0;
+  color:#1f2937;
+  font-size:16px;
+}
+
+.timeline-header span{
+  color:#64748b;
+  font-size:12px;
+}
+
+/* =========================
+   TIMELINE BODY
+========================= */
+
+.timeline-body{
+  padding:18px 20px;
+}
+
+.timeline-item{
+  display:flex;
+  gap:14px;
+  position:relative;
+  padding-bottom:20px;
+  cursor:pointer;
+}
+
+.timeline-line{
+  width:24px;
+  display:flex;
+  justify-content:center;
+}
+
+.timeline-line::after{
+  content:'';
+  position:absolute;
+  left:11px;
+  top:22px;
+  width:2px;
+  height:100%;
+  background:#e2e8f0;
+}
+
+.timeline-item:last-child .timeline-line::after{
+  display:none;
+}
+
+.timeline-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  z-index:1;
+  background:#94a3b8;
+}
+
+.timeline-content{
+  flex:1;
+}
+
+.timeline-badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:16px;
+  font-size:10px;
+  font-weight:600;
+  margin-bottom:8px;
+  background:#f1f5f9;
+  color:#475569;
+}
+
+.timeline-description{
+  font-size:13px;
+  color:#1f2937;
+  margin-bottom:6px;
+}
+
+.timeline-meta{
+  display:flex;
+  gap:14px;
+  color:#64748b;
+  font-size:11px;
+}
+
+.timeline-meta span{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+/* =========================
+   COLORES EVENTOS
+========================= */
+
+.observacion{ background:#ecfdf5; color:#047857; }
+.autorizacion{ background:#fffbeb; color:#b45309; }
+.correo{ background:#f5f3ff; color:#6d28d9; }
+.documento{ background:#eff6ff; color:#1d4ed8; }
+.ingreso{ background:#f0f9ff; color:#0369a1; }
+
+.timeline-dot.observacion{ background:#10b981; }
+.timeline-dot.autorizacion{ background:#f59e0b; }
+.timeline-dot.correo{ background:#8b5cf6; }
+.timeline-dot.documento{ background:#3b82f6; }
+.timeline-dot.ingreso{ background:#0ea5e9; }
+
+/* =========================
+   DETALLE EVENTO
+========================= */
+
+.timeline-expandido {
+  margin-top: 10px;
+  padding: 12px;
+  border-left: 3px solid #3b82f6;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.detalle-evento p {
+  margin: 5px 0;
+  color: #1f2937;
+  font-size:13px;
+}
+
+.detalle-evento pre {
+  white-space: pre-wrap;
+  font-family: inherit;
+  background: #f1f5f9;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+/* =========================
+   ADJUNTOS
+========================= */
+
+.adjunto-item {
+  background: #f1f5f9;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* =========================
+   ENVÍOS
+========================= */
+
+.envio-item {
+  background: #f8fafc;
+  border-left: 3px solid #3b82f6;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+
+.envio-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  color:#1f2937;
+  font-size:12px;
+}
+
+.envio-fecha {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.envio-estado {
+  color: #3b82f6;
+}
