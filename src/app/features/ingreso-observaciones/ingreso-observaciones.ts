@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { IngresoService } from '../../core/services/ingreso';
+import { IngresoService } from '../../core/services/ingreso.service';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
-import { ObservacionService } from '../../core/services/observacion';
+import { ObservacionService } from '../../core/services/observacion.service';
 
 import { ChangeDetectorRef } from '@angular/core';
 

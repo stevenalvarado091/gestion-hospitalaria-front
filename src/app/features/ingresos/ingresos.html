@@ -1,71 +1,260 @@
 <div class="page-card">
 
-  <div class="section-title">
-    📋 Ingresos Activos
+  <div class="page-header">
+
+    <h1>INGRESOS ACTIVOS</h1>
+
+    <p>
+      Consulte y gestione los ingresos de pacientes
+    </p>
+
+  </div>
+
+  <div class="filtro-card">
+
+    <div class="filtro-titulo">
+
+      <mat-icon>search</mat-icon>
+
+      FILTROS DE BÚSQUEDA
+
+    </div>
+
+    <div class="filtros">
+
+      <!-- Número ingreso -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Número ingreso</mat-label>
+
+        <input matInput [(ngModel)]="numeroIngreso">
+
+      </mat-form-field>
+
+      <!-- Tipo -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Tipo documento</mat-label>
+
+        <mat-select [(ngModel)]="tipoDocumento">
+
+          <mat-option *ngFor="let tipo of tiposDocumento" [value]="tipo">
+
+            {{ tipo }}
+
+          </mat-option>
+
+        </mat-select>
+
+      </mat-form-field>
+
+      <!-- Documento -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Número documento</mat-label>
+
+        <input matInput [(ngModel)]="numeroDocumento">
+
+      </mat-form-field>
+
+      <!-- Nombre -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Nombre o apellido</mat-label>
+
+        <input matInput [(ngModel)]="nombrePaciente">
+
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" (click)="buscar()">
+
+        <mat-icon>search</mat-icon>
+
+        Buscar
+
+      </button>
+
+      <button mat-stroked-button (click)="limpiarFiltros()">
+
+        <mat-icon>restart_alt</mat-icon>
+
+        Limpiar
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <div
+    class="mensaje-busqueda"
+    *ngIf="mensajeBusqueda">
+
+  <mat-icon>search_off</mat-icon>
+
+  {{ mensajeBusqueda }}
+
+</div>
+
+  <div class="listado-header">
+
+    <h2>LISTADO DE INGRESOS</h2>
+
+    <span>
+
+      Total: {{ totalRegistros }} ingresos
+
+    </span>
+
   </div>
 
   <div class="timeline">
 
-    <div
-      class="timeline-item"
-      *ngFor="let ingreso of ingresos"
-      (click)="abrirIngreso(ingreso.id)">
-
-      <div class="timeline-dot"></div>
+    <div class="timeline-item" *ngFor="let ingreso of ingresos" (click)="abrirIngreso(ingreso.id)">
 
       <div class="ingreso-card">
+
+        <!-- Avatar -->
 
         <div class="avatar">
 
           <mat-icon>
-            person_outline
+
+            person
+
           </mat-icon>
 
-
         </div>
 
-        <div class="ingreso-info">
+        <!-- Número ingreso -->
 
-          <h3>
-            Número Ingreso:
-            <span>{{ ingreso.numeroIngreso }}</span>
-          </h3>
+        <div class="numero-ingreso">
+
+          <span>
+
+            N° INGRESO
+
+          </span>
 
           <h2>
-            {{ ingreso.nombrePaciente }}
+
+            {{ ingreso.numeroIngreso }}
+
           </h2>
 
-          <p>
-            {{ ingreso.nombreEps }}
-          </p>
-
         </div>
 
-        <div class="ingreso-fecha">
+        <!-- Información -->
 
-          <p class="fecha-principal">
-            📅 {{ ingreso.fechaIngreso | date:'dd MMM yyyy' }}
+        <div class="datos-paciente">
+
+          <h3>
+
+            {{ ingreso.nombrePaciente | uppercase }}
+
+          </h3>
+
+          <div class="dato">
+
+            <mat-icon>
+
+              badge
+
+            </mat-icon>
+
+            {{ ingreso.tipoDocumento }}
+
             &nbsp;
-            🕒 {{ ingreso.fechaIngreso | date:'HH:mm' }}
-          </p>
 
-          <p class="usuario-registro">
-            Registrado por
-            <strong>{{ ingreso.usuario }}</strong>
-          </p>
+            {{ ingreso.numeroDocumento }}
+
+          </div>
+
+          <div class="dato">
+
+            <mat-icon>
+
+              business
+
+            </mat-icon>
+
+            {{ ingreso.nombreEps | uppercase }}
+
+          </div>
 
         </div>
 
-        <div class="ingreso-estado">
+        <!-- Fecha -->
 
-          <span
-            class="estado-badge"
-            [class.activo]="ingreso.estado === 'ACTIVO'"
-            [class.cerrado]="ingreso.estado !== 'ACTIVO'">
+        <div class="datos-fecha">
+
+          <div>
+
+            <mat-icon>
+
+              calendar_today
+
+            </mat-icon>
+
+            {{ ingreso.fechaIngreso | date:'dd MMM yyyy' | uppercase }}
+
+          </div>
+
+          <div>
+
+            <mat-icon>
+
+              schedule
+
+            </mat-icon>
+
+            {{ ingreso.fechaIngreso | date:'HH:mm' }}
+
+          </div>
+
+          <div>
+
+            <mat-icon>
+
+              person_outline
+
+            </mat-icon>
+
+            {{ ingreso.usuario }}
+
+          </div>
+
+        </div>
+
+        <!-- Estado -->
+
+        <div class="estado">
+
+          <span class="estado-badge" [class.activo]="ingreso.estado==='ACTIVO'">
 
             ● {{ ingreso.estado }}
 
           </span>
+
+        </div>
+
+        <!-- Flecha -->
+
+        <div class="abrir">
+
+          <button mat-icon-button>
+
+            <mat-icon>
+
+              chevron_right
+
+            </mat-icon>
+
+          </button>
 
         </div>
 
@@ -74,5 +263,10 @@
     </div>
 
   </div>
+
+  <mat-paginator [length]="totalRegistros" [pageSize]="tamanio" [pageIndex]="pagina" [pageSizeOptions]="[10,20,50]"
+    showFirstLastButtons (page)="cambiarPagina($event)">
+
+  </mat-paginator>
 
 </div>

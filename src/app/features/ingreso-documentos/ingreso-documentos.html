@@ -1,1 +1,362 @@
-<p>ingreso-documentos works!</p>
+<div class="documentos-container">
+
+  <!-- ========================================================= -->
+  <!-- CABECERA -->
+  <!-- ========================================================= -->
+
+  <div class="documentos-header">
+
+    <div>
+
+      <h2>DOCUMENTOS</h2>
+
+      <p>
+        Gestión de documentos asociados al ingreso
+      </p>
+
+    </div>
+
+    <div class="acciones-header">
+
+      <button
+        *ngIf="!mostrarFormulario"
+        mat-flat-button
+        color="primary"
+        (click)="abrirFormulario()">
+
+        <mat-icon>upload_file</mat-icon>
+
+        Cargar documento
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- FORMULARIO -->
+  <!-- ========================================================= -->
+
+  <div
+    class="formulario-documento"
+    *ngIf="mostrarFormulario">
+
+    <div class="formulario-header">
+
+      <h3>
+
+        Nuevo documento
+
+      </h3>
+
+      <div class="botones-formulario">
+
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!archivoSeleccionado || !tipoDocumentoSeleccionado || subiendo"
+          (click)="guardarDocumento()">
+
+          <mat-icon>
+
+            save
+
+          </mat-icon>
+
+          Guardar
+
+        </button>
+
+        <button
+          mat-stroked-button
+          (click)="cerrarFormulario()">
+
+          Cancelar
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <hr>
+
+    <!-- Tipo documento -->
+
+    <mat-form-field
+      appearance="outline"
+      class="campo-documento">
+
+      <mat-label>
+
+        Tipo de documento
+
+      </mat-label>
+
+      <mat-select
+        [(ngModel)]="tipoDocumentoSeleccionado">
+
+        <mat-option
+          *ngFor="let tipo of tiposDocumento"
+          [value]="tipo">
+
+          {{ tipo.replaceAll('_',' ') }}
+
+        </mat-option>
+
+      </mat-select>
+
+    </mat-form-field>
+
+    <!-- Drop Zone -->
+
+    <div
+      class="drop-zone"
+      (click)="inputArchivo.click()">
+
+      <mat-icon>
+
+        cloud_upload
+
+      </mat-icon>
+
+      <h3>
+
+        Documento adjunto
+
+      </h3>
+
+      <p>
+
+        Arrastre el documento aquí o haga clic para seleccionarlo.
+
+      </p>
+
+      <button
+        type="button"
+        mat-stroked-button
+        color="primary">
+
+        Seleccionar documento
+
+      </button>
+
+      <input
+        #inputArchivo
+        hidden
+        type="file"
+        (change)="seleccionarArchivo($event)">
+
+    </div>
+
+    <!-- Archivo -->
+
+    <div
+      class="archivo-info"
+      *ngIf="archivoSeleccionado">
+
+      <mat-icon>
+
+        description
+
+      </mat-icon>
+
+      <div>
+
+        <strong>
+
+          {{ nombreArchivo }}
+
+        </strong>
+
+        <small>
+
+          {{ tamanoArchivo }}
+
+        </small>
+
+      </div>
+
+    </div>
+
+    <!-- Spinner -->
+
+    <div
+      class="spinner"
+      *ngIf="subiendo">
+
+      <mat-progress-spinner
+        mode="indeterminate"
+        diameter="45">
+
+      </mat-progress-spinner>
+
+      <span>
+
+        Subiendo documento...
+
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- HISTORIAL -->
+  <!-- ========================================================= -->
+
+  <div class="historial-header">
+
+    <h3>
+
+      Historial de documentos
+
+    </h3>
+
+    <span>
+
+      {{ documentos.length }} documento(s)
+
+    </span>
+
+  </div>
+
+  <!-- Sin documentos -->
+
+  <div
+    class="sin-documentos"
+    *ngIf="documentos.length==0">
+
+    <mat-icon>
+
+      folder_open
+
+    </mat-icon>
+
+    <p>
+
+      Este ingreso aún no tiene documentos cargados.
+
+    </p>
+
+  </div>
+
+  <!-- Lista -->
+
+  <div
+    class="documentos-lista"
+    *ngIf="documentos.length>0">
+
+    <div
+      class="documento-card"
+      *ngFor="let documento of documentos">
+
+      <div class="documento-icono">
+
+        <mat-icon>
+
+          description
+
+        </mat-icon>
+
+      </div>
+
+      <div class="documento-info">
+
+        <h3>
+
+          {{ documento.nombre }}
+
+        </h3>
+
+        <div class="documento-detalles">
+
+          <span>
+
+            <strong>Tipo:</strong>
+
+            {{ documento.tipoDocumento }}
+
+          </span>
+
+          <span>
+
+            <strong>Extensión:</strong>
+
+            {{ documento.extension }}
+
+          </span>
+
+          <span>
+
+            <strong>Tamaño:</strong>
+
+            {{ documento.tamano }}
+
+          </span>
+
+        </div>
+
+        <div class="documento-fecha">
+
+          <mat-icon>
+
+            calendar_today
+
+          </mat-icon>
+
+          {{ documento.fechaCreacion | date:'dd/MM/yyyy' }}
+
+          <mat-icon>
+
+            schedule
+
+          </mat-icon>
+
+          {{ documento.fechaCreacion | date:'HH:mm' }}
+
+        </div>
+
+        <div class="documento-usuario">
+
+          <mat-icon>
+
+            person
+
+          </mat-icon>
+
+          {{ documento.usuario }}
+
+          •
+
+          {{ documento.rolUsuario }}
+
+        </div>
+
+      </div>
+
+      <div class="documento-acciones">
+
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="descargarDocumento(documento.id)">
+
+          <mat-icon>
+
+            download
+
+          </mat-icon>
+
+          Descargar
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

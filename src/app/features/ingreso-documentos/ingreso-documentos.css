@@ -1,0 +1,540 @@
+/*=========================================================
+CONTENEDOR GENERAL
+=========================================================*/
+
+.documentos-container{
+
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+
+}
+
+/*=========================================================
+HEADER
+=========================================================*/
+
+.documentos-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.documentos-header h2{
+
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+    color:#1e293b;
+
+}
+
+.documentos-header p{
+
+    margin-top:6px;
+    color:#64748b;
+    font-size:15px;
+
+}
+
+.acciones-header{
+
+    display:flex;
+    gap:12px;
+
+}
+
+/*=========================================================
+FORMULARIO
+=========================================================*/
+
+.formulario-documento{
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:18px;
+
+    padding:28px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:22px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.04);
+
+}
+
+.formulario-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.formulario-header h3{
+
+    margin:0;
+
+    font-size:23px;
+
+    font-weight:600;
+
+}
+
+.botones-formulario{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.campo-documento{
+
+    width:420px;
+
+    max-width:100%;
+
+}
+
+/*=========================================================
+DROP ZONE
+=========================================================*/
+
+.drop-zone{
+
+    border:2px dashed #3b82f6;
+
+    border-radius:18px;
+
+    background:#f8fbff;
+
+    padding:45px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+.drop-zone:hover{
+
+    background:#eef6ff;
+
+    border-color:#2563eb;
+
+}
+
+.drop-zone mat-icon{
+
+    font-size:64px;
+
+    width:64px;
+
+    height:64px;
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}
+
+.drop-zone h3{
+
+    margin:0;
+
+    font-size:22px;
+
+    color:#1e3a8a;
+
+}
+
+.drop-zone p{
+
+    margin-top:10px;
+
+    margin-bottom:25px;
+
+    color:#64748b;
+
+}
+
+/*=========================================================
+ARCHIVO
+=========================================================*/
+
+.archivo-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    background:#eff6ff;
+
+    border-left:5px solid #2563eb;
+
+    padding:18px;
+
+    border-radius:12px;
+
+}
+
+.archivo-info mat-icon{
+
+    color:#2563eb;
+
+    font-size:38px;
+
+    width:38px;
+
+    height:38px;
+
+}
+
+.archivo-info strong{
+
+    display:block;
+
+    font-size:15px;
+
+}
+
+.archivo-info small{
+
+    color:#64748b;
+
+}
+
+/*=========================================================
+SPINNER
+=========================================================*/
+
+.spinner{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:20px;
+
+    padding:15px;
+
+}
+
+/*=========================================================
+HISTORIAL
+=========================================================*/
+
+.historial-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding-top:10px;
+
+}
+
+.historial-header h3{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:600;
+
+}
+
+.historial-header span{
+
+    color:#64748b;
+
+}
+
+/*=========================================================
+SIN DOCUMENTOS
+=========================================================*/
+
+.sin-documentos{
+
+    background:#fafafa;
+
+    border:2px dashed #d1d5db;
+
+    border-radius:18px;
+
+    padding:60px;
+
+    text-align:center;
+
+}
+
+.sin-documentos mat-icon{
+
+    font-size:70px;
+
+    width:70px;
+
+    height:70px;
+
+    color:#94a3b8;
+
+}
+
+.sin-documentos p{
+
+    margin-top:20px;
+
+    color:#64748b;
+
+}
+
+/*=========================================================
+LISTADO
+=========================================================*/
+
+.documentos-lista{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+/*=========================================================
+CARD
+=========================================================*/
+
+.documento-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    border:1px solid #e5e7eb;
+
+    padding:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    transition:.25s;
+
+}
+
+.documento-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+/*=========================================================
+ICONO
+=========================================================*/
+
+.documento-icono{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:16px;
+
+    background:#eff6ff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-right:20px;
+
+}
+
+.documento-icono mat-icon{
+
+    font-size:38px;
+
+    width:38px;
+
+    height:38px;
+
+    color:#2563eb;
+
+}
+
+/*=========================================================
+INFO
+=========================================================*/
+
+.documento-info{
+
+    flex:1;
+
+}
+
+.documento-info h3{
+
+    margin:0 0 10px 0;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+.documento-detalles{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:25px;
+
+    margin-bottom:12px;
+
+    color:#475569;
+
+    font-size:14px;
+
+}
+
+.documento-fecha,
+
+.documento-usuario{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#64748b;
+
+    margin-top:8px;
+
+    font-size:14px;
+
+}
+
+.documento-fecha mat-icon,
+
+.documento-usuario mat-icon{
+
+    font-size:18px;
+
+    width:18px;
+
+    height:18px;
+
+}
+
+/*=========================================================
+BOTONES
+=========================================================*/
+
+.documento-acciones{
+
+    margin-left:25px;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+/*=========================================================
+RESPONSIVE
+=========================================================*/
+
+@media(max-width:1000px){
+
+.documento-card{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.documento-acciones{
+
+    width:100%;
+
+    margin-left:0;
+
+}
+
+.documento-acciones button{
+
+    width:100%;
+
+}
+
+.documentos-header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.formulario-header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+}
+
+.botones-formulario{
+
+    width:100%;
+
+}
+
+.botones-formulario button{
+
+    flex:1;
+
+}
+
+}

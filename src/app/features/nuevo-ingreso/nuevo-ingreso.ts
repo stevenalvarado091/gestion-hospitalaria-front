@@ -12,7 +12,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { EpsService } from '../../core/services/eps.service';
-import { IngresoService } from '../../core/services/ingreso';
+import { IngresoService } from '../../core/services/ingreso.service';
 
 @Component({
   selector: 'app-nuevo-ingreso',

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
-import { IngresoService } from './core/services/ingreso';
+import { IngresoService } from './core/services/ingreso.service';
 import { CommonModule } from '@angular/common';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
