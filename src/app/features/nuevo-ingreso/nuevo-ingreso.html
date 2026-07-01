@@ -3,8 +3,9 @@
   <form [formGroup]="form">
 
     <div class="section-title">
-      📋 Datos del Ingreso
-    </div>
+    <mat-icon>inventory_2</mat-icon>
+    <span>Datos del ingreso</span>
+</div>
 
     <div class="row row-2">
 
@@ -78,8 +79,9 @@
     </div>
 
     <div class="section-title">
-      👤 Datos del Paciente
-    </div>
+    <mat-icon>badge</mat-icon>
+    <span>Información del paciente</span>
+</div>
 
     <div class="row row-2">
 
@@ -135,6 +137,7 @@
             formControlName="numeroDocumento"
             (keypress)="soloNumeros($event)"
             (blur)="buscarPaciente()">
+            
 
           <mat-error *ngIf="form.get('numeroDocumento')?.hasError('required')">
             El documento es obligatorio
@@ -330,22 +333,32 @@
 
     <div class="footer-form">
 
-      <button mat-stroked-button type="button">
-        Cancelar
-      </button>
+  <button
+    mat-stroked-button
+    class="btn-cancelar"
+    type="button"
+    (click)="cancelar()">
 
-      <button
-        mat-raised-button
-        color="primary"
-        type="button"
-        (click)="guardarIngreso()">
+    <mat-icon>close</mat-icon>
 
+    Cancelar
 
-        Registrar
+</button>
 
-      </button>
+<button
+    mat-flat-button
+    class="btn-guardar"
+    type="button"
+    (click)="guardarIngreso()">
 
-    </div>
+    <mat-icon>save</mat-icon>
+
+    Registrar ingreso
+
+</button>
+
+</div>
+
 
   </form>
 

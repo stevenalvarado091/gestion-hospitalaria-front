@@ -31,7 +31,7 @@
 
                 </mat-icon>
 
-                {{ mostrarFormulario ? 'Ocultar formulario' : 'Enviar correo' }}
+                {{ mostrarFormulario ? 'Ocultar formulario' : 'Nuevo correo' }}
 
             </button>
 
@@ -49,6 +49,35 @@
             </button>
 
         </div>
+
+        <div
+    class="spinner"
+    *ngIf="enviando">
+
+    <mat-progress-spinner
+        mode="indeterminate"
+        diameter="45">
+
+    </mat-progress-spinner>
+
+    <div class="spinner-texto">
+
+        <strong>
+
+            Enviando correo...
+
+        </strong>
+
+        <small>
+
+            Espere mientras se envían el mensaje y los archivos adjuntos.
+
+        </small>
+
+    </div>
+
+</div>
+
 
     </div>
 
@@ -180,11 +209,18 @@
 
         <div class="acciones">
 
-            <button mat-raised-button color="primary" type="button" (click)="enviarCorreo()">
+            <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    [disabled]="enviando"
+    (click)="enviarCorreo()">
 
-                Nuevo correo
+    <mat-icon>send</mat-icon>
 
-            </button>
+    Enviar correo
+
+</button>
 
             <button mat-button type="button" (click)="mostrarFormulario=false">
 
@@ -193,6 +229,29 @@
             </button>
 
         </div>
+
+        <div
+    class="spinner"
+    *ngIf="enviando">
+
+    <mat-progress-spinner
+        mode="indeterminate"
+        diameter="45">
+
+    </mat-progress-spinner>
+
+    <div class="spinner-texto">
+
+        <strong>
+
+            Enviando correo...
+
+        </strong>
+
+
+    </div>
+
+</div>
 
     </div>
 

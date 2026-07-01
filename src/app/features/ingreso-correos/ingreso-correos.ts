@@ -9,6 +9,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ViewChild, ElementRef } from '@angular/core';
 
@@ -29,7 +30,8 @@ import { ChangeDetectorRef } from '@angular/core';
     MatAutocompleteModule,
     MatSelectModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './ingreso-correos.html',
   styleUrls: ['./ingreso-correos.css']
@@ -55,6 +57,7 @@ export class IngresoCorreosComponent implements OnInit {
   archivos: File[] = [];
   mostrarFormulario = false;
   correos: any[] = [];
+  enviando = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -221,6 +224,8 @@ enviarCorreo() {
     return;
   }
 
+  this.enviando = true;
+
   this.correoService.enviarCorreo(
 
     this.ingresoId,
@@ -238,6 +243,8 @@ enviarCorreo() {
   ).subscribe({
 
     next: (response: any) => {
+
+      this.enviando = false;
 
       console.log('Correo enviado', response);
 

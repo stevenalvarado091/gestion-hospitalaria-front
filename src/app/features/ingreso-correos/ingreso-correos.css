@@ -630,3 +630,51 @@ hr{
     color:#64748b;
 
 }
+
+/*=========================================================
+SPINNER ENVÍO CORREO
+=========================================================*/
+
+.spinner{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:20px;
+
+    margin-top:20px;
+
+    padding:15px;
+
+}
+
+.spinner-texto{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+.spinner-texto strong{
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#1e293b;
+
+}
+
+.spinner-texto small{
+
+    font-size:13px;
+
+    color:#64748b;
+
+}

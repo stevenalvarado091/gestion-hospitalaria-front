@@ -79,4 +79,11 @@ buscarPorNombre(nombre: string) {
 
 }
 
+
+buscarPaciente(tipo: string, numero: string) {
+  return this.http.get(
+    `${this.url}/pacientes/buscar?tipoDocumento=${tipo}&numeroDocumento=${numero}`
+  );
+}
+
 }

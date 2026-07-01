@@ -1,214 +1,318 @@
+/* ==========================
+   CONTENEDOR
+==========================*/
+
 .page-card{
 
-  background:#ffffff;
+    max-width:1400px;
+    margin:auto;
 
-  border-radius:22px;
+    background:#fff;
 
-  padding:35px;
+    border-radius:20px;
 
-  box-shadow:
-      0 8px 25px rgba(15,23,42,.06);
+    padding:34px;
 
-  border:1px solid #eef2f7;
+    border:1px solid #e8edf5;
+
+    box-shadow:
+        0 8px 30px rgba(15,23,42,.05);
 }
 
-.card-header{
-
-  margin-bottom:30px;
-}
-
-.card-header h2{
-
-  margin:0;
-
-  color:#17324d;
-
-  font-size:28px;
-
-  font-weight:700;
-}
-
-.card-header p{
-
-  margin-top:8px;
-
-  color:#64748b;
-
-  font-size:14px;
-}
+/*=========================
+TITULOS
+=========================*/
 
 .section-title{
 
-  font-size:16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
 
-  font-weight:700;
+    margin:10px 0 24px;
 
-  color:#17324d;
+    padding-bottom:14px;
 
-  margin-top:25px;
+    border-bottom:1px solid #eef2f6;
 
-  margin-bottom:20px;
+    font-size:20px;
+    font-weight:700;
 
-  padding-bottom:12px;
-
-  border-bottom:1px solid #edf2f7;
+    color:#16324f;
 }
+
+.section-title mat-icon{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#eef5ff;
+
+    color:#2d6cdf;
+
+    border-radius:12px;
+
+    font-size:22px;
+}
+
+/*=========================
+GRID
+=========================*/
 
 .row{
 
-  display:grid;
+    display:grid;
 
-  gap:20px;
+    gap:22px;
 
-  margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 .row-2{
 
-  grid-template-columns:
-      1fr
-      1fr;
+    grid-template-columns:repeat(2,minmax(0,1fr));
 }
 
 .row-3{
 
-  grid-template-columns:
-      1fr
-      280px
-      300px;
+    grid-template-columns:
+            2fr
+            180px
+            220px;
 }
+
+/*=========================
+CAMPOS
+=========================*/
 
 .field{
 
-  display:flex;
+    display:flex;
 
-  flex-direction:column;
+    flex-direction:column;
 }
 
 .field label{
 
-  margin-bottom:8px;
+    font-size:13px;
 
-  font-size:13px;
+    font-weight:600;
 
-  font-weight:600;
+    color:#5b6778;
 
-  color:#334155;
+    margin-bottom:8px;
 }
 
-.field mat-form-field{
+.required{
 
-  width:100%;
+    color:#ef4444;
 }
+
+/*=========================
+ANGULAR MATERIAL
+=========================*/
 
 ::ng-deep .mat-mdc-form-field{
 
-  width:100%;
+    width:100%;
 }
 
 ::ng-deep .mat-mdc-text-field-wrapper{
 
-  height:58px !important;
+    background:#fafbfd !important;
 
-  border-radius:14px !important;
+    border-radius:14px !important;
 
-  background:white !important;
+    min-height:58px;
+
+    transition:.2s;
 }
 
 ::ng-deep .mdc-notched-outline__leading,
 ::ng-deep .mdc-notched-outline__notch,
 ::ng-deep .mdc-notched-outline__trailing{
 
-  border-color:#d8e0ea !important;
+    border-color:#d9e3ef !important;
 }
 
-::ng-deep .mat-mdc-form-field:hover
-.mdc-notched-outline__leading,
+::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline__leading,
+::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline__notch,
+::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline__trailing{
 
-::ng-deep .mat-mdc-form-field:hover
-.mdc-notched-outline__notch,
+    border-color:#4f8ef7 !important;
+}
 
-::ng-deep .mat-mdc-form-field:hover
-.mdc-notched-outline__trailing{
+::ng-deep .mat-focused .mdc-notched-outline__leading,
+::ng-deep .mat-focused .mdc-notched-outline__notch,
+::ng-deep .mat-focused .mdc-notched-outline__trailing{
 
-  border-color:#285f96 !important;
+    border-width:2px !important;
+
+    border-color:#2d6cdf !important;
 }
 
 ::ng-deep .mat-mdc-input-element{
 
-  font-size:14px !important;
+    font-size:15px;
 }
 
 ::ng-deep .mat-mdc-select-value{
 
-  font-size:14px !important;
+    font-size:15px;
 }
 
 ::ng-deep .mat-mdc-form-field-icon-prefix{
 
-  padding-right:10px;
+    color:#8c98aa;
+
+    padding-right:12px;
 }
+
+/*=========================
+ICONOS
+=========================*/
 
 .mat-icon{
 
-  color:#64748b;
+    color:#7b8794;
+}
+
+/*=========================
+BOTONES
+=========================*/
+
+.footer-form button{
+
+    min-width:170px;
+    height:46px;
+
+    border-radius:10px;
+
+    font-size:15px;
+    font-weight:600;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    transition:all .2s ease;
+}
+
+.footer-form button mat-icon{
+
+    font-size:20px;
+    width:20px;
+    height:20px;
+}
+
+/*=========================
+RESPONSIVE
+=========================*/
+
+@media(max-width:1200px){
+
+.row-2{
+
+grid-template-columns:1fr;
+
+}
+
+.row-3{
+
+grid-template-columns:1fr;
+
 }
 
 .footer-form{
 
-  display:flex;
+justify-content:stretch;
 
-  justify-content:flex-end;
+flex-direction:column;
 
-  gap:12px;
-
-  margin-top:35px;
-
-  padding-top:25px;
-
-  border-top:1px solid #edf2f7;
 }
 
 .footer-form button{
 
-  height:46px;
+width:100%;
 
-  min-width:150px;
-
-  border-radius:12px;
 }
 
-.footer-form button:last-child{
-
-  background:#285f96 !important;
 }
 
-@media(max-width:1100px){
+.footer-form{
 
-  .row-2,
-  .row-3{
+    display:flex;
+    justify-content:flex-end;
+    gap:14px;
 
-    grid-template-columns:1fr;
-  }
+    margin-top:34px;
+    padding-top:26px;
+
+    border-top:1px solid #edf2f7;
 }
 
-.required{
-  color:#dc2626;
-  font-weight:700;
+/* BOTÓN CANCELAR */
+
+.btn-cancelar{
+
+    height:46px !important;
+    padding:0 22px !important;
+
+    border-radius:12px !important;
+
+    border:1px solid #d9e2ec !important;
+
+    background:#fff !important;
+
+    color:#5b6778 !important;
+
+    font-weight:600 !important;
+
+    transition:.2s;
 }
 
-.page-title{
-  margin-bottom:24px;
+.btn-cancelar:hover{
+
+    background:#f8fafc !important;
+
+    border-color:#c6d3df !important;
 }
 
-.page-title h1{
-  margin:0;
-  font-size:30px;
-  font-weight:700;
-  color:#153556;
+/* BOTÓN REGISTRAR */
+
+.btn-guardar{
+
+    height:46px !important;
+    padding:0 24px !important;
+
+    border-radius:12px !important;
+
+    background:#1d4f91 !important;
+
+    color:#fff !important;
+
+    font-weight:600 !important;
+
+    box-shadow:
+        0 8px 18px rgba(29,79,145,.18);
+
+    transition:.2s;
 }
 
-.page-title p{
-  margin-top:8px;
-  color:#64748b;
+.btn-guardar:hover{
+
+    background:#163f74 !important;
+
+    transform:translateY(-1px);
+}
+
+.footer-form button mat-icon{
+
+    margin-right:6px;
+    font-size:18px;
 }

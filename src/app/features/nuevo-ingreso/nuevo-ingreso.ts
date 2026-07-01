@@ -136,7 +136,7 @@ export class NuevoIngresoComponent implements OnInit {
 
     if (!tipo || !numero) return;
 
-    this.ingresoService.getByDocumento(tipo, numero)
+    this.ingresoService.buscarPaciente(tipo, numero)
       .subscribe({
 
         next: (paciente: any) => {
@@ -222,12 +222,8 @@ export class NuevoIngresoComponent implements OnInit {
             duration: 3000
           });
 
-          this.form.reset();
-          this.epsControl.setValue('');
-          this.epsSeleccionada = null;
-          this.epsFiltradas = this.epsList;
-
-          this.pacienteExiste = false;
+          //Reiniciar formulario
+          this.cancelar();
 
         },
 
@@ -345,5 +341,25 @@ export class NuevoIngresoComponent implements OnInit {
     }
 
   }
+
+  cancelar() {
+
+  this.form.reset();
+
+  this.form.get('primerNombre')?.enable();
+  this.form.get('segundoNombre')?.enable();
+  this.form.get('primerApellido')?.enable();
+  this.form.get('segundoApellido')?.enable();
+  this.form.get('fechaNacimiento')?.enable();
+  this.form.get('sexo')?.enable();
+
+  this.epsControl.setValue('');
+
+  this.epsSeleccionada = null;
+  this.epsFiltradas = this.epsList;
+
+  this.pacienteExiste = false;
+
+}
 
 }
