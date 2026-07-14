@@ -46,4 +46,13 @@ export class CorreoService {
 
   }
 
+  descargarAdjunto(id: number) {
+
+  window.open(
+    `${this.url}/adjuntos/${id}/descargar`,
+    '_blank'
+  );
+
+}
+
 }

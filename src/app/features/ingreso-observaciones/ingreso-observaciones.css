@@ -29,10 +29,10 @@
   padding:0 20px;
 
   background:#ffffff;
-  border:1px solid #2563eb;
+  border:1px solid #193b85;
   border-radius:10px;
 
-  color:#2563eb;
+  color:#193b85;
   font-size:14px;
   font-weight:600;
 
@@ -106,7 +106,7 @@
 
     border-radius:12px;
 
-    font-size:14px;
+    font-size:16px;
 
     font-family:inherit;
 
@@ -126,7 +126,7 @@
 
     outline:none;
 
-    border-color:#2d5bff;
+    border-color:#193b85;
 
     box-shadow:0 0 0 3px rgba(45,91,255,.10);
 
@@ -184,7 +184,7 @@
   border:none;
   border-radius:10px;
 
-  background:#2563eb;
+  background:#193b85;
   color:white;
 
   font-weight:600;
@@ -220,14 +220,14 @@
 }
 
 .observacion-tipo{
-  font-size:12px;
+  font-size:14px;
   font-weight:700;
-  color:#2563eb;
+  color:#1367b4;
   text-transform:uppercase;
 }
 
 .observacion-fecha{
-  font-size:13px;
+  font-size:15px;
   color:#6b7280;
 }
 

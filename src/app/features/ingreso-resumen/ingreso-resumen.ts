@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IngresoService } from '../../core/services/ingreso.service';
 import { MatIconModule } from '@angular/material/icon';
 import { ChangeDetectorRef } from '@angular/core';
+import { AutorizacionService } from '../../core/services/autorizacion.service';
+import { CorreoService } from '../../core/services/correo.service';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 
 
-export class IngresoResumenComponent implements OnInit{
+export class IngresoResumenComponent implements OnInit {
 
   ingresoId!: number;
   ingreso: any;
@@ -24,11 +26,13 @@ export class IngresoResumenComponent implements OnInit{
   eventos: any[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private ingresoService: IngresoService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  private route: ActivatedRoute,
+  private router: Router,
+  private ingresoService: IngresoService,
+  private correoService: CorreoService,
+  private autorizacionService: AutorizacionService,
+  private cdr: ChangeDetectorRef
+) {}
 
   ngOnInit(): void {
     const id = this.route.parent?.snapshot.paramMap.get('id');
@@ -55,7 +59,6 @@ export class IngresoResumenComponent implements OnInit{
 
   construirTimeline() {
 
-    this.eventos = [];
 
     this.ingreso.observaciones?.forEach((o: any) => {
       this.eventos.push({
@@ -81,8 +84,8 @@ export class IngresoResumenComponent implements OnInit{
 
     this.ingreso.correos?.forEach((c: any) => {
 
-        console.log('CORREO', c.id);
-        console.log('ADJUNTOS', c.adjuntos);
+      console.log('CORREO', c.id);
+      console.log('ADJUNTOS', c.adjuntos);
 
       this.eventos.push({
 
@@ -95,10 +98,23 @@ export class IngresoResumenComponent implements OnInit{
           asunto: c.asunto,
           mensaje: c.mensaje,
           destinatarios: c.destinatario
-              ? c.destinatario.split(',').map((x: string) => x.trim())
-              : [],
+            ? c.destinatario.split(',').map((x: string) => x.trim())
+            : [],
           adjuntos: c.adjuntos || [],
-          envios: c.envios || []
+
+        envios: (c.envios || []).sort((a: any, b: any) => {
+
+    const fechaA = a.fechaEjecutada ?? a.fechaProgramada;
+    const fechaB = b.fechaEjecutada ?? b.fechaProgramada;
+
+    return new Date(fechaA).getTime() - new Date(fechaB).getTime();
+
+  })
+  .map((e: any) => ({
+    ...e,
+    expandido: false
+  }))
+
         },
 
         expandido: false
@@ -107,15 +123,39 @@ export class IngresoResumenComponent implements OnInit{
     });
 
     this.ingreso.autorizaciones?.forEach((a: any) => {
-      this.eventos.push({
-        tipo: 'AUTORIZACION',
-        fecha: a.fechaCreacion,
-        usuario: a.usuario,
-        descripcion: a.asunto,
-        detalle: a,
-        expandido: false
-      });
-    });
+
+  let descripcion = '';
+
+  if (a.numeroAutorizacion) {
+    descripcion = a.numeroAutorizacion;
+  }
+  else if (a.nombreArchivo) {
+    descripcion = a.nombreArchivo;
+  }
+  else if (a.observacion) {
+    descripcion = a.observacion;
+  }
+  else {
+    descripcion = 'Autorización';
+  }
+
+  this.eventos.push({
+
+    tipo: 'AUTORIZACION',
+
+    fecha: a.fechaCreacion,
+
+    usuario: a.usuario,
+
+    descripcion: descripcion,
+
+    detalle: a,
+
+    expandido: false
+
+  });
+
+});;
 
     this.eventos.sort((a, b) =>
       new Date(b.fecha).getTime() - new Date(a.fecha).getTime()
@@ -125,15 +165,35 @@ export class IngresoResumenComponent implements OnInit{
   }
 
   toggleEvento(evento: any) {
-    evento.expandido = !evento.expandido;
-  }
+  evento.expandido = !evento.expandido;
+}
 
-  getTipoClase(tipo: string): string {
-    return tipo ? tipo.toLowerCase().trim() : '';
-  }
+toggleEnvio(envio: any) {
+  envio.expandido = !envio.expandido;
+}
+
+getTipoClase(tipo: string): string {
+  return tipo ? tipo.toLowerCase().trim() : '';
+}
 
   volverAIngresos() {
     this.router.navigate(['/ingresos']);
   }
+
+
+  descargarAutorizacion(id: number) {
+
+  this.autorizacionService.descargar(id);
+
+}
+
+descargarAdjunto(id: number) {
+
+  console.log("ID enviado:", id);
+
+  this.correoService.descargarAdjunto(id);
+
+}
+
 }
 

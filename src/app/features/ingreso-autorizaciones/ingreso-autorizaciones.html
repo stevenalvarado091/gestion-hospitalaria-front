@@ -1,1 +1,257 @@
-<p>ingreso-autorizaciones works!</p>
+<div class="autorizaciones-container">
+
+  <!-- HEADER -->
+  <div class="autorizaciones-header">
+
+    <div>
+      <h2>AUTORIZACIONES</h2>
+      <p>Gestión de autorizaciones asociadas al ingreso</p>
+    </div>
+
+    <div class="acciones-header">
+
+      <button
+        *ngIf="!mostrarFormulario"
+        mat-flat-button
+        color="primary"
+        (click)="abrirFormulario()">
+
+        <mat-icon>verified</mat-icon>
+        Nueva autorización
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- FORMULARIO -->
+  <div class="formulario-autorizacion" *ngIf="mostrarFormulario">
+
+    <div class="formulario-header">
+
+      <h3>Nueva autorización</h3>
+
+      <div class="botones-formulario">
+
+        <button
+    mat-flat-button
+    color="primary"
+    (click)="guardarAutorizacion()"
+    [disabled]="!puedeGuardar() || subiendo">
+
+    <mat-icon>save</mat-icon>
+
+    Guardar
+
+</button>
+
+        <button
+          mat-stroked-button
+          (click)="cerrarFormulario()">
+
+          Cancelar
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <hr>
+
+    <!-- NUMERO -->
+    <mat-form-field appearance="outline" class="campo-autorizacion">
+
+      <mat-label>Número de autorización</mat-label>
+
+      <input matInput [(ngModel)]="nuevaAutorizacion.numero">
+
+    </mat-form-field>
+
+    <!-- OBSERVACION -->
+    <mat-form-field appearance="outline" class="campo-autorizacion">
+
+      <mat-label>Observación</mat-label>
+
+      <input matInput [(ngModel)]="nuevaAutorizacion.observacion">
+
+    </mat-form-field>
+
+    <!-- DROP ZONE -->
+    <div
+      class="drop-zone"
+      (click)="inputFile.click()"
+      (dragover)="onDragOver($event)"
+      (drop)="onDrop($event)">
+
+      <mat-icon>cloud_upload</mat-icon>
+
+      <h3>Autorización</h3>
+
+      <p>Arrastra el documento o haz clic para seleccionarlo</p>
+
+      <button mat-stroked-button color="primary">
+        Seleccionar archivo
+      </button>
+
+      <input
+        #inputFile
+        hidden
+        type="file"
+        (change)="seleccionarArchivo($event)">
+
+    </div>
+
+    <!-- ARCHIVO SELECCIONADO (CORRECTO) -->
+    <div class="archivo-info" *ngIf="archivoSeleccionado">
+
+      <mat-icon>description</mat-icon>
+
+      <div>
+        <strong>{{ nombreArchivo }}</strong>
+        <small>{{ tamanoArchivo }}</small>
+      </div>
+
+      <button mat-icon-button (click)="eliminarArchivo()">
+        <mat-icon>close</mat-icon>
+      </button>
+
+    </div>
+
+    <!-- SPINNER -->
+    <div class="spinner" *ngIf="subiendo">
+
+      <mat-progress-spinner
+        mode="indeterminate"
+        diameter="45">
+      </mat-progress-spinner>
+
+      <span>Subiendo autorización...</span>
+
+    </div>
+
+  </div>
+
+  <!-- HISTORIAL -->
+  <div class="historial-header">
+
+    <h3>Historial de autorizaciones</h3>
+
+    <span>{{ autorizaciones.length }} registro(s)</span>
+
+  </div>
+
+  <!-- EMPTY -->
+  <div class="sin-documentos" *ngIf="autorizaciones.length === 0">
+
+    <mat-icon>folder_open</mat-icon>
+    <p>No hay autorizaciones registradas</p>
+
+  </div>
+
+  <!-- LISTA -->
+  <div class="documentos-lista" *ngIf="autorizaciones.length > 0">
+
+    <div class="documento-card" *ngFor="let a of autorizaciones">
+
+      <div class="documento-icono">
+        <mat-icon>verified</mat-icon>
+      </div>
+
+      <div class="documento-info">
+
+  <h3>
+
+  {{ a.numeroAutorizacion
+      || a.nombreArchivo
+      || 'Autorización' }}
+
+</h3>
+
+  <div
+    class="documento-detalles"
+    *ngIf="a.numeroAutorizacion">
+
+    <span>
+      <strong>Número autorización:</strong>
+      {{ a.numeroAutorizacion }}
+    </span>
+
+  </div>
+
+  <div
+    class="documento-detalles"
+    *ngIf="a.observacion">
+
+    <span>
+      <strong>Observación:</strong>
+      {{ a.observacion }}
+    </span>
+
+  </div>
+
+  <div
+    class="documento-detalles"
+    *ngIf="a.nombreArchivo">
+
+    <span>
+      <strong>Documento:</strong>
+      {{ a.nombreArchivo }}
+    </span>
+
+    <span>
+      <strong>{{ a.extension }}</strong>
+
+      • {{ a.tamano }}
+    </span>
+
+  </div>
+
+  <div class="documento-fecha">
+
+    <mat-icon>calendar_today</mat-icon>
+
+    {{ a.fechaCreacion | date:'dd/MM/yyyy' }}
+
+    <mat-icon>schedule</mat-icon>
+
+    {{ a.fechaCreacion | date:'HH:mm' }}
+
+  </div>
+
+  <div class="documento-usuario">
+
+    <mat-icon>person</mat-icon>
+
+    {{ a.usuario }}
+
+    •
+
+    {{ a.rolUsuario }}
+
+  </div>
+
+</div>
+
+      <div class="documento-acciones">
+
+        <button
+    mat-flat-button
+    color="primary"
+    *ngIf="a.nombreArchivo"
+    (click)="descargarDocumento(a.id)">
+
+    <mat-icon>download</mat-icon>
+
+    Descargar
+
+</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

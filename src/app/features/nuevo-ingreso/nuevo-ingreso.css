@@ -4,14 +4,14 @@
 
 .page-card{
 
-    max-width:1400px;
+    max-width:1700px;
     margin:auto;
 
     background:#fff;
 
     border-radius:20px;
 
-    padding:34px;
+    padding:44px;
 
     border:1px solid #e8edf5;
 
@@ -98,7 +98,7 @@ CAMPOS
 
 .field label{
 
-    font-size:13px;
+    font-size:15px;
 
     font-weight:600;
 
@@ -185,29 +185,37 @@ ICONOS
 BOTONES
 =========================*/
 
-.footer-form button{
+.footer-form{
 
-    min-width:170px;
-    height:46px;
+    margin-top:35px;
 
-    border-radius:10px;
+    padding-top:24px;
 
-    font-size:15px;
-    font-weight:600;
+    border-top:1px solid #eef2f6;
 
     display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
 
-    transition:all .2s ease;
+    justify-content:flex-end;
+
+    gap:14px;
+}
+
+.footer-form button{
+
+    height:48px;
+
+    min-width:180px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    font-weight:600;
 }
 
 .footer-form button mat-icon{
 
-    font-size:20px;
-    width:20px;
-    height:20px;
+    margin-right:4px;
 }
 
 /*=========================
@@ -313,6 +321,6 @@ width:100%;
 
 .footer-form button mat-icon{
 
-    margin-right:6px;
+    margin-right:8px;
     font-size:18px;
 }

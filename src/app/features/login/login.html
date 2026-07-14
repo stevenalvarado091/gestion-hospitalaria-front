@@ -1,0 +1,353 @@
+<div class="login-container">
+
+    <div class="login-card">
+
+        <!-- ==========================
+             PANEL IZQUIERDO
+        =========================== -->
+
+        <section class="login-panel-informacion">
+
+            <div class="panel-background"></div>
+
+            <div class="panel-overlay"></div>
+
+            <div class="login-overlay">
+
+                <div class="login-logo">
+
+                    <div class="logo-wrapper">
+
+                        <mat-icon class="logo-icono">
+
+                            local_hospital
+
+                        </mat-icon>
+
+                    </div>
+
+                    <div>
+
+                        <h2>Gestión Hospitalaria</h2>
+
+                        <span>Sistema Integral</span>
+
+                    </div>
+
+                </div>
+
+                <div class="login-bienvenida">
+
+                    <h1>
+
+                        Bienvenido nuevamente
+
+                    </h1>
+
+                    <p>
+
+                        Plataforma para la gestión integral de pacientes,
+                        ingresos, autorizaciones, documentos y seguimiento
+                        hospitalario.
+
+                    </p>
+
+                </div>
+
+                <div class="login-beneficios">
+
+                    <div class="beneficio-card">
+
+                        <div class="beneficio-icono">
+
+                            <mat-icon>
+
+                                verified_user
+
+                            </mat-icon>
+
+                        </div>
+
+                        <div class="beneficio-info">
+
+                            <h3>
+
+                                Seguridad
+
+                            </h3>
+
+                            <p>
+
+                                Información protegida mediante autenticación segura.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="beneficio-card">
+
+                        <div class="beneficio-icono">
+
+                            <mat-icon>
+
+                                monitor_heart
+
+                            </mat-icon>
+
+                        </div>
+
+                        <div class="beneficio-info">
+
+                            <h3>
+
+                                Seguimiento
+
+                            </h3>
+
+                            <p>
+
+                                Control completo del ciclo clínico del paciente.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="beneficio-card">
+
+                        <div class="beneficio-icono">
+
+                            <mat-icon>
+
+                                insights
+
+                            </mat-icon>
+
+                        </div>
+
+                        <div class="beneficio-info">
+
+                            <h3>
+
+                                Productividad
+
+                            </h3>
+
+                            <p>
+
+                                Optimización de procesos administrativos.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ==========================
+             PANEL DERECHO
+        =========================== -->
+
+        <section class="login-panel-autenticacion">
+
+            <div class="login-formulario">
+
+                <div class="formulario-header">
+
+                    <div class="login-avatar">
+
+                        <mat-icon>
+
+                            shield
+
+                        </mat-icon>
+
+                    </div>
+
+                    <span class="formulario-badge">
+
+                        ACCESO AL SISTEMA
+
+                    </span>
+
+                    <h2>
+
+                        Iniciar sesión
+
+                    </h2>
+
+                    <p>
+
+                        Ingrese su número de documento y contraseña para acceder al sistema.
+
+                    </p>
+
+                </div>
+
+                <form (ngSubmit)="iniciarSesion()">
+
+                    <div class="campo-formulario">
+
+                        <label class="campo-label">
+
+                            Usuario
+
+                        </label>
+
+                        <mat-form-field
+                            appearance="outline"
+                            class="campo-completo">
+
+                            <mat-icon matPrefix>
+
+                                person_outline
+
+                            </mat-icon>
+
+                            <input
+                                matInput
+                                name="usuario"
+                                autocomplete="username"
+                                placeholder="Ingrese su usuario"
+                                [(ngModel)]="usuario">
+
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="campo-formulario">
+
+                        <label class="campo-label">
+
+                            Contraseña
+
+                        </label>
+
+                        <mat-form-field
+                            appearance="outline"
+                            class="campo-completo">
+
+                            <mat-icon matPrefix>
+
+                                lock_outline
+
+                            </mat-icon>
+
+                            <input
+                                matInput
+                                [type]="mostrarPassword ? 'text' : 'password'"
+                                name="password"
+                                autocomplete="current-password"
+                                placeholder="Ingrese su contraseña"
+                                [(ngModel)]="password">
+
+                            <button
+                                mat-icon-button
+                                matSuffix
+                                type="button"
+                                (click)="mostrarPassword = !mostrarPassword">
+
+                                <mat-icon>
+
+                                    {{ mostrarPassword ? 'visibility_off' : 'visibility' }}
+
+                                </mat-icon>
+
+                            </button>
+
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="acciones-login">
+
+                        <mat-checkbox>
+
+                            Recordar sesión
+
+                        </mat-checkbox>
+
+                    </div>
+
+                    <div
+                        class="mensaje-error"
+                        *ngIf="error">
+
+                        <mat-icon>
+
+                            error
+
+                        </mat-icon>
+
+                        <span>
+
+                            {{ error }}
+
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="mensaje-exito"
+                        *ngIf="inicioSesionExitoso">
+
+                        <mat-icon>
+
+                            check_circle
+
+                        </mat-icon>
+
+                        <span>
+
+                            Inicio de sesión correcto.
+
+                        </span>
+
+                    </div>
+
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        class="boton-login"
+                        type="submit"
+                        [disabled]="cargando">
+
+                        <mat-spinner
+                            *ngIf="cargando"
+                            diameter="22">
+
+                        </mat-spinner>
+
+                        <span
+                            *ngIf="!cargando"
+                            class="texto-boton">
+
+                            <mat-icon>
+
+                                login
+
+                            </mat-icon>
+
+                            Iniciar sesión
+
+                        </span>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>

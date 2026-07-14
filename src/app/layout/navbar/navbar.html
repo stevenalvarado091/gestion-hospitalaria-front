@@ -1,25 +1,87 @@
-<div class="navbar">
+<header class="topbar">
 
-  <div></div>
+  <div class="left-section">
 
-  <div class="user">
+    <button
+      mat-icon-button
+      class="menu-button"
+      (click)="alternarMenu()">
 
-    <div class="info">
+      <mat-icon>menu_open</mat-icon>
 
-      <span class="nombre">
-        Stiveen
+    </button>
+
+    <div class="breadcrumb">
+
+      <span>Inicio</span>
+
+      <span class="separator">/</span>
+
+      <span class="current">
+        Nuevo Ingreso
       </span>
 
-      <span class="rol">
-        FACTURADOR
-      </span>
-
-    </div>
-
-    <div class="avatar">
-      S
     </div>
 
   </div>
 
-</div>
+  <div class="header-right">
+
+    <button
+      mat-icon-button
+      class="notification-btn">
+
+      <mat-icon>notifications</mat-icon>
+
+    </button>
+
+    <div class="user-card">
+
+      <div class="user-info">
+
+        <div class="user-name">
+          {{ nombreCompleto }}
+        </div>
+
+        <div class="user-role">
+          {{ rol }}
+        </div>
+
+      </div>
+
+      <button
+        mat-icon-button
+        class="avatar"
+        [matMenuTriggerFor]="menuUsuario">
+
+        {{ inicial }}
+
+      </button>
+
+      <mat-menu #menuUsuario="matMenu">
+
+        <div class="menu-header">
+
+          <strong>{{ nombreCompleto }}</strong>
+
+          <small>{{ rol }}</small>
+
+        </div>
+
+        <button
+          mat-menu-item
+          (click)="cerrarSesion()">
+
+          <mat-icon>logout</mat-icon>
+
+          <span>Cerrar sesión</span>
+
+        </button>
+
+      </mat-menu>
+
+    </div>
+
+  </div>
+
+</header>

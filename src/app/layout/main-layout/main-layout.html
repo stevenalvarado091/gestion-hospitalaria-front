@@ -1,0 +1,158 @@
+<mat-sidenav-container class="layout">
+
+  <mat-sidenav
+  #sidenav
+  mode="side"
+  opened
+  class="sidebar">
+
+    <app-sidebar></app-sidebar>
+
+   </mat-sidenav>
+
+  <mat-sidenav-content>
+
+<app-navbar
+  (menuToggle)="sidenav.toggle()">
+</app-navbar>
+
+    <ng-container *ngIf="detalleIngreso && ingreso">
+
+      <div class="detalle-superior">
+
+        <div class="icono-ingreso">
+
+          <mat-icon>
+            assignment
+          </mat-icon>
+
+        </div>
+
+        <div class="info-principal">
+
+    <span class="titulo-ingreso">
+      NÚMERO DE INGRESO
+    </span>
+
+          <h1>
+            {{ ingreso.numeroIngreso }}
+          </h1>
+
+          <h2>
+            {{ ingreso.nombrePaciente }}
+          </h2>
+
+          <div class="datos-secundarios">
+
+      <span>
+
+        <mat-icon>
+          calendar_month
+        </mat-icon>
+        Fecha de Ingreso:
+        {{ ingreso.fechaCreacion | date:'dd/MM/yyyy HH:mm' }}
+
+      </span>
+
+            <span>
+
+        <mat-icon>
+          person
+        </mat-icon>
+
+        Registrado por:
+        {{ ingreso.usuario }}
+
+      </span>
+
+          </div>
+
+        </div>
+
+        <div
+          class="estado-badge"
+          [ngClass]="ingreso.estado?.toLowerCase()">
+
+          <mat-icon>
+            circle
+          </mat-icon>
+
+          {{ ingreso.estado }}
+
+        </div>
+
+      </div>
+
+      <div class="paciente-grid">
+
+        <div class="dato-card">
+
+          <div class="dato-icono">
+            <mat-icon>badge</mat-icon>
+          </div>
+
+          <div>
+            <label>Documento</label>
+            <strong>
+              {{ ingreso.tipoDocumento }} - {{ ingreso.numeroDocumento }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="dato-card">
+
+          <div class="dato-icono">
+            <mat-icon>event</mat-icon>
+          </div>
+
+          <div>
+            <label>Fecha Nacimiento</label>
+            <strong>
+              {{ ingreso.fechaNacimiento | date:'dd/MM/yyyy' }}
+            </strong>
+          </div>
+
+        </div>
+
+        <div class="dato-card">
+
+          <div class="dato-icono">
+            <mat-icon>person</mat-icon>
+          </div>
+
+          <div>
+            <label>Sexo</label>
+            <strong>{{ ingreso.sexo }}</strong>
+          </div>
+
+        </div>
+
+        <div class="dato-card">
+
+          <div class="dato-icono">
+            <mat-icon>health_and_safety</mat-icon>
+          </div>
+
+          <div>
+            <label>EPS</label>
+            <strong>{{ ingreso.nombreEps }}</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </ng-container>
+
+    <main class="main-content">
+
+      <router-outlet></router-outlet>
+
+    </main>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

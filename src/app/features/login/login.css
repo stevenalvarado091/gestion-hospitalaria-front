@@ -1,0 +1,1225 @@
+/*==================================================
+=                 RESET GENERAL                     =
+==================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        sans-serif;
+
+    background:#eef3f8;
+
+}
+
+:host{
+
+    display:block;
+
+    width:100%;
+
+    height:100vh;
+
+}
+
+/*==================================================
+=              CONTENEDOR PRINCIPAL                =
+==================================================*/
+
+.login-container{
+
+    width:100%;
+    margin:auto;
+    
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:62px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #edf3f8 0%,
+            #f6f9fc 55%,
+            #eef4fb 100%
+        );
+
+}
+
+/*==================================================
+=                 TARJETA LOGIN                    =
+==================================================*/
+
+.login-card{
+
+    width:min(1580px,100%);
+
+    height:min(1000px,calc(100vh - 70px));
+
+    display:grid;
+
+    grid-template-columns:60% 40%;
+
+    border-radius:34px;
+
+    overflow:hidden;
+
+    background:#ffffff;
+
+    box-shadow:
+
+        0 30px 90px rgba(15,23,42,.10),
+
+        0 8px 30px rgba(15,23,42,.05);
+
+}
+
+/*==================================================
+=                PANEL IZQUIERDO                   =
+==================================================*/
+
+.login-panel-informacion{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+/*==================================================
+=            FONDO DEL PANEL IZQUIERDO             =
+==================================================*/
+
+.panel-background{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            140deg,
+
+            #74d481 0%,
+
+            #0d243d 55%,
+
+            #032441 100%
+
+        );
+
+}
+
+/*==================================================
+=              CAPA DE EFECTOS                     =
+==================================================*/
+
+.panel-background::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:600px;
+
+    height:600px;
+
+    border-radius:50%;
+
+    top:-280px;
+
+    right:-250px;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(255,255,255,.18),
+
+            transparent 72%
+
+        );
+
+}
+
+.panel-background::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+
+    height:500px;
+
+    border-radius:50%;
+
+    left:-180px;
+
+    bottom:-180px;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(255,255,255,.10),
+
+            transparent 70%
+
+        );
+
+}
+
+/*==================================================
+=                  OVERLAY                         =
+==================================================*/
+
+.panel-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            rgba(7,44,76,.18),
+
+            rgba(7,44,76,.42)
+
+        );
+
+}
+
+/*==================================================
+=                 CONTENIDO                        =
+==================================================*/
+
+.login-overlay{
+
+    position:relative;
+
+    z-index:18;
+
+    width:80%;
+
+    max-width:710px;
+
+    margin-left:auto;
+
+    margin-right:120px;
+
+}
+
+/*==================================================
+=                    LOGO                          =
+==================================================*/
+
+.login-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:60px;
+
+}
+
+.logo-wrapper{
+
+    width:68px;
+
+    height:68px;
+
+    border-radius:24px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+
+        linear-gradient(
+
+            rgba(255,255,255,.28),
+
+            rgba(255,255,255,.12)
+
+        );
+
+    backdrop-filter:blur(12px);
+
+}
+
+.logo-icono{
+
+    color:white;
+
+    font-size:48px !important;
+
+    width:48px;
+
+    height:48px;
+
+}
+
+.login-logo h2{
+
+    color:white;
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+.login-logo span{
+
+    color:rgba(255,255,255,.88);
+
+    font-size:15px;
+
+}
+
+/*==================================================
+=                 BIENVENIDA                       =
+==================================================*/
+
+.login-bienvenida h1{
+
+    color:white;
+
+    font-size:45px;
+
+    line-height:1.05;
+
+    font-weight:700;
+
+    margin-bottom:24px;
+
+}
+
+.login-bienvenida p{
+
+    color:rgba(255,255,255,.92);
+
+    line-height:1.9;
+
+    font-size:17px;
+
+    max-width:500px;
+
+}
+
+/*==================================================
+=              BENEFICIOS                          =
+==================================================*/
+
+.login-beneficios{
+
+    margin-top:65px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    max-width:540px;
+
+}
+
+.beneficio-card{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:22px;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.35s;
+
+}
+
+.beneficio-card:nth-child(1){
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.22),
+            rgba(255,255,255,.10)
+        );
+
+}
+
+.beneficio-card:nth-child(2){
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(28,176,246,.18),
+            rgba(255,255,255,.10)
+        );
+
+}
+
+.beneficio-card:nth-child(3){
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,230,118,.15),
+            rgba(255,255,255,.08)
+        );
+
+}
+
+.beneficio-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            rgba(255,255,255,.14),
+
+            transparent 55%
+
+        );
+
+}
+
+.beneficio-card:hover{
+
+    transform:translateX(10px);
+
+    box-shadow:
+
+        0 18px 35px rgba(0,0,0,.15);
+
+}
+
+.beneficio-icono{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:18px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(255,255,255,.28),
+
+            rgba(255,255,255,.10)
+
+        );
+
+}
+
+.beneficio-icono mat-icon{
+
+    color:white;
+
+    width:30px;
+
+    height:30px;
+
+    font-size:30px !important;
+
+}
+
+.beneficio-info{
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+.beneficio-info h3{
+
+    color:white;
+
+    font-size:18px;
+
+    margin-bottom:5px;
+
+    font-weight:600;
+
+}
+
+.beneficio-info p{
+
+    color:rgba(255,255,255,.88);
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+/*==================================================
+=             PANEL DERECHO                        =
+==================================================*/
+
+.login-panel-autenticacion{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:#fbfcfe;
+
+}
+
+.login-panel-autenticacion::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    top:-220px;
+
+    right:-220px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(3, 24, 49, 0.08),
+
+            transparent 70%
+
+        );
+
+}
+
+.login-panel-autenticacion::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+
+    height:300px;
+
+    bottom:-140px;
+
+    left:-120px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(46,125,50,.05),
+
+            transparent 70%
+
+        );
+
+}
+
+/*==================================================
+=               TARJETA LOGIN                      =
+==================================================*/
+
+.login-formulario{
+
+    position:relative;
+
+    z-index:10;
+
+    width:100%;
+
+    max-width:500px;
+
+    margin:0px;
+
+    padding:55px;
+
+    border-radius:30px;
+
+    background:white;
+
+    border:1px solid #edf2f7;
+
+    box-shadow:
+
+        0 25px 60px rgba(90, 226, 158, 0.08),
+
+        0 10px 25px rgba(23, 160, 34, 0.04);
+
+}
+
+.login-formulario::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+
+    height:280px;
+
+    border-radius:50%;
+
+    right:-70px;
+
+    top:-70px;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(25,118,210,.05),
+
+            transparent 72%
+
+        );
+
+}
+
+.login-formulario::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:50%;
+
+    left:-60px;
+
+    bottom:-60px;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(0,200,83,.05),
+
+            transparent 72%
+
+        );
+
+}
+
+/*==================================================
+=                HEADER                            =
+==================================================*/
+
+.formulario-header{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.login-avatar{
+
+    width:84px;
+
+    height:84px;
+
+    margin:auto auto 20px;
+
+    border-radius:24px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #E8F5E9,
+
+            #D5F1DA
+
+        );
+
+}
+
+.login-avatar mat-icon{
+
+    color:#2E7D32;
+
+    width:42px;
+
+    height:42px;
+
+    font-size:42px !important;
+
+}
+
+.formulario-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    background:#EDF5FF;
+
+    color:#1565C0;
+
+    border:1px solid #D6E8FF;
+
+    font-size:11px;
+
+    letter-spacing:1.2px;
+
+    font-weight:700;
+
+}
+
+.formulario-header h2{
+
+    margin-top:20px;
+
+    color:#243447;
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+.formulario-header p{
+
+    margin-top:12px;
+
+    color:#64748B;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+/*==================================================
+=               CAMPOS
+==================================================*/
+
+.campo-formulario{
+
+    margin-bottom:22px;
+
+}
+
+.campo-label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    color:#334155;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.campo-completo{
+
+    width:100%;
+
+}
+
+/*==================================================
+=          ANGULAR MATERIAL
+==================================================*/
+
+::ng-deep .mat-mdc-form-field{
+
+    width:100%;
+
+}
+
+::ng-deep .mat-mdc-text-field-wrapper{
+
+    height:60px;
+
+    border-radius:18px !important;
+
+    background:white;
+
+    transition:.30s;
+
+}
+
+::ng-deep .mat-mdc-form-field-flex{
+
+    height:60px;
+
+    align-items:center;
+
+}
+
+::ng-deep .mdc-notched-outline__leading{
+
+    border-radius:18px 0 0 18px;
+
+}
+
+::ng-deep .mdc-notched-outline__trailing{
+
+    border-radius:0 18px 18px 0;
+
+}
+
+::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline{
+
+    opacity:1;
+
+}
+
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline{
+
+    border-width:2px !important;
+
+}
+
+::ng-deep .mat-mdc-form-field.mat-focused .mat-icon{
+
+    color:#1565C0;
+
+}
+
+::ng-deep .mat-mdc-form-field-icon-prefix{
+
+    padding-left:12px;
+
+}
+
+::ng-deep .mat-mdc-form-field-icon-suffix{
+
+    padding-right:10px;
+
+}
+
+::ng-deep input.mat-mdc-input-element{
+
+    font-size:15px;
+
+    color:#1E293B;
+
+}
+
+::ng-deep input.mat-mdc-input-element::placeholder{
+
+    color:#94A3B8;
+
+}
+
+::ng-deep .mat-icon{
+
+    color:#94A3B8;
+
+}
+
+::ng-deep button.mat-mdc-icon-button{
+
+    width:40px;
+
+    height:40px;
+
+}
+
+/*==================================================
+=          CHECKBOX
+==================================================*/
+
+.acciones-login{
+
+    display:flex;
+
+    align-items:center;
+
+    margin:8px 0 28px;
+
+}
+
+::ng-deep .acciones-login .mdc-form-field{
+
+    color:#475569;
+
+    font-size:14px;
+
+}
+
+/*==================================================
+=          MENSAJES
+==================================================*/
+
+.mensaje-error,
+.mensaje-exito{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:15px 18px;
+
+    border-radius:16px;
+
+    margin-bottom:20px;
+
+    font-size:14px;
+
+    animation:fade .25s ease;
+
+}
+
+.mensaje-error{
+
+    color:#C62828;
+
+    background:#FDECEC;
+
+    border:1px solid #F8CACA;
+
+}
+
+.mensaje-exito{
+
+    color:#2E7D32;
+
+    background:#E8F5E9;
+
+    border:1px solid #CFE9D2;
+
+}
+
+/*==================================================
+=          BOTON
+==================================================*/
+
+.boton-login{
+
+    width:100%;
+
+    height:60px !important;
+
+    border-radius:18px !important;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    letter-spacing:.4px;
+
+    box-shadow:
+
+        0 18px 35px rgba(21,101,192,.22);
+
+    transition:.30s;
+
+}
+
+.boton-login:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+        0 22px 45px rgba(21,101,192,.28);
+
+}
+
+.texto-boton{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+}
+
+.texto-boton mat-icon{
+
+    width:22px;
+
+    height:22px;
+
+    font-size:22px !important;
+
+}
+
+.boton-login mat-spinner{
+
+    margin:auto;
+
+}
+
+/*==================================================
+=          ANIMACIONES
+==================================================*/
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(8px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*==================================================
+=          RESPONSIVE
+==================================================*/
+
+@media (max-width:1280px){
+
+    .login-card{
+
+        grid-template-columns:55% 45%;
+
+    }
+
+    .login-overlay{
+
+        margin-left:45px;
+
+        margin-right:45px;
+
+    }
+
+    .login-bienvenida h1{
+
+        font-size:50px;
+
+    }
+
+}
+
+@media (max-width:992px){
+
+    html,
+    body{
+
+        overflow:auto;
+
+    }
+
+    .login-container{
+
+        padding:20px;
+
+    }
+
+    .login-card{
+
+        width:100%;
+
+        height:auto;
+
+        display:flex;
+
+        flex-direction:column;
+
+    }
+
+    .login-panel-informacion{
+
+        min-height:420px;
+
+    }
+
+    .login-overlay{
+
+        margin:40px;
+
+        max-width:100%;
+
+    }
+
+    .login-formulario{
+
+        margin:35px;
+
+        max-width:none;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .login-panel-informacion{
+
+        display:none;
+
+    }
+
+    .login-card{
+
+        max-width:520px;
+
+        margin:auto;
+
+    }
+
+    .login-panel-autenticacion{
+
+        width:100%;
+
+    }
+
+    .login-formulario{
+
+        margin:25px;
+
+        padding:35px;
+
+        box-shadow:none;
+
+        border:none;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .login-container{
+
+        padding:10px;
+
+    }
+
+    .login-formulario{
+
+        margin:15px;
+
+        padding:25px;
+
+    }
+
+    .formulario-header h2{
+
+        font-size:28px;
+
+    }
+
+}

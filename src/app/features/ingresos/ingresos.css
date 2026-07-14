@@ -177,7 +177,7 @@
 
 .page-header h1{
     margin:0;
-    font-size:32px;
+    font-size:19px;
     font-weight:700;
     color:#0f172a;
 }
@@ -219,7 +219,7 @@
 
     margin-bottom:22px;
 
-    font-size:17px;
+    font-size:15px;
 
     font-weight:600;
 
@@ -229,7 +229,7 @@
 
 .filtro-titulo mat-icon{
 
-    color:#2563eb;
+    color:#0a3591;
 
     font-size:26px;
 
@@ -240,19 +240,21 @@
   FILTROS
 =========================================*/
 
-.filtros{
+.filtros {
+  display: grid;
 
-    display:grid;
+  grid-template-columns:
+    repeat(4, minmax(160px, 1fr))
+    minmax(90px, auto)
+    minmax(90px, auto);
 
-    grid-template-columns:
-        repeat(4,minmax(220px,1fr))
-        auto
-        auto;
+  gap: 14px;
 
-    gap:18px;
+  align-items: center;
 
-    align-items:center;
+  width: 100%;
 
+  box-sizing: border-box;
 }
 
 .filtros mat-form-field{
@@ -294,7 +296,7 @@
 
     margin:0;
 
-    font-size:22px;
+    font-size:15px;
 
     color:#1e293b;
 
@@ -339,28 +341,36 @@ margin-top:0;
    TARJETA INGRESO - DISEÑO PRINCIPAL
 ========================================= */
 
-.ingreso-card{
+.ingreso-card {
+  display: grid;
 
-    display:grid;
+  grid-template-columns:
+    52px
+    minmax(100px, 130px)
+    minmax(180px, 1fr)
+    minmax(150px, 200px)
+    minmax(90px, 110px)
+    40px;
 
-    grid-template-columns: 60px 140px 1fr 220px 120px 60px;
+  align-items: center;
 
-    align-items:center;
+  gap: 14px;
 
-    gap:18px;
+  width: 100%;
 
-    background:#ffffff;
+  background: #ffffff;
 
-    border:1px solid #e2e8f0;
+  border: 1px solid #e2e8f0;
 
-    border-radius:16px;
+  border-radius: 16px;
 
-    padding:18px 22px;
+  padding: 16px 18px;
 
-    transition:.25s;
+  box-sizing: border-box;
 
-    cursor:pointer;
+  transition: .25s;
 
+  cursor: pointer;
 }
 
 .ingreso-card:hover{
@@ -439,7 +449,7 @@ margin-top:0;
 
     margin:0;
 
-    font-size:15px;
+    font-size:16px;
 
     font-weight:700;
 
@@ -455,7 +465,7 @@ margin-top:0;
 
     gap:6px;
 
-    font-size:13px;
+    font-size:14px;
 
     color:#475569;
 
@@ -481,7 +491,7 @@ margin-top:0;
 
 .datos-fecha{
 
-    font-size:12px;
+    font-size:14px;
 
     color:#475569;
 
@@ -554,6 +564,54 @@ margin-top:0;
 .abrir mat-icon{
 
     color:#64748b;
+
+}
+
+
+@media (max-width: 1200px) {
+
+  .ingreso-card {
+    grid-template-columns:
+      52px
+      minmax(90px, 120px)
+      minmax(160px, 1fr)
+      minmax(130px, 170px)
+      90px
+      32px;
+
+    gap: 10px;
+
+    padding: 14px;
+  }
+
+}
+
+@media (max-width: 900px) {
+
+  .ingreso-card {
+    grid-template-columns: 52px 1fr auto;
+  }
+
+  .numero-ingreso {
+    grid-column: 2;
+  }
+
+  .datos-paciente {
+    grid-column: 2;
+  }
+
+  .datos-fecha {
+    grid-column: 2;
+  }
+
+  .ingreso-estado {
+    grid-column: 3;
+    grid-row: 1 / span 3;
+  }
+
+  .abrir {
+    grid-column: 3;
+  }
 
 }
 

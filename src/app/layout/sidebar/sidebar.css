@@ -2,7 +2,18 @@
   width: 280px;
   height: 100vh;
 
-  background: #17324d;
+  background:
+  linear-gradient(
+
+            140deg,
+
+            #14486b 0%,
+
+            #1f9463 50%,
+
+            #021b30 100%
+
+        );
 
   color: white;
 
@@ -89,9 +100,9 @@ nav a.active mat-icon{
 
   background:rgba(255,255,255,.12);
 
-  border-left:4px solid #22c55e;
+  border-left:4px solid #ffffffdc;
 
-  color:#22c55e;
+  color:#ffffffdc;
 
   font-weight:600;
 }
