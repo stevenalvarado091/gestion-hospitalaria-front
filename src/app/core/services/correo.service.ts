@@ -11,21 +11,17 @@ export class CorreoService {
   constructor(private http: HttpClient) {}
 
   enviarCorreo(
-    ingresoId: number,
-    epsDestinoId: number,
-    tipoCorreo: string,
-    usuario: string,
-    rolUsuario: string,
-    archivos: File[]
-  ) {
+  ingresoId: number,
+  epsDestinoId: number,
+  tipoCorreo: string,
+  archivos: File[]
+) {
 
     const formData = new FormData();
 
     formData.append('ingresoId', ingresoId.toString());
     formData.append('epsDestinoId', epsDestinoId.toString());
     formData.append('tipoCorreo', tipoCorreo);
-    formData.append('usuario', usuario);
-    formData.append('rolUsuario', rolUsuario);
 
     archivos.forEach(archivo => {
       formData.append('archivos', archivo);
@@ -48,9 +44,11 @@ export class CorreoService {
 
   descargarAdjunto(id: number) {
 
-  window.open(
+  return this.http.get(
     `${this.url}/adjuntos/${id}/descargar`,
-    '_blank'
+    {
+      responseType: 'blob'
+    }
   );
 
 }

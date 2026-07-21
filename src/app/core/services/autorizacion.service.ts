@@ -29,9 +29,11 @@ export class AutorizacionService {
 
   descargar(id: number) {
 
-  window.open(
+  return this.http.get(
     `${this.url}/${id}/descargar`,
-    '_blank'
+    {
+      responseType: 'blob'
+    }
   );
 
 }

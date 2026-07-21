@@ -6,17 +6,9 @@
 
         <div class="header-info">
 
-            <h1>
+            <h2>CORREOS </h2>
 
-                Historial de correos
-
-            </h1>
-
-            <p>
-
-                Consulta todos los correos enviados relacionados con este ingreso.
-
-            </p>
+                <p>Gestión de correos asociados al ingreso</p>
 
         </div>
 
@@ -353,13 +345,16 @@
 
                     <ng-container *ngIf="correo.adjuntos?.length > 0; else sinAdjuntos">
 
-                        <div class="adjunto-item" *ngFor="let adjunto of correo.adjuntos">
+<div
+    class="adjunto-item"
+    *ngFor="let adjunto of correo.adjuntos"
+    (click)="descargarAdjunto(adjunto.id, adjunto.nombreArchivo)">
 
-                            <mat-icon>insert_drive_file</mat-icon>
+    <mat-icon>insert_drive_file</mat-icon>
 
-                            {{ adjunto.nombreArchivo }}
+    {{ adjunto.nombreArchivo }}
 
-                        </div>
+</div>
 
                     </ng-container>
 

@@ -1,6 +1,9 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
 import { AuthService } from '../services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (solicitudHttp, siguiente) => {
@@ -9,18 +12,36 @@ export const authInterceptor: HttpInterceptorFn = (solicitudHttp, siguiente) => 
 
   const tokenAutenticacion = servicioAutenticacion.getToken();
 
-  if (!tokenAutenticacion) {
-    return siguiente(solicitudHttp);
+  let solicitud = solicitudHttp;
+
+  if (tokenAutenticacion) {
+
+    solicitud = solicitudHttp.clone({
+
+      setHeaders: {
+
+        Authorization: `Bearer ${tokenAutenticacion}`
+
+      }
+
+    });
+
   }
 
-  const solicitudConAutenticacion = solicitudHttp.clone({
+  return siguiente(solicitud).pipe(
 
-    setHeaders: {
-      Authorization: `Bearer ${tokenAutenticacion}`
-    }
+    catchError(error => {
 
-  });
+      if (error.status === 401) {
 
-  return siguiente(solicitudConAutenticacion);
+        servicioAutenticacion.logout(true);
+
+      }
+
+      return throwError(() => error);
+
+    })
+
+  );
 
 };

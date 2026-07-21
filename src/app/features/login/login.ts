@@ -31,7 +31,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class LoginComponent {
 
-  usuario = '';
+  numeroDocumento = '';
   password = '';
 
   cargando = false;
@@ -49,7 +49,7 @@ export class LoginComponent {
 
     this.error = '';
 
-    if (!this.usuario || !this.password) {
+    if (!this.numeroDocumento || !this.password) {
       this.error = 'Ingrese usuario y contraseña';
       return;
     }
@@ -57,8 +57,8 @@ export class LoginComponent {
     this.cargando = true;
 
     this.authService.login(
-      this.usuario,
-      this.password
+    this.numeroDocumento,
+    this.password
     ).subscribe({
 
       next: () => {
@@ -73,7 +73,7 @@ export class LoginComponent {
             replaceUrl: true
           });
 
-        }, 1200);
+        }, 400);
 
       },
 

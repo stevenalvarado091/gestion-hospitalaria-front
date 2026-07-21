@@ -7,7 +7,7 @@
       <mat-icon>history</mat-icon>
       <div>
         <h2>TRAZABILIDAD DEL INGRESO</h2>
-        <span>Historial completo de eventos</span>
+        <span>Historial completo</span>
       </div>
     </div>
 
@@ -156,7 +156,7 @@
 
                             <div class="envio-titulo">
 
-                              {{ envio.estado == 'PROGRAMADO'
+                              {{ envio.estadoVisual == 'PROGRAMADO'
                               ? 'Programado'
                               : 'Enviado' }}
 
@@ -176,9 +176,9 @@
                         <div class="envio-right">
 
                           {{
-                          (envio.estado == 'PROGRAMADO'
-                          ? envio.fechaProgramada
-                          : envio.fechaEjecutada)
+                          (envio.fechaEjecutada
+                          ? envio.fechaEjecutada
+                          : envio.fechaProgramada)
                           | date:'dd/MM/yyyy hh:mm a'
                           }}
 

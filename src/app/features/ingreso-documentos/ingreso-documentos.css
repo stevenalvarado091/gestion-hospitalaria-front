@@ -2,11 +2,13 @@
 CONTENEDOR GENERAL
 =========================================================*/
 
+/* css de ingreso correos*/
+
 .documentos-container{
 
     display:flex;
     flex-direction:column;
-    gap:24px;
+    gap:16px;
 
 }
 
@@ -83,7 +85,7 @@ FORMULARIO
 
     margin:0;
 
-    font-size:23px;
+    font-size:18px;
 
     font-weight:600;
 
@@ -323,7 +325,7 @@ LISTADO
 
     flex-direction:column;
 
-    gap:18px;
+    gap:20px;
 
 }
 
@@ -423,7 +425,7 @@ INFO
 
     gap:25px;
 
-    margin-bottom:12px;
+    margin-bottom:16px;
 
     color:#475569;
 
@@ -521,7 +523,7 @@ RESPONSIVE
 
     align-items:flex-start;
 
-    gap:15px;
+    gap:20px;
 
 }
 
@@ -536,5 +538,16 @@ RESPONSIVE
     flex:1;
 
 }
+
+}
+
+.modulo-card{
+
+    background:white;
+
+    border-radius:14px;
+
+
+    padding:20px;
 
 }

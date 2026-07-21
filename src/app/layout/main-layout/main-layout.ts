@@ -91,4 +91,21 @@ export class MainLayoutComponent {
 
   }
 
+  obtenerSexo(sexo: string): string {
+
+  switch (sexo?.toUpperCase()) {
+
+    case 'F':
+      return 'FEMENINO';
+
+    case 'M':
+      return 'MASCULINO';
+
+    default:
+      return sexo;
+
+  }
+
+}
+
 }

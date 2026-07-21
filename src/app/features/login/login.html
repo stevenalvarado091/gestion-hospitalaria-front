@@ -202,9 +202,7 @@
 
                         </label>
 
-                        <mat-form-field
-                            appearance="outline"
-                            class="campo-completo">
+                        <mat-form-field appearance="outline" class="campo-completo">
 
                             <mat-icon matPrefix>
 
@@ -212,12 +210,9 @@
 
                             </mat-icon>
 
-                            <input
-                                matInput
-                                name="usuario"
-                                autocomplete="username"
-                                placeholder="Ingrese su usuario"
-                                [(ngModel)]="usuario">
+                            <input matInput name="numeroDocumento" autocomplete="username"
+                                placeholder="Ingrese su número de documento" [(ngModel)]="numeroDocumento"
+                                inputmode="numeric" maxlength="20" pattern="[0-9]*">
 
                         </mat-form-field>
 
@@ -231,9 +226,7 @@
 
                         </label>
 
-                        <mat-form-field
-                            appearance="outline"
-                            class="campo-completo">
+                        <mat-form-field appearance="outline" class="campo-completo">
 
                             <mat-icon matPrefix>
 
@@ -241,18 +234,11 @@
 
                             </mat-icon>
 
-                            <input
-                                matInput
-                                [type]="mostrarPassword ? 'text' : 'password'"
-                                name="password"
-                                autocomplete="current-password"
-                                placeholder="Ingrese su contraseña"
+                            <input matInput [type]="mostrarPassword ? 'text' : 'password'" name="password"
+                                autocomplete="current-password" placeholder="Ingrese su contraseña"
                                 [(ngModel)]="password">
 
-                            <button
-                                mat-icon-button
-                                matSuffix
-                                type="button"
+                            <button mat-icon-button matSuffix type="button"
                                 (click)="mostrarPassword = !mostrarPassword">
 
                                 <mat-icon>
@@ -277,9 +263,7 @@
 
                     </div>
 
-                    <div
-                        class="mensaje-error"
-                        *ngIf="error">
+                    <div class="mensaje-error" *ngIf="error">
 
                         <mat-icon>
 
@@ -295,9 +279,7 @@
 
                     </div>
 
-                    <div
-                        class="mensaje-exito"
-                        *ngIf="inicioSesionExitoso">
+                    <div class="mensaje-exito" *ngIf="inicioSesionExitoso">
 
                         <mat-icon>
 
@@ -313,22 +295,13 @@
 
                     </div>
 
-                    <button
-                        mat-raised-button
-                        color="primary"
-                        class="boton-login"
-                        type="submit"
-                        [disabled]="cargando">
+                    <button mat-raised-button color="primary" class="boton-login" type="submit" [disabled]="cargando">
 
-                        <mat-spinner
-                            *ngIf="cargando"
-                            diameter="22">
+                        <mat-spinner *ngIf="cargando" diameter="22">
 
                         </mat-spinner>
 
-                        <span
-                            *ngIf="!cargando"
-                            class="texto-boton">
+                        <span *ngIf="!cargando" class="texto-boton">
 
                             <mat-icon>
 

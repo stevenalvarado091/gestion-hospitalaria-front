@@ -59,6 +59,7 @@ export class IngresoResumenComponent implements OnInit {
 
   construirTimeline() {
 
+    this.eventos = [];
 
     this.ingreso.observaciones?.forEach((o: any) => {
       this.eventos.push({
@@ -111,9 +112,16 @@ export class IngresoResumenComponent implements OnInit {
 
   })
   .map((e: any) => ({
+
     ...e,
+
+    estadoVisual: e.fechaEjecutada 
+        ? 'ENVIADO'
+        : e.estado,
+
     expandido: false
-  }))
+
+}))
 
         },
 

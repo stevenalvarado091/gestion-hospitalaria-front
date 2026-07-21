@@ -16,9 +16,15 @@
   (menuToggle)="sidenav.toggle()">
 </app-navbar>
 
+
+
     <ng-container *ngIf="detalleIngreso && ingreso">
 
+      <div class="modulo-card">
+
       <div class="detalle-superior">
+
+        
 
         <div class="icono-ingreso">
 
@@ -49,8 +55,10 @@
         <mat-icon>
           calendar_month
         </mat-icon>
-        Fecha de Ingreso:
-        {{ ingreso.fechaCreacion | date:'dd/MM/yyyy HH:mm' }}
+        Fecha de Ingreso : 
+        {{ ingreso.fechaCreacion  |  date :'dd/MM/yyyy HH:mm'  | uppercase }}
+
+
 
       </span>
 
@@ -60,7 +68,7 @@
           person
         </mat-icon>
 
-        Registrado por:
+        Registrado por : 
         {{ ingreso.usuario }}
 
       </span>
@@ -82,6 +90,8 @@
         </div>
 
       </div>
+
+    
 
       <div class="paciente-grid">
 
@@ -124,7 +134,7 @@
 
           <div>
             <label>Sexo</label>
-            <strong>{{ ingreso.sexo }}</strong>
+            <strong>{{ obtenerSexo(ingreso.sexo) }}</strong>
           </div>
 
         </div>
@@ -144,8 +154,11 @@
 
       </div>
 
+      </div>
 
     </ng-container>
+
+    
 
     <main class="main-content">
 
@@ -153,6 +166,8 @@
 
     </main>
 
+
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+

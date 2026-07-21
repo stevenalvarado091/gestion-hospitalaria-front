@@ -30,9 +30,7 @@ export class IngresoObservacionesComponent implements OnInit {
 
   nuevaObservacion = {
     descripcion: '',
-    tipoObservacion: 'GENERAL',
-    usuario: 'STIVEEN',
-    rolUsuario: 'AUDITOR'
+    tipoObservacion: 'GENERAL'
   };
 
   observaciones: any[] = [];
@@ -108,9 +106,7 @@ export class IngresoObservacionesComponent implements OnInit {
 
     this.nuevaObservacion = {
       descripcion: '',
-      tipoObservacion: 'GENERAL',
-      usuario: 'STIVEEN',
-      rolUsuario: 'AUDITOR'
+      tipoObservacion: 'GENERAL'
     };
   }
 

@@ -208,9 +208,6 @@ export class NuevoIngresoComponent implements OnInit {
       fechaNacimiento: this.form.get('fechaNacimiento')?.value,
       sexo: this.form.get('sexo')?.value,
 
-      usuario: 'FACTURADOR01',
-      rolUsuario: 'FACTURADOR'
-
     };
 
     this.ingresoService.crearIngreso(request)
@@ -361,5 +358,7 @@ export class NuevoIngresoComponent implements OnInit {
   this.pacienteExiste = false;
 
 }
+
+
 
 }

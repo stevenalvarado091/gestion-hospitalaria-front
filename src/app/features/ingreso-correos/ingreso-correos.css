@@ -1,3 +1,6 @@
+/* css de ingreso correos*/
+
+
 .correo-card{
 
     background:#fff;
@@ -511,35 +514,41 @@ hr{
 
 }
 
-.adjunto-item{
+.adjunto-item {
 
-    display:flex;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-    align-items:center;
+    cursor: pointer;
 
-    gap:12px;
-
-    padding:14px;
-
-    border-radius:10px;
-
-    background:#f8fafc;
-
-    border:1px solid #e5e7eb;
-
-    margin-bottom:10px;
+    transition: all .2s ease;
 
 }
 
-.adjunto-item:hover{
+.adjunto-item:hover {
 
-    background:#eef4ff;
+    color: var(--mat-sys-primary);
+
+    background: rgba(83, 3, 3, 0.04);
+
+    border-radius: 6px;
 
 }
 
-.adjunto-item mat-icon{
+.adjunto-item:hover mat-icon {
 
-    color:#2563eb;
+    transform: scale(1.1);
+
+}
+
+.adjunto-item mat-icon {
+
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+
+    color: #5f6368;
 
 }
 

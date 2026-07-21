@@ -34,11 +34,13 @@ export class DocumentoService {
 
   descargar(id: number) {
 
-    window.open(
-      `${this.url}/${id}/descargar`,
-      '_blank'
-    );
+  return this.http.get(
+    `${this.url}/${id}/descargar`,
+    {
+      responseType: 'blob'
+    }
+  );
 
-  }
+}
 
 }

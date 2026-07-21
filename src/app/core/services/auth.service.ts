@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -9,18 +11,22 @@ export class AuthService {
 
   private apiUrl = 'http://localhost:8080/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+  private http: HttpClient,
+  private router: Router,
+  private snackBar: MatSnackBar
+) {}
 
-  login(usuario: string, password: string): Observable<any> {
+  login(numeroDocumento: string, password: string): Observable<any> {
 
     return this.http.post<any>(`${this.apiUrl}/login`, {
-      usuario,
+      numeroDocumento,
       password
     }).pipe(
       tap(response => {
 
         localStorage.setItem('token', response.token);
-        localStorage.setItem('usuario', response.usuario);
+        localStorage.setItem('numeroDocumento', response.numeroDocumento);
         localStorage.setItem('nombreCompleto', response.nombreCompleto);
         localStorage.setItem('rol', response.rol);
 
@@ -32,8 +38,8 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  getUsuario(): string | null {
-    return localStorage.getItem('usuario');
+  getNumeroDocumento(): string | null {
+    return localStorage.getItem('numeroDocumento');
   }
 
   getNombreCompleto(): string | null {
@@ -48,11 +54,27 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
-    localStorage.removeItem('nombreCompleto');
-    localStorage.removeItem('rol');
+  logout(mostrarMensaje: boolean = false): void {
+
+  localStorage.removeItem('token');
+  localStorage.removeItem('numeroDocumento');
+  localStorage.removeItem('nombreCompleto');
+  localStorage.removeItem('rol');
+
+  if (mostrarMensaje) {
+
+    this.snackBar.open(
+      'La sesión ha expirado. Inicie sesión nuevamente.',
+      'Cerrar',
+      {
+        duration: 4000
+      }
+    );
+
   }
+
+  this.router.navigate(['/login']);
+
+}
 
 }

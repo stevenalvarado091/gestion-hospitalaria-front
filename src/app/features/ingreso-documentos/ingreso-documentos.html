@@ -1,5 +1,7 @@
 <div class="documentos-container">
 
+  <div class="modulo-card">
+
   <!-- ========================================================= -->
   <!-- CABECERA -->
   <!-- ========================================================= -->
@@ -341,7 +343,7 @@
         <button
           mat-flat-button
           color="primary"
-          (click)="descargarDocumento(documento.id)">
+          (click)="descargarDocumento(documento.id, documento.nombre)">
 
           <mat-icon>
 
@@ -356,6 +358,8 @@
       </div>
 
     </div>
+
+      </div>
 
   </div>
 

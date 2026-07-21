@@ -40,9 +40,7 @@ export class IngresoAutorizacionesComponent implements OnInit {
 
   nuevaAutorizacion = {
     numero: '',
-    observacion: '',
-    usuario: 'STIVEEN',
-    rolUsuario: 'FACTURADOR'
+    observacion: ''
   };
 
   archivoSeleccionado?: File;
@@ -55,21 +53,30 @@ export class IngresoAutorizacionesComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+ngOnInit(): void {
 
   let route = this.route;
 
   while (route.parent) {
+
+    if (route.snapshot.paramMap.has('id')) {
+      break;
+    }
+
     route = route.parent;
+
   }
 
-  const id = route.snapshot.firstChild?.paramMap.get('id');
+  const id = route.snapshot.paramMap.get('id');
 
-  console.log('ID obtenido:', id);
+  console.log('ID ingreso:', id);
 
   if (!id) {
-    console.error('No fue posible obtener el id del ingreso.');
+
+    console.error('No se encontró el id del ingreso');
+
     return;
+
   }
 
   this.ingresoId = Number(id);
@@ -81,16 +88,37 @@ export class IngresoAutorizacionesComponent implements OnInit {
   // =====================================================
   // CARGA LISTADO
   // =====================================================
-  cargarAutorizaciones() {
-    this.autorizacionService
-      .listarPorIngreso(this.ingresoId)
-      .subscribe({
-        next: (data: any) => {
-          this.autorizaciones = data;
-          this.cdr.detectChanges();
-        }
-      });
+ cargarAutorizaciones() {
+
+  if (!this.ingresoId) {
+    console.error('IngresoId no válido');
+    return;
   }
+
+  this.autorizacionService
+    .listarPorIngreso(this.ingresoId)
+    .subscribe({
+
+      next: (data) => {
+
+        this.autorizaciones = data;
+
+        this.cdr.detectChanges();
+
+      },
+
+      error: (err) => {
+
+        console.error(
+          'Error cargando autorizaciones',
+          err
+        );
+
+      }
+
+    });
+
+}
 
   // =====================================================
   // FORMULARIO
@@ -104,9 +132,7 @@ export class IngresoAutorizacionesComponent implements OnInit {
 
     this.nuevaAutorizacion = {
       numero: '',
-      observacion: '',
-      usuario: 'STIVEEN',
-      rolUsuario: 'FACTURADOR'
+      observacion: ''
     };
 
     this.eliminarArchivo();
@@ -188,16 +214,6 @@ export class IngresoAutorizacionesComponent implements OnInit {
     this.nuevaAutorizacion.observacion || ''
   );
 
-  formData.append(
-    'usuario',
-    this.nuevaAutorizacion.usuario
-  );
-
-  formData.append(
-    'rolUsuario',
-    this.nuevaAutorizacion.rolUsuario
-  );
-
   this.subiendo = true;
 
   this.autorizacionService
@@ -231,9 +247,39 @@ export class IngresoAutorizacionesComponent implements OnInit {
   // =====================================================
   // DESCARGA
   // =====================================================
-  descargarDocumento(id: number) {
+  descargarDocumento(id: number, nombreArchivo: string) {
 
-  this.autorizacionService.descargar(id);
+  this.autorizacionService
+    .descargar(id)
+    .subscribe({
+
+      next: (archivo: Blob) => {
+
+        const url = window.URL.createObjectURL(archivo);
+
+        const enlace = document.createElement('a');
+
+        enlace.href = url;
+
+        enlace.download = nombreArchivo;
+
+        enlace.click();
+
+        window.URL.revokeObjectURL(url);
+
+      },
+
+      error: (err) => {
+
+        console.error(
+          'Error descargando autorización',
+          err
+        );
+
+      }
+
+    });
 
 }
+
 }

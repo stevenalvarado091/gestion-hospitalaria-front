@@ -228,19 +228,15 @@ enviarCorreo() {
 
   this.correoService.enviarCorreo(
 
-    this.ingresoId,
+  this.ingresoId,
 
-    this.form.value.epsId,
+  this.form.value.epsId,
 
-    this.form.value.tipoCorreo,
+  this.form.value.tipoCorreo,
 
-    'FACTURADOR01',
+  this.archivos
 
-    'FACTURADOR',
-
-    this.archivos
-
-  ).subscribe({
+).subscribe({
 
     next: (response: any) => {
 
@@ -307,6 +303,42 @@ cargarCorreos() {
 toggleCorreo(correo: any) {
 
   correo.expandido = !correo.expandido;
+
+}
+
+
+descargarAdjunto(id: number, nombreArchivo: string) {
+
+  this.correoService
+    .descargarAdjunto(id)
+    .subscribe({
+
+      next: (archivo: Blob) => {
+
+        const url = window.URL.createObjectURL(archivo);
+
+        const enlace = document.createElement('a');
+
+        enlace.href = url;
+
+        enlace.download = nombreArchivo;
+
+        enlace.click();
+
+        window.URL.revokeObjectURL(url);
+
+      },
+
+      error: (err) => {
+
+        console.error(
+          'Error descargando adjunto',
+          err
+        );
+
+      }
+
+    });
 
 }
 
