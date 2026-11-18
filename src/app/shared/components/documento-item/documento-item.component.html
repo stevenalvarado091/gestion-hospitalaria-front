@@ -1,0 +1,86 @@
+<div class="evento-card-body documento-resumen-card">
+
+  <div class="evento-header">
+
+    <div class="evento-icono documento">
+      <mat-icon>description</mat-icon>
+    </div>
+
+    <div class="evento-info">
+
+      <div class="evento-info-top">
+        <h3>Documento cargado</h3>
+
+        <span class="evento-badge documento">
+          DOCUMENTO
+        </span>
+      </div>
+
+      <div class="evento-subinfo">
+
+        <div class="evento-doc-nombre">
+          {{ documento.nombre }}
+        </div>
+
+        <div class="evento-doc-tipo">
+          Tipo: {{ documento.tipoDocumento }}
+        </div>
+
+        <div class="documento-detalles">
+
+          <span>
+            <strong>Extensión:</strong>
+            {{ documento.extension }}
+          </span>
+
+          <span>
+            <strong>Tamaño:</strong>
+            {{ documento.tamano }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="evento-meta">
+
+      <div class="evento-meta-item">
+        <mat-icon>calendar_month</mat-icon>
+        <span>
+          {{ documento.fechaCreacion | date:'dd MMM yyyy' | uppercase }}
+        </span>
+      </div>
+
+      <div class="evento-meta-item">
+        <mat-icon>schedule</mat-icon>
+        <span>
+          {{ documento.fechaCreacion | date:'hh:mm a' }}
+        </span>
+      </div>
+
+      <div class="evento-meta-item">
+        <mat-icon>person_outline</mat-icon>
+        <span>{{ documento.usuario }}</span>
+      </div>
+
+    </div>
+
+    <div class="evento-accion">
+
+      <button mat-stroked-button
+              color="primary"
+              type="button"
+              (click)="descargar.emit()">
+
+        <mat-icon>download</mat-icon>
+        Descargar
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

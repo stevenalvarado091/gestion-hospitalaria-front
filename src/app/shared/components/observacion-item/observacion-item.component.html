@@ -1,0 +1,89 @@
+<div class="evento-card-body observacion-resumen-card">
+
+  <div class="evento-header evento-header-clickable"
+       (click)="toggle.emit()">
+
+     <div class="evento-icono observacion">
+      <mat-icon>chat</mat-icon>
+     </div>
+
+    <div class="evento-info">
+
+      <div class="evento-info-top">
+
+        <h3>Observación registrada</h3>
+
+        <span class="evento-badge observacion">
+          {{ observacion.tipoObservacion }}
+        </span>
+
+      </div>
+
+      <span class="evento-subtitulo observacion-preview">
+
+        {{ observacion.descripcion | slice:0:140 }}
+
+        <span *ngIf="observacion.descripcion.length > 140">
+          ...
+        </span>
+
+      </span>
+
+    </div>
+
+    <div class="evento-meta">
+
+      <div class="evento-meta-item">
+        <mat-icon>calendar_month</mat-icon>
+        <span>
+          {{ observacion.fechaCreacion | date:'dd MMM yyyy' | uppercase }}
+        </span>
+      </div>
+
+      <div class="evento-meta-item">
+        <mat-icon>schedule</mat-icon>
+        <span>
+          {{ observacion.fechaCreacion | date:'hh:mm a' }}
+        </span>
+      </div>
+
+      <div class="evento-meta-item">
+        <mat-icon>person_outline</mat-icon>
+        <span>{{ observacion.usuario }}</span>
+      </div>
+
+    </div>
+
+    <div class="evento-accion">
+
+      <button mat-stroked-button
+              color="primary"
+              type="button"
+              (click)="toggle.emit(); $event.stopPropagation()">
+
+        <mat-icon>visibility</mat-icon>
+        {{ expandido ? 'Ocultar detalle' : 'Ver detalle' }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="evento-body" *ngIf="expandido">
+
+    <div class="evento-section">
+
+      <div class="evento-label">
+        Observación completa
+      </div>
+
+      <div class="evento-observacion">
+        <pre>{{ observacion.descripcion }}</pre>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

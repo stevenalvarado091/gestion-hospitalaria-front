@@ -53,4 +53,11 @@ export class CorreoService {
 
 }
 
+abrirAdjunto(id: number) {
+  return this.http.get(
+    `${this.url}/adjuntos/${id}/descargar`,
+    { responseType: 'blob' }
+  );
+}
+
 }

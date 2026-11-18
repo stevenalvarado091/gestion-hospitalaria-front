@@ -16,6 +16,9 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { EpsService } from '../../core/services/eps.service';
 import { CorreoService } from '../../core/services/correo.service';
 
+import { ModuloLayoutComponent } from '../../shared/components/modulo-layout/modulo-layout.component';
+import { CorreoItemComponent } from '../../shared/components/correo-item/correo-item.component';
+
 //IMPORRT PARA CORREGIR ERROR DE VISTA
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -31,6 +34,8 @@ import { ChangeDetectorRef } from '@angular/core';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    CorreoItemComponent,
+    ModuloLayoutComponent,
     MatProgressSpinnerModule
   ],
   templateUrl: './ingreso-correos.html',
@@ -273,41 +278,234 @@ enviarCorreo() {
 cargarCorreos() {
 
   this.correoService
-      .listarPorIngreso(this.ingresoId)
-      .subscribe({
+    .listarPorIngreso(this.ingresoId)
+    .subscribe({
 
-        next: (data: any) => {
+      next: (data: any) => {
 
-          console.log(data);
-          this.correos = data.map((c: any) => ({
+        this.correos = data.map((c: any) => ({
 
-            ...c,
+          ...c,
 
-            expandido: false
+          expandido: false,
 
-          }));
-          this.cdr.detectChanges();
+          envios: (c.envios || []).map((e: any) => ({
 
-        },
+            ...e,
 
-        error: (error: any) => {
+            expandido: false,
 
-          console.error(error);
+            estadoVisual: e.fechaEjecutada
+              ? 'ENVIADO'
+              : e.fechaProgramada
+                ? 'PROGRAMADO'
+                : e.estado
 
-        }
+          }))
 
-      });
+        }));
+
+        this.cdr.detectChanges();
+
+      },
+
+      error: (error: any) => {
+
+        console.error(error);
+
+      }
+
+    });
 
 }
 
-toggleCorreo(correo: any) {
-
+toggleCorreo(correo: any): void {
   correo.expandido = !correo.expandido;
+}
+
+toggleEnvio(envio: any) {
+
+  envio.expandido = !envio.expandido;
+
+}
+
+imprimirCorreo(correo: any, imprimir: boolean = true): void {
+
+  correo.imprimiendo = true;
+
+  // Fuerza que todos los envíos se muestren temporalmente
+  if (correo.envios?.length) {
+    correo.envios.forEach((envio: any) => envio.expandido = true);
+  }
+
+  setTimeout(() => {
+
+    const elemento = document.getElementById(`correo-${correo.id}`);
+
+    if (!elemento) {
+      correo.imprimiendo = false;
+      return;
+    }
+
+    // Clonamos el contenido para quitar iconos de acción
+    const clon = elemento.cloneNode(true) as HTMLElement;
+
+    clon.querySelectorAll('.correo-acciones').forEach(e => e.remove());
+    clon.querySelectorAll('.adjunto-action').forEach(e => e.remove());
+    clon.querySelectorAll('.adjunto-left mat-icon').forEach(e => e.remove());
+
+    // Eliminar encabezados técnicos de reenvíos
+    clon.querySelectorAll('.envio-header').forEach(e => e.remove());
+
+    // Eliminar el texto "Historial del correo"
+    clon.querySelectorAll('.evento-label').forEach(label => {
+      if (label.textContent?.trim() === 'Historial del correo') {
+        label.remove();
+      }
+    });
+
+    const contenido = clon.innerHTML;
+
+    if (!contenido) {
+      correo.imprimiendo = false;
+      return;
+    }
+
+    const ventana = window.open('', '_blank', 'width=1100,height=900');
+
+    if (!ventana) {
+      correo.imprimiendo = false;
+      return;
+    }
+
+    ventana.document.write(`
+
+      <html>
+
+        <head>
+
+          <title>${correo.asunto}</title>
+
+          <style>
+
+            body{
+              font-family: Arial, Helvetica, sans-serif;
+              margin:0;
+              padding:32px;
+              background:#f8fafc;
+              color:#202124;
+            }
+
+            .correo-header-detalle{
+              margin-bottom:24px;
+              padding-bottom:16px;
+              border-bottom:1px solid #e5e7eb;
+            }
+
+            .correo-asunto-grande{
+              font-size:24px;
+              font-weight:600;
+              margin-bottom:12px;
+            }
+
+            .correo-meta-grid{
+              display:flex;
+              flex-direction:column;
+              gap:6px;
+              font-size:14px;
+              color:#4b5563;
+            }
+
+            .correo-contenido{
+              margin-top:24px;
+            }
+
+            .correo-mensaje{
+              background:white;
+              border:1px solid #e5e7eb;
+              border-radius:14px;
+              padding:22px;
+              white-space:pre-wrap;
+              line-height:1.7;
+            }
+
+            .evento-label{
+              margin:28px 0 14px;
+              font-size:12px;
+              font-weight:700;
+              text-transform:uppercase;
+              color:#64748b;
+            }
+
+            .adjuntos-lista{
+              display:flex;
+              flex-wrap:wrap;
+              gap:12px;
+            }
+
+            .adjunto-card{
+              display:flex;
+              align-items:center;
+              gap:12px;
+              border:1px solid #e5e7eb;
+              border-radius:12px;
+              padding:12px 14px;
+              background:white;
+            }
+
+            .envio-card{
+              margin-top:24px;
+              border:1px solid #e5e7eb;
+              border-radius:14px;
+              overflow:hidden;
+              background:white;
+            }
+
+            .envio-body{
+              padding:22px;
+            }
+
+          </style>
+
+        </head>
+
+        <body>
+
+          ${contenido}
+
+        </body>
+
+      </html>
+    `);
+
+    ventana.document.close();
+
+    if (imprimir) {
+      ventana.focus();
+      ventana.print();
+    } else {
+      ventana.focus();
+    }
+
+    // Restaurar estado original
+    if (correo.envios?.length) {
+      correo.envios.forEach((envio: any) => envio.expandido = false);
+    }
+
+    correo.imprimiendo = false;
+
+  }, 0);
+
+}
+
+abrirCorreoVentana(correo: any): void {
+
+  this.imprimirCorreo(correo, false);
 
 }
 
 
-descargarAdjunto(id: number, nombreArchivo: string) {
+abrirAdjunto(id: number) {
 
   this.correoService
     .descargarAdjunto(id)
@@ -317,30 +515,18 @@ descargarAdjunto(id: number, nombreArchivo: string) {
 
         const url = window.URL.createObjectURL(archivo);
 
-        const enlace = document.createElement('a');
-
-        enlace.href = url;
-
-        enlace.download = nombreArchivo;
-
-        enlace.click();
-
-        window.URL.revokeObjectURL(url);
+        window.open(url, '_blank');
 
       },
 
       error: (err) => {
 
-        console.error(
-          'Error descargando adjunto',
-          err
-        );
+        console.error('Error abriendo adjunto', err);
 
       }
 
     });
 
 }
-
 
 }

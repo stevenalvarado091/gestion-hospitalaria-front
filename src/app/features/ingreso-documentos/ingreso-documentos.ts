@@ -13,6 +13,9 @@ import { TipoDocumentoArchivo } from '../../core/enums/tipo-documento-archivo.en
 
 import { DocumentoService } from '../../core/services/documento.service';
 
+import { ModuloLayoutComponent } from '../../shared/components/modulo-layout/modulo-layout.component';
+import { DocumentoItemComponent } from '../../shared/components/documento-item/documento-item.component';
+
 //IMPORRT PARA CORREGIR ERROR DE VISTA
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -27,7 +30,9 @@ import { ChangeDetectorRef } from '@angular/core';
   MatFormFieldModule,
   MatSelectModule,
   MatInputModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  ModuloLayoutComponent,
+  DocumentoItemComponent
 ],
   templateUrl: './ingreso-documentos.html',
   styleUrls: ['./ingreso-documentos.css']

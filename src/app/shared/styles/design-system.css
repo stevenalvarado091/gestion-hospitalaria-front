@@ -1,0 +1,546 @@
+:root {
+  /* ===== COLORES ===== */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: #eff6ff;
+
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-purple: #7c3aed;
+
+  /* ===== TEXTO ===== */
+  --text: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  /* ===== FONDOS ===== */
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-secondary: #f8fafc;
+
+  /* ===== BORDES ===== */
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* ===== SOMBRAS ===== */
+  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 6px 20px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+  /* ===== RADIOS ===== */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+
+  /* ===== ESPACIADO ===== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ===== TIPOGRAFÍA ===== */
+  --font-family: Inter, sans-serif;
+
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 22px;
+  --text-3xl: 28px;
+}
+
+/* ========================================================
+   BASE GLOBAL
+======================================================== */
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-family);
+}
+
+/* ========================================================
+   CARD ESTÁNDAR
+======================================================== */
+
+.app-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* ========================================================
+   HEADER DE MÓDULOS
+======================================================== */
+
+.app-module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: nowrap;
+  margin-bottom: var(--space-6);
+}
+
+.app-module-header > div:first-child {
+  flex: 1;
+}
+
+.app-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.app-module-header h2 {
+  margin: 0;
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.app-module-header p {
+  margin: var(--space-1) 0 0;
+  color: var(--text-secondary);
+  font-size: var(--text-md);
+}
+
+/* ========================================================
+   BOTONES MATERIAL UNIFICADOS
+======================================================== */
+
+button[mat-flat-button],
+button[mat-raised-button],
+button[mat-stroked-button] {
+  border-radius: var(--radius-sm) !important;
+  min-height: 40px;
+  padding: 0 18px !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
+
+button[mat-stroked-button] {
+  border-color: var(--border-strong) !important;
+}
+
+button[mat-stroked-button]:hover {
+  background: var(--color-primary-light) !important;
+  border-color: #93c5fd !important;
+}
+
+button mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+/* ========================================================
+   FORMULARIOS
+======================================================== */
+
+.app-form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.app-form-header h3 {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+/* ========================================================
+   LISTAS / ITEMS
+======================================================== */
+
+.app-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.app-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  transition: all 0.2s ease;
+}
+
+.app-list-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ========================================================
+   EMPTY STATE
+======================================================== */
+
+.app-empty-state {
+  border: 2px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 56px 24px;
+  text-align: center;
+  background: #fafafa;
+}
+
+.app-empty-state mat-icon {
+  width: 64px;
+  height: 64px;
+  font-size: 64px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.app-empty-state p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-md);
+}
+
+/* ========================================================
+   RESPONSIVE
+======================================================== */
+
+@media (max-width: 768px) {
+  .app-module-header,
+  .app-form-header,
+  .app-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .app-module-header h2 {
+    font-size: 24px;
+  }
+}
+
+
+
+/* ==========================================================
+   TIMELINE / RESUMEN REUTILIZABLE
+========================================================== */
+
+.evento-card-body{
+  width:100%;
+  border:1px solid #eef2f7;
+  border-radius:20px;
+  background:#ffffff;
+  box-shadow:0 6px 20px rgba(15,23,42,.04);
+  overflow:hidden;
+}
+
+.evento-header{
+  display:grid;
+  grid-template-columns:72px minmax(320px,1fr) 240px auto;
+  align-items:center;
+  gap:28px;
+  padding:26px 30px;
+  min-height:118px;
+}
+
+.evento-accion{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  min-width:180px;
+}
+
+.evento-accion button{
+  white-space:nowrap;
+}
+
+@media (max-width: 1200px){
+  .evento-header{
+    grid-template-columns:1fr;
+  }
+
+  .evento-meta{
+    border-left:none;
+    border-top:1px solid var(--border);
+    padding-left:0;
+    padding-top:16px;
+  }
+}
+
+.app-form-card textarea,
+.app-form-card mat-form-field{
+  width:100%;
+  max-width:100%;
+}
+
+.evento-accion{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  align-self:center;
+}
+
+.evento-icono{
+  width:72px;
+  height:72px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.evento-icono.observacion{
+  background:#dcfce7;
+}
+
+.evento-icono.observacion mat-icon{
+  color:#16a34a;
+}
+
+.evento-icono mat-icon{
+  width:38px;
+  height:38px;
+  font-size:38px;
+}
+
+.evento-info{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.evento-info-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.evento-info-top h3{
+  margin:0;
+  font-size:20px;
+  font-weight:700;
+  color:#0f172a;
+  line-height:1.2;
+}
+
+.evento-badge{
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.evento-badge.observacion{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.evento-meta{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:10px;
+  padding-left:24px;
+  border-left:1px solid #e2e8f0;
+}
+
+.evento-meta-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  color:#475569;
+}
+
+.evento-meta-item mat-icon{
+  width:16px;
+  height:16px;
+  font-size:16px;
+  color:#64748b;
+}
+
+.evento-body{
+  border-top:1px solid #e2e8f0;
+  padding:24px 30px;
+  background:#fbfcfe;
+}
+
+.evento-section{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.evento-label{
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  color:#64748b;
+}
+
+.evento-observacion{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  padding:18px;
+  color:#334155;
+  font-size:14px;
+  line-height:1.8;
+}
+
+.evento-observacion pre{
+  margin:0;
+  white-space:pre-wrap;
+  font-family:inherit;
+}
+
+.observacion-resumen-card:hover{
+  transform:none;
+  box-shadow:0 6px 20px rgba(15,23,42,.04);
+}
+
+@media (max-width: 900px){
+
+  .evento-header{
+  grid-template-columns:1fr;
+  gap:20px;
+}
+
+.evento-accion{
+  width:100%;
+  justify-content:flex-start;
+}
+
+  .evento-meta{
+    border-left:none;
+    border-top:1px solid #e2e8f0;
+    padding-left:0;
+    padding-top:16px;
+  }
+
+}
+
+/* ========================================================
+   CONTENEDOR PRINCIPAL RESPONSIVO
+======================================================== */
+
+.app-page{
+  width:100%;
+  max-width:1600px;
+  margin:0 auto;
+  padding:clamp(16px, 2vw, 32px);
+}
+
+/* ========================================================
+LAYOUT DE MÓDULOS REUTILIZABLE
+======================================================== */
+
+.app-module{
+display:flex;
+flex-direction:column;
+gap:24px;
+}
+
+.app-module-content{
+display:flex;
+flex-direction:column;
+gap:24px;
+}
+
+.app-section{
+background:var(--surface);
+border:1px solid var(--border);
+border-radius:var(--radius-lg);
+padding:24px;
+box-shadow:var(--shadow-sm);
+}
+
+.app-section-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:16px;
+margin-bottom:20px;
+}
+
+.app-section-header h3{
+margin:0;
+font-size:var(--text-xl);
+font-weight:600;
+color:var(--text);
+}
+
+.app-section-counter{
+font-size:var(--text-sm);
+color:var(--text-secondary);
+font-weight:500;
+}
+
+/* ========================================================
+ACCIONES DE MÓDULO
+======================================================== */
+
+.app-actions{
+display:flex;
+align-items:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+/* ========================================================
+LISTAS HOMOGÉNEAS
+======================================================== */
+
+.app-records{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.app-record-item{
+width:100%;
+}
+
+/* ========================================================
+SEPARADOR SUAVE
+======================================================== */
+
+.app-divider{
+border:none;
+border-top:1px solid var(--border);
+margin:28px 0;
+}
+
+
+.app-module-header .app-actions{
+  margin-left:auto;
+  justify-content:flex-end;
+  display:flex;
+  width:auto;
+}

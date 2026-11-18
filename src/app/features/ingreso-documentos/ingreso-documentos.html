@@ -1,41 +1,25 @@
-<div class="documentos-container">
+<app-modulo-layout
+  titulo="DOCUMENTOS"
+  subtitulo="Gestión de documentos asociados al ingreso">
 
-  <div class="modulo-card">
+  <div acciones class="app-actions">
 
-  <!-- ========================================================= -->
-  <!-- CABECERA -->
-  <!-- ========================================================= -->
+    <button
+      *ngIf="!mostrarFormulario"
+      mat-flat-button
+      color="primary"
+      (click)="abrirFormulario()">
 
-  <div class="documentos-header">
+      <mat-icon>upload_file</mat-icon>
+      Cargar documento
 
-    <div>
-
-      <h2>DOCUMENTOS</h2>
-
-      <p>
-        Gestión de documentos asociados al ingreso
-      </p>
-
-    </div>
-
-    <div class="acciones-header">
-
-      <button
-        *ngIf="!mostrarFormulario"
-        mat-flat-button
-        color="primary"
-        (click)="abrirFormulario()">
-
-        <mat-icon>upload_file</mat-icon>
-
-        Cargar documento
-
-      </button>
-
-    </div>
+    </button>
 
   </div>
 
+ <!-- <div class="modulo-card"> -->
+
+ 
   <!-- ========================================================= -->
   <!-- FORMULARIO -->
   <!-- ========================================================= -->
@@ -208,21 +192,15 @@
   <!-- HISTORIAL -->
   <!-- ========================================================= -->
 
-  <div class="historial-header">
+  <div class="app-section-header historial-header">
 
-    <h3>
+  <span class="app-section-counter">
 
-      Historial de documentos
+    {{ documentos.length }} documento(s)
 
-    </h3>
+  </span>
 
-    <span>
-
-      {{ documentos.length }} documento(s)
-
-    </span>
-
-  </div>
+</div>
 
   <!-- Sin documentos -->
 
@@ -244,123 +222,19 @@
 
   </div>
 
-  <!-- Lista -->
+<!-- Lista -->
 
-  <div
-    class="documentos-lista"
-    *ngIf="documentos.length>0">
+<div class="documentos-lista"
+     *ngIf="documentos.length > 0">
 
-    <div
-      class="documento-card"
-      *ngFor="let documento of documentos">
-
-      <div class="documento-icono">
-
-        <mat-icon>
-
-          description
-
-        </mat-icon>
-
-      </div>
-
-      <div class="documento-info">
-
-        <h3>
-
-          {{ documento.nombre }}
-
-        </h3>
-
-        <div class="documento-detalles">
-
-          <span>
-
-            <strong>Tipo:</strong>
-
-            {{ documento.tipoDocumento }}
-
-          </span>
-
-          <span>
-
-            <strong>Extensión:</strong>
-
-            {{ documento.extension }}
-
-          </span>
-
-          <span>
-
-            <strong>Tamaño:</strong>
-
-            {{ documento.tamano }}
-
-          </span>
-
-        </div>
-
-        <div class="documento-fecha">
-
-          <mat-icon>
-
-            calendar_today
-
-          </mat-icon>
-
-          {{ documento.fechaCreacion | date:'dd/MM/yyyy' }}
-
-          <mat-icon>
-
-            schedule
-
-          </mat-icon>
-
-          {{ documento.fechaCreacion | date:'HH:mm' }}
-
-        </div>
-
-        <div class="documento-usuario">
-
-          <mat-icon>
-
-            person
-
-          </mat-icon>
-
-          {{ documento.usuario }}
-
-          •
-
-          {{ documento.rolUsuario }}
-
-        </div>
-
-      </div>
-
-      <div class="documento-acciones">
-
-        <button
-          mat-flat-button
-          color="primary"
-          (click)="descargarDocumento(documento.id, documento.nombre)">
-
-          <mat-icon>
-
-            download
-
-          </mat-icon>
-
-          Descargar
-
-        </button>
-
-      </div>
-
-    </div>
-
-      </div>
-
-  </div>
+  <app-documento-item
+    *ngFor="let documento of documentos"
+    [documento]="documento"
+    (descargar)="descargarDocumento(documento.id, documento.nombre)">
+  </app-documento-item>
 
 </div>
+
+   <!-- </div> -->
+
+</app-modulo-layout>

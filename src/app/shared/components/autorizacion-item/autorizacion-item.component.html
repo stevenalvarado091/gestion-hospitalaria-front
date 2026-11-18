@@ -1,0 +1,98 @@
+<div class="evento-card-body autorizacion-resumen-card">
+
+    <div class="evento-header">
+
+        <div class="evento-icono autorizacion">
+            <mat-icon>verified</mat-icon>
+        </div>
+
+        <div class="evento-info">
+
+            <div class="evento-info-top">
+
+                <h3>Autorización registrada</h3>
+
+                <span class="evento-badge autorizacion">
+                    AUTORIZACIÓN
+                </span>
+
+            </div>
+
+            <div class="evento-subinfo">
+
+                <div class="evento-doc-nombre">
+                    {{ autorizacion.numeroAutorizacion
+                    || autorizacion.nombreArchivo
+                    || 'Autorización' }}
+                </div>
+
+                <div class="evento-doc-tipo" *ngIf="autorizacion.numeroAutorizacion">
+
+                    Número: {{ autorizacion.numeroAutorizacion }}
+
+                </div>
+
+                <div class="evento-doc-tipo" *ngIf="autorizacion.observacion">
+
+                    {{ autorizacion.observacion }}
+
+                </div>
+
+                <div class="documento-detalles" *ngIf="autorizacion.nombreArchivo">
+
+                    <span>
+                        <strong>Documento:</strong>
+                        {{ autorizacion.nombreArchivo }}
+                    </span>
+
+                    <span>
+                        <strong>{{ autorizacion.extension }}</strong>
+                        • {{ autorizacion.tamano }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="evento-meta">
+
+            <div class="evento-meta-item">
+                <mat-icon>calendar_month</mat-icon>
+                <span>
+                    {{ autorizacion.fechaCreacion | date:'dd MMM yyyy' | uppercase }}
+                </span>
+            </div>
+
+            <div class="evento-meta-item">
+                <mat-icon>schedule</mat-icon>
+                <span>
+                    {{ autorizacion.fechaCreacion | date:'hh:mm a' }}
+                </span>
+            </div>
+
+            <div class="evento-meta-item">
+                <mat-icon>person_outline</mat-icon>
+                <span>
+                    {{ autorizacion.usuario }}
+                </span>
+            </div>
+
+        </div>
+
+        <div class="evento-accion">
+
+            <button *ngIf="autorizacion.nombreArchivo" mat-stroked-button color="primary" type="button"
+                (click)="descargar.emit()">
+
+                <mat-icon>download</mat-icon>
+                Descargar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

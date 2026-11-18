@@ -1,5 +1,5 @@
 /* css de ingreso correos*/
-
+/* 
 .observaciones-container{
   background:#ffffff;
   border-radius:16px;
@@ -238,4 +238,252 @@
   line-height:1.5;
   color:#111827;
   white-space:pre-wrap;
+}
+*/
+
+.observaciones-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.observaciones-card {
+  padding: 24px;
+}
+
+/* ========================================================
+   FILTROS
+======================================================== */
+
+.observaciones-filtros {
+  margin-bottom: 20px;
+}
+
+.observaciones-filtros select,
+.form-footer select {
+  height: 42px;
+  min-width: 240px;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--text-md);
+}
+
+/* ========================================================
+   FORMULARIO
+======================================================== */
+
+.nueva-observacion-card {
+  margin-bottom: 24px;
+}
+
+.observacion-textarea {
+  width: 100%;
+  min-height: 180px;
+  max-height: 420px;
+  resize: vertical;
+  padding: 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--text);
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.observacion-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 16px;
+}
+
+/* ========================================================
+   LISTADO
+======================================================== */
+
+.observacion-item {
+  align-items: flex-start;
+}
+
+/*
+.observacion-icono {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: #dcfce7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.observacion-icono mat-icon {
+  width: 28px;
+  height: 28px;
+  font-size: 28px;
+  color: var(--color-success);
+}
+
+.observacion-contenido {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.observacion-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.observacion-usuario {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.observacion-tipo {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--color-primary);
+}
+
+.observacion-fecha {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.observacion-fecha mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.observacion-texto {
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #334155;
+}
+*/
+
+/* ========================================================
+   RESPONSIVE
+======================================================== */
+
+@media (max-width: 768px) {
+  .observaciones-card {
+    padding: 18px;
+  }
+
+  .observacion-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-footer select {
+    width: 100%;
+  }
+}
+
+
+.observaciones-filtros{
+  margin-bottom:20px;
+}
+
+.observaciones-filtros mat-form-field{
+  width:260px;
+}
+
+.observacion-expandible{
+  cursor:pointer;
+}
+
+.observacion-expandible:hover{
+  opacity:.98;
+}
+
+.observacion-preview{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  color:#475569;
+  line-height:1.6;
+  max-width:520px;
+}
+
+.observaciones-toolbar{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:24px;
+}
+
+.filtro-observaciones{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.filtro-observaciones mat-icon{
+  color:var(--text-secondary);
+}
+
+.filtro-observaciones mat-form-field{
+  width:260px;
+}
+
+.observaciones-header-actions{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.filtro-observaciones{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.filtro-observaciones mat-icon{
+  color:var(--text-secondary);
+  width:18px;
+  height:18px;
+  font-size:18px;
+}
+
+.filtro-observaciones mat-form-field{
+  width:min(260px, 100%);
+  margin-bottom:-1.25em; /* corrige alineación vertical de Material */
+}
+
+@media (max-width: 768px){
+
+  .observaciones-header-actions{
+    width:100%;
+    justify-content:space-between;
+  }
+
+  .filtro-observaciones mat-form-field{
+    width:100%;
+  }
 }

@@ -1,0 +1,38 @@
+.observacion-resumen-card{
+  width:100%;
+}
+
+/* Recupera el layout original del resumen */
+.observacion-resumen-card .evento-header{
+  display:grid;
+  grid-template-columns:72px minmax(260px,1fr) 220px auto;
+  align-items:center;
+  gap:24px;
+}
+
+.observacion-resumen-card .evento-accion{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
+
+.evento-header-clickable{
+  cursor:pointer;
+}
+
+/* Zoom alto / pantallas pequeñas */
+@media (max-width: 1100px){
+
+  .observacion-resumen-card .evento-header{
+    grid-template-columns:1fr;
+  }
+
+  .observacion-resumen-card .evento-accion{
+    justify-content:flex-start;
+    width:100%;
+  }
+
+  .observacion-resumen-card .evento-accion button{
+    width:100%;
+  }
+}

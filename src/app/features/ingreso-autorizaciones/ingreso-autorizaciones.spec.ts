@@ -1,22 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IngresoAutorizaciones } from './ingreso-autorizaciones';
+import { IngresoAutorizacionesComponent } from './ingreso-autorizaciones';
+import { AutorizacionItemComponent } from '../../shared/components/autorizacion-item/autorizacion-item.component';
 
-describe('IngresoAutorizaciones', () => {
-  let component: IngresoAutorizaciones;
-  let fixture: ComponentFixture<IngresoAutorizaciones>;
+describe('IngresoAutorizacionesComponent', () => {
+
+  let component: IngresoAutorizacionesComponent;
+  let fixture: ComponentFixture<IngresoAutorizacionesComponent>;
 
   beforeEach(async () => {
+
     await TestBed.configureTestingModule({
-      imports: [IngresoAutorizaciones],
+      imports: [
+        IngresoAutorizacionesComponent,
+        AutorizacionItemComponent
+      ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(IngresoAutorizaciones);
+    fixture = TestBed.createComponent(IngresoAutorizacionesComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
-  });
+
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

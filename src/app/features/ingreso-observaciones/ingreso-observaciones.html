@@ -1,15 +1,32 @@
-<div class="observaciones-container">
+<app-modulo-layout titulo="OBSERVACIONES" subtitulo="Gestión de observaciones asociadas al ingreso">
 
-  <div class="observaciones-header">
+  <div acciones class="app-actions observaciones-header-actions">
 
-       <div>
-      <h2>OBSERVACIONES</h2>
-      <p>Gestión de observaciones asociadas al ingreso</p>
+    <div class="filtro-observaciones" *ngIf="!mostrarFormulario">
+
+      <mat-icon>filter_list</mat-icon>
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Filtrar observaciones</mat-label>
+
+        <mat-select [(ngModel)]="filtroCategoria" (selectionChange)="aplicarFiltro()">
+
+          <mat-option value="TODAS">
+            Todas las categorías
+          </mat-option>
+
+          <mat-option value="GENERAL">GENERAL</mat-option>
+          <mat-option value="MEDICA">MEDICA</mat-option>
+          <mat-option value="ADMINISTRATIVA">ADMINISTRATIVA</mat-option>
+
+        </mat-select>
+
+      </mat-form-field>
+
     </div>
 
-    <button
-      class="btn-nueva-observacion"
-      (click)="abrirFormulario()">
+    <button *ngIf="!mostrarFormulario" mat-flat-button color="primary" (click)="abrirFormulario()">
 
       <mat-icon>add</mat-icon>
       Nueva observación
@@ -18,62 +35,29 @@
 
   </div>
 
-  <div class="observaciones-filtros">
 
-    <select>
 
-      <option>Todas las categorías</option>
-      <option>GENERAL</option>
-      <option>AUDITORIA</option>
-      <option>ADMINISTRATIVA</option>
 
-    </select>
 
-  </div>
 
-  <div
-    class="nueva-observacion-card"
-    *ngIf="mostrarFormulario">
+  <!-- FORMULARIO -->
+  <div class="app-form-card nueva-observacion-card" *ngIf="mostrarFormulario">
 
-    <div class="form-title">
-      Nueva observación
-    </div>
+    <div class="app-form-header">
 
-    <textarea
-      class="observacion-textarea"
-      [(ngModel)]="nuevaObservacion.descripcion"
-      placeholder="Escribir observación...">
-    </textarea>
-
-    <div class="form-footer">
-
-      <select
-        [(ngModel)]="nuevaObservacion.tipoObservacion">
-
-        <option
-          *ngFor="let tipo of tiposObservacion"
-          [value]="tipo">
-
-          {{ tipo }}
-
-        </option>
-
-      </select>
+      <h3>Nueva observación</h3>
 
       <div class="acciones">
 
-        <button
-          class="btn-cancelar"
-          (click)="cerrarFormulario()">
+        <button mat-stroked-button (click)="cerrarFormulario()">
 
           Cancelar
 
         </button>
 
-        <button
-          class="btn-guardar"
-          (click)="crearObservacion()">
+        <button mat-flat-button color="primary" (click)="crearObservacion()">
 
+          <mat-icon>save</mat-icon>
           Guardar observación
 
         </button>
@@ -82,36 +66,75 @@
 
     </div>
 
-  </div>
+    <textarea class="observacion-textarea" [(ngModel)]="nuevaObservacion.descripcion"
+      placeholder="Escribir observación...">
+      </textarea>
 
-  <div
-    class="observacion-card"
-    *ngFor="let observacion of observaciones">
+    <div class="form-footer">
 
-    <div class="observacion-header">
+      <mat-form-field appearance="outline">
 
-      <div class="observacion-info">
+        <mat-label>Tipo de observación</mat-label>
 
-        <strong>
-          {{ observacion.usuario }}
-        </strong>
+        <mat-select [(ngModel)]="nuevaObservacion.tipoObservacion">
 
-        <span class="observacion-tipo">
-          {{ observacion.tipoObservacion }}
-        </span>
+          <mat-option *ngFor="let tipo of tiposObservacion" [value]="tipo">
 
-      </div>
+            {{ tipo }}
 
-      <span class="observacion-fecha">
-        {{ observacion.fechaCreacion | date:'dd/MM/yyyy HH:mm' }}
-      </span>
+          </mat-option>
 
-    </div>
+        </mat-select>
 
-    <div class="observacion-texto">
-      {{ observacion.descripcion }}
+      </mat-form-field>
+
     </div>
 
   </div>
 
-</div>
+
+  <div class="app-section-header">
+
+    <span class="app-section-counter">
+
+      {{ observacionesFiltradas.length }} observación(es)
+
+    </span>
+
+  </div>
+
+  <!-- LISTADO -->
+
+  <div class="app-list" *ngIf="observacionesFiltradas.length > 0; else sinObservaciones">
+
+    <div *ngFor="let observacion of observacionesFiltradas">
+
+      <app-observacion-item [observacion]="observacion" [expandido]="observacion.expandido"
+        (toggle)="toggleObservacion(observacion)">
+
+      </app-observacion-item>
+
+    </div>
+
+  </div>
+
+
+
+  <ng-template #sinObservaciones>
+
+    <div class="app-empty-state">
+
+      <mat-icon>chat</mat-icon>
+
+      <p>
+        No hay observaciones registradas para este ingreso.
+      </p>
+
+    </div>
+
+  </ng-template>
+
+
+  <!-- </div> -->
+
+</app-modulo-layout>

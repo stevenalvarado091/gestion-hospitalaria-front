@@ -1,435 +1,582 @@
-.detalle-container{
-  padding:24px;
-  background:#f5f7fb;
+:root{
+
+    --color-primary:#2563eb;
+    --color-primary-light:#eff6ff;
+
+    --color-success:#16a34a;
+    --color-success-light:#ecfdf5;
+
+    --color-warning:#d97706;
+    --color-warning-light:#fffbeb;
+
+    --color-purple:#7c3aed;
+    --color-purple-light:#f5f3ff;
+
+    --color-danger:#dc2626;
+
+    --text:#0f172a;
+    --text-secondary:#64748b;
+
+    --border:#e2e8f0;
+
+    --background:#f8fafc;
+
+    --shadow:0 10px 30px rgba(15,23,42,.06);
+
+    --radius:18px;
+
 }
 
-.volver-btn{
-  margin-bottom:20px;
-}
 
-/* =========================
-   CARDS (ESTILO UNIFICADO)
-========================= */
+/* ===========================================================
+   CARD GENERAL
+=========================================================== */
 
-.detalle-card,
 .timeline-card{
-  background:#ffffff;
-  border-radius:22px;
-  padding:28px; /* reducido */
-  box-shadow:0 8px 25px rgba(15,23,42,.06);
-  border:1px solid #eef2f7;
-  margin-bottom:24px;
-  overflow:hidden;
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+
 }
 
-/* =========================
-   HEADER (COMPACTO EN UNA LÍNEA)
-========================= */
 
-.detalle-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:22px 26px;
-  border-bottom:1px solid #edf2f7;
-}
-
-.header-left{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  flex-wrap:nowrap;
-}
-
-.header-icon{
-  width:64px;
-  height:64px;
-  border-radius:16px;
-  background:#eef4ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 2px 6px rgba(37,99,235,.08);
-}
-
-.header-icon mat-icon{
-  font-size:30px;
-  width:30px;
-  height:30px;
-  color:#2563eb;
-}
-
-.numero-label{
-  display:none; /* eliminado visualmente para compactación */
-}
-
-.numero-row{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.numero-row h1{
-  margin:0;
-  font-size:34px;
-  font-weight:700;
-  color:#1e293b;
-}
-
-.header-info{
-  display:flex;
-  gap:18px;
-  font-size:14px;
-  color:#475569;
-  align-items:center;
-}
-
-.header-info span::after{
-  content:"|";
-  margin-left:12px;
-  color:#cbd5e1;
-}
-
-.header-info span:last-child::after{
-  content:"";
-}
-
-.estado-badge{
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  border:1px solid transparent;
-}
-
-.estado-badge.activo{
-  background:#dcfce7;
-  color:#16a34a;
-  border-color:#86efac;
-}
-
-/* CERRADO FUTURO */
-.estado-badge.cerrado{
-  background:#f1f5f9;
-  color:#64748b;
-  border-color:#cbd5e1;
-}
-
-/* NUEVO: HEADER LINEAL */
-.header-line{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-  font-size:13px;
-}
-
-.header-line .sep{
-  color:#cbd5e1;
-}
-
-.header-line .item{
-  color:#334155;
-  font-size:13px;
-}
-
-.header-line .strong{
-  font-weight:700;
-  color:#0f172a;
-}
-
-/* =========================
-   SECCIONES
-========================= */
-
-.section-divider{
-  height:1px;
-  background:#edf2f7;
-}
-
-.section-title{
-  font-size:16px;
-  font-weight:700;
-  color:#1f2937;
-  margin-top:20px;
-  margin-bottom:16px;
-  padding-bottom:10px;
-  border-bottom:1px solid #edf2f7;
-}
-
-/* =========================
-   PACIENTE GRID
-========================= */
-
-.patient-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  padding:0;
-  margin-bottom:20px;
-}
-
-.patient-box{
-  border:1px solid #edf2f7;
-  border-radius:14px;
-  padding:12px;
-  display:flex;
-  gap:10px;
-  align-items:center;
-  background:#ffffff;
-}
-
-.patient-icon{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:#f1f5f9;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.patient-icon mat-icon{
-  color:#64748b;
-}
-
-.patient-box label{
-  display:block;
-  font-size:11px;
-  color:#64748b;
-  margin-bottom:2px;
-}
-
-.patient-box strong{
-  color:#1f2937;
-  font-size:13px;
-}
-
-/* =========================
-   TIMELINE HEADER
-========================= */
+/* ===========================================================
+   HEADER
+=========================================================== */
 
 .timeline-header{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:20px;
-  border-bottom:1px solid #edf2f7;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:24px 28px;
+
+    border-bottom:1px solid var(--border);
+
+    background:white;
+
 }
 
 .timeline-header-icon{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:#f1f5f9;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+
+    width:54px;
+
+    height:54px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:var(--color-primary-light);
+
 }
 
 .timeline-header-icon mat-icon{
-  color:#64748b;
+
+    font-size:28px;
+
+    width:28px;
+
+    height:28px;
+
+    color:var(--color-primary);
+
 }
 
 .timeline-header h2{
-  margin:0;
-  color:#1f2937;
-  font-size:16px;
+
+    margin:0;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:var(--text);
+
 }
 
 .timeline-header span{
-  color:#64748b;
-  font-size:12px;
+
+    display:block;
+
+    margin-top:4px;
+
+    font-size:13px;
+
+    color:var(--text-secondary);
+
 }
 
-/* =========================
-   TIMELINE BODY
-========================= */
+
+/* ===========================================================
+   CUERPO
+=========================================================== */
 
 .timeline-body{
-  padding:18px 20px;
-}
 
-.timeline-item{
-  display:flex;
-  gap:14px;
-  position:relative;
-  padding-bottom:20px;
-  cursor:pointer;
-}
-
-.timeline-line{
-  width:24px;
-  display:flex;
-  justify-content:center;
-}
-
-.timeline-line::after{
-  content:'';
-  position:absolute;
-  left:11px;
-  top:22px;
-  width:2px;
-  height:100%;
-  background:#e2e8f0;
-}
-
-.timeline-item:last-child .timeline-line::after{
-  display:none;
-}
-
-.timeline-dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  z-index:1;
-  background:#94a3b8;
-}
-
-.timeline-content{
-  flex:1;
-}
-
-.timeline-badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:16px;
-  font-size:10px;
-  font-weight:600;
-  margin-bottom:8px;
-  background:#f1f5f9;
-  color:#475569;
-}
-
-.timeline-description{
-  font-size:13px;
-  color:#1f2937;
-  margin-bottom:6px;
-}
-
-.timeline-meta{
-  display:flex;
-  gap:14px;
-  color:#64748b;
-  font-size:11px;
-}
-
-.timeline-meta span{
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-
-/* =========================
-   COLORES EVENTOS
-========================= */
-
-.observacion{ background:#ecfdf5; color:#047857; }
-.autorizacion{ background:#fffbeb; color:#b45309; }
-.correo{ background:#f5f3ff; color:#6d28d9; }
-.documento{ background:#eff6ff; color:#1d4ed8; }
-.ingreso{ background:#f0f9ff; color:#0369a1; }
-
-.timeline-dot.observacion{ background:#10b981; }
-.timeline-dot.autorizacion{ background:#f59e0b; }
-.timeline-dot.correo{ background:#8b5cf6; }
-.timeline-dot.documento{ background:#3b82f6; }
-.timeline-dot.ingreso{ background:#0ea5e9; }
-
-/* =========================
-   DETALLE EVENTO
-========================= */
-
-.timeline-expandido {
-  margin-top: 10px;
-  padding: 12px;
-  border-left: 3px solid #3b82f6;
-  background: #f8fafc;
-  border-radius: 8px;
-}
-
-.detalle-evento p {
-  margin: 5px 0;
-  color: #1f2937;
-  font-size:13px;
-}
-
-.detalle-evento pre {
-  white-space: pre-wrap;
-  font-family: inherit;
-  background: #f1f5f9;
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 6px;
-}
-
-/* =========================
-   ADJUNTOS
-========================= */
-
-.adjunto-item {
-  background: #f1f5f9;
-  padding: 5px 8px;
-  border-radius: 6px;
-  font-size: 11px;
-  display: inline-block;
-  margin-right: 6px;
-}
-
-/* =========================
-   ENVÍOS
-========================= */
-
-.envio-item {
-  background: #f8fafc;
-  border-left: 3px solid #3b82f6;
-  padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 8px;
-}
-
-.envio-header {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 600;
-  color:#1f2937;
-  font-size:12px;
-}
-
-.envio-fecha {
-  margin-top: 4px;
-  color: #64748b;
-  font-size: 11px;
-}
-
-.envio-estado {
-  color: #3b82f6;
-}
-
-.envios-lista{
-
-    margin-top:20px;
+    padding:34px;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:12px;
+    gap:22px;
 
 }
 
-.envio-item{
 
-    border:1px solid #e5e7eb;
+/* ===========================================================
+   EVENTO
+=========================================================== */
 
-    border-radius:12px;
+.evento-card{
+
+    display:flex;
+
+    gap:22px;
+
+    position:relative;
+
+}
+
+.evento-linea{
+
+    width:28px;
+
+    display:flex;
+
+    justify-content:center;
+
+    position:relative;
+
+}
+
+.evento-linea::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:22px;
+
+    width:2px;
+
+    bottom:-22px;
+
+    background:#dbe4ef;
+
+}
+
+.evento-card:last-child .evento-linea::after{
+
+    display:none;
+
+}
+
+.evento-dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    margin-top:18px;
+
+    z-index:5;
+
+}
+
+/* ===========================================================
+   TARJETA
+=========================================================== */
+
+.evento-card-body{
+
+    flex:1;
+
+    border:1px solid #eef2f7;
+    box-shadow:0 6px 20px rgba(15,23,42,.04);
+
+    border-radius:16px;
+
+    background:white;
 
     overflow:hidden;
 
-    background:#fff;
+    transition:.20s;
+
+}
+
+.evento-card-body:hover{
+
+    box-shadow:0 8px 22px rgba(15,23,42,.07);
+
+}
+
+/* ===========================================================
+   HEADER EVENTO
+=========================================================== */
+
+.evento-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 22px;
+
+    cursor:pointer;
+
+}
+
+.evento-header:hover{
+
+    background:#fafcff;
+
+}
+
+.evento-header-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.evento-header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+
+}
+
+.evento-titulo{
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+.evento-fecha,
+.evento-usuario{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    color:var(--text-secondary);
+
+    font-size:13px;
+
+}
+
+.evento-fecha mat-icon,
+.evento-usuario mat-icon{
+
+    width:18px;
+
+    height:18px;
+
+    font-size:18px;
+
+}
+
+/* ===========================================================
+   BADGES
+=========================================================== */
+
+.evento-badge{
+
+    padding:6px 12px;
+
+    border-radius:40px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    text-transform:uppercase;
+
+}
+
+.evento-badge.documento{
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+}
+
+.evento-badge.correo{
+
+    background:#ede9fe;
+
+    color:#6d28d9;
+
+}
+
+.evento-badge.autorizacion{
+
+    background:#fef3c7;
+
+    color:#b45309;
+
+}
+
+.evento-badge.observacion{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+/* ===========================================================
+   PUNTO DE LA LINEA
+=========================================================== */
+
+.evento-dot.documento{
+
+    background:#2563eb;
+
+}
+
+.evento-dot.correo{
+
+    background:#7c3aed;
+
+}
+
+.evento-dot.autorizacion{
+
+    background:#f59e0b;
+
+}
+
+.evento-dot.observacion{
+
+    background:#16a34a;
+
+}
+
+/* ===========================================================
+   CUERPO
+=========================================================== */
+
+.evento-body{
+
+    border-top:1px solid var(--border);
+
+    padding:22px;
+
+    background:#fbfcfe;
+
+}
+
+/* ===========================================================
+   DETALLE DEL EVENTO
+=========================================================== */
+
+.detalle-evento{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+}
+
+.evento-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.evento-label{
+
+    font-size:12px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+    color:#64748b;
+
+}
+
+.evento-value{
+
+    font-size:14px;
+
+    color:#1e293b;
+
+    line-height:1.7;
+
+}
+
+.mensaje-correo{
+
+    margin:0;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    white-space:pre-wrap;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    color:#334155;
+
+}
+
+/* ===========================================================
+   ADJUNTOS
+=========================================================== */
+
+.adjuntos-lista{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+}
+
+.adjunto-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 18px;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    background:white;
+
+    transition:.20s;
+
+}
+
+.adjunto-card:hover{
+
+    border-color:#2563eb;
+
+    box-shadow:0 5px 14px rgba(37,99,235,.08);
+
+}
+
+.adjunto-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.adjunto-left mat-icon{
+
+    font-size:34px;
+
+    width:34px;
+
+    height:34px;
+
+    color:#2563eb;
+
+}
+
+.adjunto-nombre{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#1e293b;
+
+}
+
+.adjunto-info{
+
+    margin-top:2px;
+
+    font-size:12px;
+
+    color:#64748b;
+
+}
+
+/* ===========================================================
+   HISTORIAL DEL CORREO
+=========================================================== */
+
+.envios-lista{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.envio-card{
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    background:white;
 
 }
 
@@ -437,13 +584,11 @@
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
 
-    gap:16px;
+    align-items:center;
 
-    padding:14px 18px;
+    padding:16px 20px;
 
     cursor:pointer;
 
@@ -457,7 +602,7 @@
 
 }
 
-.envio-left{
+.envio-header-left{
 
     display:flex;
 
@@ -467,15 +612,15 @@
 
 }
 
-.envio-info{
+.envio-header-left mat-icon{
 
-    display:flex;
-
-    flex-direction:column;
+    color:#64748b;
 
 }
 
 .envio-titulo{
+
+    font-size:14px;
 
     font-weight:600;
 
@@ -483,17 +628,11 @@
 
 }
 
-.envio-subtitulo{
+.envio-fecha{
 
-    font-size:13px;
+    margin-top:4px;
 
-    color:#64748b;
-
-}
-
-.envio-right{
-
-    font-size:13px;
+    font-size:12px;
 
     color:#64748b;
 
@@ -501,7 +640,7 @@
 
 .envio-body{
 
-    padding:20px;
+    padding:22px;
 
     border-top:1px solid #e5e7eb;
 
@@ -509,65 +648,63 @@
 
 }
 
-.correo-meta{
+/* ===========================================================
+   BOTONES DEL SISTEMA
+=========================================================== */
 
-    display:flex;
+button[mat-flat-button],
+button[mat-raised-button],
+button[mat-stroked-button]{
 
-    flex-direction:column;
+    border-radius:10px !important;
 
-    gap:14px;
-
-    margin-bottom:24px;
-
-}
-
-.correo-meta-item{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:6px;
-
-}
-
-.correo-label{
-
-    font-size:12px;
+    font-size:13px;
 
     font-weight:600;
 
-    color:#64748b;
+    min-height:38px;
 
-    text-transform:uppercase;
-
-}
-
-.correo-value{
-
-    color:#1e293b;
+    padding:0 18px;
 
 }
 
-.correo-seccion{
+button mat-icon{
 
-    margin-top:20px;
+    margin-right:6px;
 
-    padding-top:20px;
+    font-size:18px;
 
-    border-top:1px solid #e5e7eb;
+    width:18px;
 
-}
-
-.correo-contenido{
-
-    margin-top:10px;
+    height:18px;
 
 }
 
-.correo-mensaje{
+/* ===========================================================
+   OBSERVACIONES
+=========================================================== */
 
-    margin-top:10px;
+.evento-observacion{
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    line-height:1.8;
+
+    color:#334155;
+
+    font-size:14px;
+
+}
+
+.evento-observacion pre{
+
+    margin:0;
 
     white-space:pre-wrap;
 
@@ -575,4 +712,1286 @@
 
 }
 
+/* ===========================================================
+   DOCUMENTOS Y AUTORIZACIONES
+=========================================================== */
 
+.documento-card,
+.autorizacion-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:16px 18px;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    background:white;
+
+    transition:.20s;
+
+}
+
+.documento-card:hover,
+.autorizacion-card:hover{
+
+    border-color:#2563eb;
+
+    box-shadow:0 6px 18px rgba(15,23,42,.06);
+
+}
+
+.documento-info,
+.autorizacion-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.documento-info mat-icon,
+.autorizacion-info mat-icon{
+
+    color:#2563eb;
+
+    font-size:34px;
+
+    width:34px;
+
+    height:34px;
+
+}
+
+/* ===========================================================
+   IMPRESIÓN (FUTURO)
+=========================================================== */
+
+@media print{
+
+    body{
+
+        background:white;
+
+    }
+
+    button{
+
+        display:none !important;
+
+    }
+
+    .timeline-card{
+
+        border:none;
+
+        box-shadow:none;
+
+    }
+
+    .evento-card{
+
+        break-inside:avoid;
+
+        page-break-inside:avoid;
+
+    }
+
+    .envio-card{
+
+        break-inside:avoid;
+
+        page-break-inside:avoid;
+
+    }
+
+}
+
+/* ===========================================================
+   RESPONSIVE
+=========================================================== */
+
+@media(max-width:992px){
+
+    .evento-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:18px;
+
+    }
+
+    .evento-header-right{
+
+        width:100%;
+
+        justify-content:space-between;
+
+        flex-wrap:wrap;
+
+    }
+
+    .adjunto-card,
+    .documento-card,
+    .autorizacion-card{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:18px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .timeline-body{
+
+        padding:18px;
+
+    }
+
+    .timeline-header{
+
+        padding:18px;
+
+    }
+
+    .evento-body{
+
+        padding:18px;
+
+    }
+
+}
+
+
+/* ===========================================================
+   AJUSTE VISUAL PARA PARECERSE AL MOCKUP
+=========================================================== */
+
+.evento-header{
+    display:grid;
+    grid-template-columns:92px minmax(360px,1fr) 300px 190px;
+    align-items:center;
+    gap:34px;
+    padding:32px 36px;
+    min-height:134px;
+}
+
+.evento-header-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.evento-header-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:8px;
+
+    padding-left:24px;
+
+    border-left:1px solid #e2e8f0;
+
+}
+
+.evento-titulo{
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:#0f172a;
+
+}
+
+.evento-fecha,
+.evento-usuario{
+
+    font-size:13px;
+
+    color:#475569;
+
+}
+
+.evento-card-body{
+
+    border-radius:20px;
+
+    box-shadow:0 4px 16px rgba(15,23,42,.05);
+
+}
+
+.timeline-body{
+
+    gap:26px;
+
+}
+
+/* ===========================================================
+   HEADER TIPO MOCKUP
+=========================================================== */
+
+.evento-header{
+
+    display:grid;
+
+    grid-template-columns:72px 1.8fr 1fr auto;
+
+    align-items:center;
+
+    gap:24px;
+
+    padding:30px 34px;
+    min-height:118px;
+
+}
+
+.evento-icono{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.evento-icono mat-icon{
+
+    width:34px;
+
+    height:34px;
+
+    font-size:34px;
+
+}
+
+.evento-icono.documento{
+    background:#eaf2ff;
+}
+
+.evento-icono.documento mat-icon{
+    color:#2563eb;
+}
+
+.evento-icono.correo{
+    background:#f3e8ff;
+}
+
+.evento-icono.correo mat-icon{
+    color:#7c3aed;
+}
+
+.evento-icono.observacion{
+    background:#dcfce7;
+}
+
+.evento-icono.observacion mat-icon{
+    color:#16a34a;
+}
+
+.evento-icono.autorizacion{
+    background:#fef3c7;
+}
+
+.evento-icono.autorizacion mat-icon{
+    color:#d97706;
+}
+
+.evento-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.evento-info-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+.evento-info-top h3{
+    font-size:20px;
+    font-weight:700;
+    line-height:1.2;
+}
+
+.evento-meta{
+    min-width:240px;
+    justify-content:center;
+}
+
+.evento-subtitulo{
+    font-size:14px;
+    line-height:1.7;
+    color:#475569;
+    max-width:520px;
+}
+
+.evento-meta{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+    padding-left:24px;
+
+    border-left:1px solid #e2e8f0;
+
+}
+
+.evento-meta-usuario{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+}
+
+.evento-meta-usuario mat-icon,
+.evento-meta-fecha mat-icon{
+
+    width:18px;
+
+    height:18px;
+
+    font-size:18px;
+
+    color:#64748b;
+
+}
+
+.evento-meta-usuario strong{
+
+    display:block;
+
+    font-size:13px;
+
+    color:#0f172a;
+
+}
+
+.evento-meta-usuario small{
+
+    display:block;
+
+    margin-top:2px;
+
+    font-size:11px;
+
+    color:#64748b;
+
+}
+
+.evento-meta-fecha{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:13px;
+
+    color:#475569;
+
+}
+
+.evento-accion{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+    .evento-header{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+    }
+
+    .evento-meta{
+
+        border-left:none;
+
+        border-top:1px solid #e2e8f0;
+
+        padding-left:0;
+
+        padding-top:16px;
+
+    }
+
+    .evento-accion{
+
+        justify-content:flex-start;
+
+    }
+
+}
+
+.evento-accion{
+    align-self:center;
+}
+
+.evento-accion button{
+    min-width:160px !important;
+    height:42px !important;
+    padding:0 18px !important;
+    border-radius:12px !important;
+    border:1px solid #c9d8ff !important;
+    background:#ffffff !important;
+    color:#2563eb !important;
+    font-size:13px !important;
+    font-weight:700 !important;
+}
+
+.evento-accion button:hover{
+    background:#eff6ff !important;
+    border-color:#93c5fd !important;
+    box-shadow:0 6px 16px rgba(37,99,235,.12) !important;
+}
+
+.observacion-preview{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  color:#475569;
+  line-height:1.6;
+  max-width:520px;
+}
+
+/* ===============================
+   SUBTÍTULOS TIPO MOCKUP
+================================ */
+
+.evento-subinfo{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.evento-doc-nombre{
+    font-size:15px;
+    font-weight:600;
+    color:#0f172a;
+    line-height:1.4;
+}
+
+.evento-doc-tipo{
+    font-size:13px;
+    color:#64748b;
+    line-height:1.4;
+}
+
+.evento-subtitulo{
+    margin-top:6px;
+}
+
+.evento-linea::after{
+    width:3px;
+    background:#cfd8e6;
+    left:12px;
+}
+
+.evento-dot{
+    width:14px;
+    height:14px;
+    border:3px solid #fff;
+    box-shadow:0 0 0 2px currentColor;
+}
+
+.evento-info-top h3{
+    margin:0;
+    font-size:20px;
+    font-weight:700;
+    color:#0f172a;
+    line-height:1.2;
+}
+
+.evento-doc-nombre{
+    font-size:15px;
+    font-weight:600;
+    color:#111827;
+}
+
+.evento-doc-tipo,
+.evento-subtitulo{
+    font-size:13px;
+    color:#64748b;
+    line-height:1.6;
+}
+
+
+.evento-meta{
+    min-width:290px;
+    padding-left:28px;
+}
+
+.evento-meta-usuario strong{
+    display:block;
+    font-size:14px;
+    color:#0f172a;
+}
+
+.evento-meta-usuario small{
+    font-size:12px;
+    color:#64748b;
+}
+
+/* ===============================
+   AJUSTE FINAL MOCKUP
+================================ */
+
+.evento-header{
+    padding:30px 34px;
+    min-height:118px;
+    gap:28px;
+}
+
+.evento-info-top h3{
+    margin:0;
+    font-size:20px;
+    font-weight:700;
+    color:#0f172a;
+    line-height:1.2;
+}
+
+.evento-doc-nombre{
+    font-size:15px;
+    font-weight:600;
+    color:#111827;
+}
+
+.evento-doc-tipo{
+    font-size:13px;
+    color:#64748b;
+    line-height:1.5;
+}
+
+.evento-meta{
+    min-width:250px;
+    justify-content:center;
+}
+
+.evento-meta-usuario strong{
+    display:block;
+    font-size:14px;
+    color:#0f172a;
+}
+
+.evento-meta-usuario small{
+    font-size:12px;
+    color:#64748b;
+}
+
+.evento-accion button{
+    min-width:160px !important;
+    height:42px !important;
+    padding:0 18px !important;
+    border-radius:12px !important;
+    border:1px solid #c9d8ff !important;
+    background:#ffffff !important;
+    color:#2563eb !important;
+    font-size:13px !important;
+    font-weight:700 !important;
+}
+
+.evento-accion button:hover{
+    background:#eff6ff !important;
+    border-color:#93c5fd !important;
+    box-shadow:0 6px 16px rgba(37,99,235,.12) !important;
+}
+
+.evento-linea::after{
+    width:3px;
+    background:#cfd8e6;
+    left:12px;
+}
+
+.evento-dot{
+    width:14px;
+    height:14px;
+    border:3px solid #fff;
+    box-shadow:0 0 0 2px currentColor;
+}
+
+/* =========================================
+   BOTONES ESTILO MOCKUP TRAZABILIDAD
+========================================= */
+
+.evento-accion button,
+.adjunto-card button,
+.documento-card button,
+.autorizacion-card button{
+
+    height:44px !important;
+    min-width:170px !important;
+    padding:0 18px !important;
+
+    border-radius:12px !important;
+
+    border:1px solid #c7d7fe !important;
+    background:#ffffff !important;
+
+    color:#2563eb !important;
+
+    font-size:13px !important;
+    font-weight:600 !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+
+    box-shadow:none !important;
+
+    transition:all .2s ease;
+}
+
+.evento-accion button:hover,
+.adjunto-card button:hover,
+.documento-card button:hover,
+.autorizacion-card button:hover{
+
+    background:#eff6ff !important;
+    border-color:#93c5fd !important;
+
+    transform:translateY(-1px);
+
+    box-shadow:0 4px 12px rgba(37,99,235,.12) !important;
+}
+
+.evento-accion button mat-icon,
+.adjunto-card button mat-icon,
+.documento-card button mat-icon,
+.autorizacion-card button mat-icon{
+
+    width:18px;
+    height:18px;
+    font-size:18px;
+    margin:0 !important;
+}
+
+/* =========================================
+   AJUSTE FINAL DE PROPORCIONES MOCKUP
+========================================= */
+
+.timeline-body{
+    padding:32px;
+    gap:28px;
+}
+
+.evento-card{
+    gap:24px;
+}
+
+.evento-header{
+    grid-template-columns:96px minmax(340px, 1fr) 260px 190px;
+    align-items:center;
+    gap:32px;
+    padding:30px 34px;
+    min-height:126px;
+}
+
+.evento-icono{
+    width:60px;
+    height:60px;
+    border-radius:16px;
+}
+
+.evento-icono mat-icon{
+    width:32px;
+    height:32px;
+    font-size:32px;
+}
+
+
+.evento-info{
+    min-width:0;
+}
+
+.evento-info-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.evento-info-top h3{
+    margin:0;
+    font-size:20px;
+    font-weight:700;
+    color:#0f172a;
+    line-height:1.2;
+}
+
+.evento-subtitulo{
+    margin-top:8px;
+    display:block;
+}
+
+.evento-doc-nombre{
+    font-size:15px;
+    font-weight:600;
+    color:#111827;
+    line-height:1.45;
+}
+
+.evento-doc-tipo,
+.observacion-preview{
+    font-size:13px;
+    color:#64748b;
+    line-height:1.6;
+}
+
+.evento-meta{
+    min-width:240px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding-left:22px;
+    border-left:1px solid #e7edf5;
+}
+
+.evento-meta-usuario{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.evento-meta-usuario strong{
+    display:block;
+    font-size:14px;
+    color:#0f172a;
+    line-height:1.3;
+}
+
+.evento-meta-usuario small{
+    display:block;
+    margin-top:2px;
+    font-size:12px;
+    color:#64748b;
+}
+
+
+.evento-accion{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+}
+
+.evento-linea::after{
+    width:3px;
+    background:#d7e0ec;
+    left:13px;
+}
+
+.evento-dot{
+    width:14px;
+    height:14px;
+    margin-top:22px;
+    border:3px solid #ffffff;
+    box-shadow:0 0 0 2px currentColor;
+}
+
+
+.evento-accion button{
+    min-width:182px !important;
+    height:46px !important;
+    border-radius:14px !important;
+    font-size:13px !important;
+    font-weight:700 !important;
+}
+
+
+/* ===== Ajuste visual final ===== */
+
+.timeline-header h2{
+    font-size:26px;
+    font-weight:700;
+    letter-spacing:-0.3px;
+}
+
+.timeline-body{
+    padding:34px;
+    gap:34px;
+}
+
+.evento-card-body{
+    border:1px solid #eef2f7;
+    border-radius:20px;
+    box-shadow:0 6px 20px rgba(15,23,42,.04);
+}
+
+.evento-card-body:hover{
+    box-shadow:0 10px 26px rgba(15,23,42,.08);
+}
+
+.evento-info-top h3{
+    font-size:20px;
+    font-weight:700;
+    line-height:1.2;
+}
+
+.evento-doc-nombre{
+    font-size:15px;
+    font-weight:600;
+    line-height:1.45;
+}
+
+.evento-doc-tipo,
+.evento-subtitulo{
+    font-size:13px;
+    line-height:1.6;
+    color:#64748b;
+}
+
+.evento-linea::after{
+    width:3px;
+    background:#d8e1ee;
+    left:13px;
+}
+
+.evento-dot{
+    width:14px;
+    height:14px;
+    margin-top:22px;
+    border:3px solid #ffffff;
+    box-shadow:0 0 0 2px currentColor;
+}
+
+
+/* ===========================================================
+   AJUSTE FINAL MOCKUP TRAZABILIDAD
+=========================================================== */
+
+.timeline-header h2{
+    font-size:26px;
+    font-weight:700;
+    letter-spacing:-0.3px;
+}
+
+.timeline-body{
+    padding:34px;
+    gap:34px;
+}
+
+.evento-header{
+    display:grid;
+    grid-template-columns:72px minmax(320px,1fr) 240px 180px;
+    align-items:center;
+    gap:28px;
+    padding:26px 30px;
+    min-height:118px;
+}
+
+.evento-card-body{
+    border:1px solid #eef2f7;
+    border-radius:20px;
+    box-shadow:0 6px 20px rgba(15,23,42,.04);
+}
+
+.evento-card-body:hover{
+    box-shadow:0 10px 26px rgba(15,23,42,.08);
+}
+
+.evento-icono{
+    width:72px;
+    height:72px;
+    border-radius:18px;
+}
+
+.evento-icono mat-icon{
+    width:38px;
+    height:38px;
+    font-size:38px;
+}
+
+.evento-info-top h3{
+    margin:0;
+    font-size:20px;
+    font-weight:700;
+    color:#0f172a;
+    line-height:1.2;
+}
+
+.evento-doc-nombre{
+    font-size:15px;
+    font-weight:600;
+    color:#111827;
+    line-height:1.45;
+}
+
+.evento-doc-tipo,
+.evento-subtitulo{
+    font-size:13px;
+    color:#64748b;
+    line-height:1.6;
+}
+
+.evento-meta{
+    min-width:240px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:10px;
+    padding-left:24px;
+    border-left:1px solid #e2e8f0;
+}
+
+.evento-meta-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color:#475569;
+    line-height:1;
+}
+
+.evento-meta-item mat-icon{
+    width:16px;
+    height:16px;
+    font-size:16px;
+    color:#64748b;
+}
+
+.evento-meta-usuario strong{
+    display:block;
+    font-size:14px;
+    color:#0f172a;
+}
+
+.evento-meta-usuario small{
+    display:block;
+    margin-top:2px;
+    font-size:12px;
+    color:#64748b;
+}
+
+.evento-accion button{
+    min-width:160px !important;
+    height:42px !important;
+    padding:0 18px !important;
+    border-radius:12px !important;
+    border:1px solid #c9d8ff !important;
+    background:#ffffff !important;
+    color:#2563eb !important;
+    font-size:13px !important;
+    font-weight:700 !important;
+}
+
+.evento-accion button:hover{
+    background:#eff6ff !important;
+    border-color:#93c5fd !important;
+    box-shadow:0 6px 16px rgba(37,99,235,.12) !important;
+}
+
+.evento-linea::after{
+    width:3px;
+    background:#d8e1ee;
+    left:13px;
+}
+
+.evento-dot{
+    width:14px;
+    height:14px;
+    margin-top:22px;
+    border:3px solid #ffffff;
+    box-shadow:0 0 0 2px currentColor;
+}
+
+
+/* ===========================================================
+   AUTORIZACIONES EN RESUMEN (MISMO ESTILO DEL MÓDULO)
+=========================================================== */
+
+.documento-detalles{
+  display:flex;
+  flex-wrap:wrap;
+  gap:25px;
+  margin-bottom:8px;
+  color:#475569;
+  font-size:14px;
+}
+
+.documento-detalles strong{
+  color:#0f172a;
+  font-weight:600;
+}
+
+/* ===========================================================
+   META FINAL DE EVENTOS
+=========================================================== */
+
+.evento-meta{
+    min-width:240px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:10px;
+    padding-left:24px;
+    border-left:1px solid #e2e8f0;
+}
+
+.evento-meta-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color:#475569;
+    line-height:1;
+}
+
+.evento-meta-item mat-icon{
+    width:16px;
+    height:16px;
+    font-size:16px;
+    color:#64748b;
+}
+
+.adjunto-card{
+    min-width:240px;
+    max-width:280px;
+    cursor:pointer;
+}
+
+.adjunto-action{
+    color:#64748b;
+    transition:.2s;
+}
+
+.adjunto-card:hover .adjunto-action{
+    color:#2563eb;
+}
+
+
+/* ===========================================================
+   DETALLE TIPO GMAIL / OUTLOOK
+=========================================================== */
+
+.correo-detalle{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.correo-header-detalle{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding-bottom:12px;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.correo-asunto-grande{
+    font-size:22px;
+    font-weight:700;
+    color:#0f172a;
+    line-height:1.35;
+    flex:1;
+    letter-spacing:-0.2px;
+}
+
+.correo-meta-grid{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    font-size:14px;
+    color:#475569;
+}
+
+.correo-meta-row strong{
+    color:#0f172a;
+    margin-right:6px;
+}
+
+.correo-acciones{
+    display:flex;
+    justify-content:flex-end;
+}
+
+.correo-contenido{
+    background:#ffffff;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 2px 8px rgba(15,23,42,.03);
+}
+
+.correo-mensaje{
+    white-space:pre-wrap;
+    font-family:inherit;
+    font-size:14px;
+    line-height:1.8;
+    color:#334155;
+}
+
+
+/* ===========================================================
+   REENVIADOS ESTILO GMAIL
+=========================================================== */
+
+.correo-header-detalle.reenviado{
+    padding-bottom:16px;
+    margin-bottom:16px;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.reenviado .correo-asunto-grande{
+    font-size:18px;
+}
+
+.correo-acciones button{
+    border-radius:10px !important;
+    font-weight:600;
+    padding:0 18px !important;
+    height:40px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+
+/* =====================
+   HEADER TIPO GMAIL
+===================== */
+
+.correo-header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    margin-bottom:8px;
+}
+
+
+.correo-acciones{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-top:-4px;
+}
+
+/* ===========================================================
+   ICONOS ESTILO GMAIL
+=========================================================== */
+
+.correo-icono-wrapper{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:background-color .18s ease, transform .18s ease;
+    user-select:none;
+}
+
+.correo-icono-wrapper:hover{
+    background:#f1f3f4;
+    transform:translateY(-1px);
+}
+
+.correo-icono-wrapper:active{
+    background:#e8eaed;
+    transform:scale(.96);
+}
+
+.correo-icono-accion{
+    width:20px;
+    height:20px;
+    font-size:20px;
+    color:#5f6368;
+    transition:color .18s ease;
+    pointer-events:none;
+}
+
+.correo-icono-wrapper:hover .correo-icono-accion{
+    color:#202124;
+}
+
+.correo-meta-grid{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    padding-bottom:10px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.correo-meta-row{
+    font-size:14px;
+    color:#374151;
+}
+
+
+
+
+/* Tooltip más parecido a Gmail */
+::ng-deep .mdc-tooltip__surface{
+    background:#202124 !important;
+    color:#fff !important;
+    font-size:12px !important;
+    border-radius:8px !important;
+    padding:8px 10px !important;
+    box-shadow:0 4px 12px rgba(0,0,0,.25) !important;
+}
+
+
+.evento-accion button,
+.adjunto-card,
+.envio-header,
+.correo-icono-wrapper {
+  cursor: pointer;
+}

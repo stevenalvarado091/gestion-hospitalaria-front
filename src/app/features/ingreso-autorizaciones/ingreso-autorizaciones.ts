@@ -10,6 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 
+import { AutorizacionItemComponent } from '../../shared/components/autorizacion-item/autorizacion-item.component';
+import { ModuloLayoutComponent } from '../../shared/components/modulo-layout/modulo-layout.component';
+
 import { AutorizacionService } from '../../core/services/autorizacion.service';
 
 @Component({
@@ -23,7 +26,9 @@ import { AutorizacionService } from '../../core/services/autorizacion.service';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AutorizacionItemComponent,
+    ModuloLayoutComponent
   ],
   templateUrl: './ingreso-autorizaciones.html',
   styleUrls: ['./ingreso-autorizaciones.css']

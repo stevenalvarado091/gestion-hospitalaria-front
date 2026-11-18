@@ -38,6 +38,39 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  private obtenerPayload(token: string): any | null {
+
+  try {
+
+    const payload = token.split('.')[1];
+    return JSON.parse(atob(payload));
+
+  } catch {
+
+    return null;
+
+  }
+}
+
+tokenExpirado(): boolean {
+
+  const token = this.getToken();
+
+  if (!token) {
+    return true;
+  }
+
+  const payload = this.obtenerPayload(token);
+
+  if (!payload || !payload.exp) {
+    return true;
+  }
+
+  const ahora = Math.floor(Date.now() / 1000);
+
+  return payload.exp < ahora;
+}
+
   getNumeroDocumento(): string | null {
     return localStorage.getItem('numeroDocumento');
   }
@@ -51,8 +84,15 @@ export class AuthService {
   }
 
   estaAutenticado(): boolean {
-    return !!this.getToken();
+
+  const token = this.getToken();
+
+  if (!token) {
+    return false;
   }
+
+  return !this.tokenExpirado();
+}
 
   logout(mostrarMensaje: boolean = false): void {
 

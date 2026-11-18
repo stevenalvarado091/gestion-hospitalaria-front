@@ -1,405 +1,236 @@
-<div class="correo-card">
+<div class="correo-container">
 
-    <!-- CABECERA -->
+    <div class="historial-card">
 
-    <div class="correo-header">
+    <div class="modulo-card correo-card">
 
-        <div class="header-info">
+        <!-- CABECERA -->
 
-            <h2>CORREOS </h2>
+        <div class="correo-header">
+
+            <div class="header-info">
+
+                <h2>CORREOS </h2>
 
                 <p>Gestión de correos asociados al ingreso</p>
 
-        </div>
-
-        <div class="header-actions">
-
-            <button mat-flat-button color="primary" class="btn-enviar" type="button"
-                (click)="mostrarFormulario = !mostrarFormulario">
-
-                <mat-icon>
-
-                    send
-
-                </mat-icon>
-
-                {{ mostrarFormulario ? 'Ocultar formulario' : 'Nuevo correo' }}
-
-            </button>
-
-            <button *ngIf="mostrarFormulario" mat-stroked-button class="btn-cancelar" type="button"
-                (click)="mostrarFormulario=false">
-
-                <mat-icon>
-
-                    close
-
-                </mat-icon>
-
-                Cancelar
-
-            </button>
-
-        </div>
-
-        <div
-    class="spinner"
-    *ngIf="enviando">
-
-    <mat-progress-spinner
-        mode="indeterminate"
-        diameter="45">
-
-    </mat-progress-spinner>
-
-    <div class="spinner-texto">
-
-        <strong>
-
-            Enviando correo...
-
-        </strong>
-
-        <small>
-
-            Espere mientras se envían el mensaje y los archivos adjuntos.
-
-        </small>
-
-    </div>
-
-</div>
-
-
-    </div>
-
-    <!-- ====================================================== -->
-    <!-- FORMULARIO (AHORA APARECE ARRIBA DEL HISTORIAL) -->
-    <!-- ====================================================== -->
-
-    <div *ngIf="mostrarFormulario">
-
-        <hr>
-
-        <form [formGroup]="form">
-
-            <div class="form-grid">
-
-                <mat-form-field appearance="outline">
-
-                    <mat-label>Tipo de correo</mat-label>
-
-                    <mat-select formControlName="tipoCorreo">
-
-                        <mat-option *ngFor="let tipo of tiposCorreo" [value]="tipo">
-
-                            {{ tipo }}
-
-                        </mat-option>
-
-                    </mat-select>
-
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-
-                    <mat-label>EPS o Convenio</mat-label>
-
-                    <input matInput type="text" [formControl]="epsControl" [matAutocomplete]="auto">
-
-                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarEps">
-
-                        <mat-option *ngFor="let eps of epsFiltradas" [value]="eps"
-                            (onSelectionChange)="seleccionarEps(eps)">
-
-                            {{ eps.codigo }} - {{ eps.nombre }}
-
-                        </mat-option>
-
-                    </mat-autocomplete>
-
-                </mat-form-field>
-
             </div>
 
-        </form>
+            <div class="header-actions">
 
-        <!-- ZONA DRAG -->
-
-        <div class="drop-zone" [class.drag-active]="dragActivo" (dragover)="onDragOver($event)"
-            (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
-
-            <mat-icon>cloud_upload</mat-icon>
-
-            <h3>Adjuntar documentos</h3>
-
-            <p>
-
-                Arrastre archivos aquí o haga clic para seleccionarlos.
-
-            </p>
-
-            <button mat-raised-button color="primary" type="button" (click)="abrirSelectorArchivos()">
-
-                Seleccionar documentos
-
-            </button>
-
-        </div>
-
-        <!-- LISTA -->
-
-        <div class="lista-archivos" *ngIf="archivos.length">
-
-            <h3>
-
-                Archivos seleccionados
-
-            </h3>
-
-            <div class="archivo-item" *ngFor="let archivo of archivos; let i=index">
-
-                <div class="archivo-info">
+                <button mat-flat-button color="primary" class="btn-enviar" type="button"
+                    (click)="mostrarFormulario = !mostrarFormulario">
 
                     <mat-icon>
 
-                        description
+                        send
 
                     </mat-icon>
 
-                    <div>
+                    {{ mostrarFormulario ? 'Ocultar formulario' : 'Nuevo correo' }}
 
-                        <strong>
+                </button>
 
-                            {{ archivo.name }}
-
-                        </strong>
-
-                        <small>
-
-                            {{ (archivo.size / 1024 / 1024).toFixed(2) }} MB
-
-                        </small>
-
-                    </div>
-
-                </div>
-
-                <button mat-icon-button color="warn" type="button" (click)="eliminarArchivo(i)">
+                <button *ngIf="mostrarFormulario" mat-stroked-button class="btn-cancelar" type="button"
+                    (click)="mostrarFormulario=false">
 
                     <mat-icon>
 
-                        delete
+                        close
 
                     </mat-icon>
+
+                    Cancelar
 
                 </button>
 
             </div>
 
-        </div>
+            <div class="spinner" *ngIf="enviando">
 
-        <div class="acciones">
+                <mat-progress-spinner mode="indeterminate" diameter="45">
 
-            <button
-    mat-raised-button
-    color="primary"
-    type="button"
-    [disabled]="enviando"
-    (click)="enviarCorreo()">
+                </mat-progress-spinner>
 
-    <mat-icon>send</mat-icon>
+                <div class="spinner-texto">
 
-    Enviar correo
+                    <strong>
 
-</button>
+                        Enviando correo...
 
-            <button mat-button type="button" (click)="mostrarFormulario=false">
+                    </strong>
 
-                Cancelar
+                    <small>
 
-            </button>
+                        Espere mientras se envían el mensaje y los archivos adjuntos.
 
-        </div>
+                    </small>
 
-        <div
-    class="spinner"
-    *ngIf="enviando">
-
-    <mat-progress-spinner
-        mode="indeterminate"
-        diameter="45">
-
-    </mat-progress-spinner>
-
-    <div class="spinner-texto">
-
-        <strong>
-
-            Enviando correo...
-
-        </strong>
-
-
-    </div>
-
-</div>
-
-    </div>
-
-    <!-- ====================================================== -->
-    <!-- HISTORIAL (AHORA VA DEBAJO DEL FORMULARIO) -->
-    <!-- ====================================================== -->
-
-    <h2 class="historial-titulo">
-        Historial de correos
-    </h2>
-
-    <div *ngIf="correos.length > 0; else sinCorreos">
-
-        <div class="correo-item" *ngFor="let correo of correos">
-
-            <!-- RESUMEN -->
-
-            <div class="correo-resumen" (click)="toggleCorreo(correo)">
-
-                <div class="correo-icono">
-                    <mat-icon>mail</mat-icon>
-                </div>
-
-                <div class="correo-info">
-
-                    <div class="correo-asunto">
-                        {{ correo.asunto }}
-                    </div>
-
-                    <div class="correo-meta">
-
-                        <span>
-                            <mat-icon>person</mat-icon>
-                            {{ correo.usuario || 'FACTURADOR01' }}
-                        </span>
-
-                        <span>
-                            <mat-icon>schedule</mat-icon>
-                            {{
-                            (correo.fechaCreacion || correo.envios?.[0]?.fechaEnvio)
-                            | date:'dd/MM/yyyy HH:mm'
-                            }}
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="correo-expandir">
-                    <mat-icon>
-                        {{ correo.expandido ? 'expand_less' : 'expand_more' }}
-                    </mat-icon>
                 </div>
 
             </div>
 
-            <!-- DETALLE -->
 
-            <div class="correo-detalle" *ngIf="correo.expandido">
+        </div>
 
-                <!-- DESTINATARIOS -->
+        <!-- ====================================================== -->
+        <!-- FORMULARIO (AHORA APARECE ARRIBA DEL HISTORIAL) -->
+        <!-- ====================================================== -->
 
-                <div class="detalle-card">
+        <div *ngIf="mostrarFormulario">
 
-                    <div class="detalle-titulo">
-                        <mat-icon>alternate_email</mat-icon>
-                        Destinatarios
-                    </div>
+            <hr>
 
-                    <div class="detalle-contenido">
-                        {{ correo.destinatario }}
-                    </div>
+            <form [formGroup]="form">
+
+                <div class="form-grid">
+
+                    <mat-form-field appearance="outline">
+
+                        <mat-label>Tipo de correo</mat-label>
+
+                        <mat-select formControlName="tipoCorreo">
+
+                            <mat-option *ngFor="let tipo of tiposCorreo" [value]="tipo">
+
+                                {{ tipo }}
+
+                            </mat-option>
+
+                        </mat-select>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+
+                        <mat-label>EPS o Convenio</mat-label>
+
+                        <input matInput type="text" [formControl]="epsControl" [matAutocomplete]="auto">
+
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarEps">
+
+                            <mat-option *ngFor="let eps of epsFiltradas" [value]="eps"
+                                (onSelectionChange)="seleccionarEps(eps)">
+
+                                {{ eps.codigo }} - {{ eps.nombre }}
+
+                            </mat-option>
+
+                        </mat-autocomplete>
+
+                    </mat-form-field>
 
                 </div>
 
-                <!-- MENSAJE -->
+            </form>
 
-                <div class="detalle-card">
+            <!-- ZONA DRAG -->
 
-                    <div class="detalle-titulo">
-                        <mat-icon>description</mat-icon>
-                        Mensaje enviado
-                    </div>
+            <div class="drop-zone" [class.drag-active]="dragActivo" (dragover)="onDragOver($event)"
+                (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
 
-                    <div class="mensaje-box">
-                        {{ correo.mensaje }}
-                    </div>
+                <mat-icon>cloud_upload</mat-icon>
 
-                </div>
+                <h3>Adjuntar documentos</h3>
 
-                <!-- ADJUNTOS -->
+                <p>
 
-                <div class="detalle-card">
+                    Arrastre archivos aquí o haga clic para seleccionarlos.
 
-                    <div class="detalle-titulo">
-                        <mat-icon>attach_file</mat-icon>
-                        Documentos adjuntos
-                    </div>
+                </p>
 
-                    <ng-container *ngIf="correo.adjuntos?.length > 0; else sinAdjuntos">
+                <button mat-raised-button color="primary" type="button" (click)="abrirSelectorArchivos()">
 
-<div
-    class="adjunto-item"
-    *ngFor="let adjunto of correo.adjuntos"
-    (click)="descargarAdjunto(adjunto.id, adjunto.nombreArchivo)">
+                    Seleccionar documentos
 
-    <mat-icon>insert_drive_file</mat-icon>
+                </button>
 
-    {{ adjunto.nombreArchivo }}
+            </div>
 
-</div>
+            <!-- LISTA -->
 
-                    </ng-container>
+            <div class="lista-archivos" *ngIf="archivos.length">
 
-                    <ng-template #sinAdjuntos>
+                <h3>
 
-                        <div class="sin-adjuntos">
-                            No hay documentos adjuntos.
+                    Archivos seleccionados
+
+                </h3>
+
+                <div class="archivo-item" *ngFor="let archivo of archivos; let i=index">
+
+                    <div class="archivo-info">
+
+                        <mat-icon>
+
+                            description
+
+                        </mat-icon>
+
+                        <div>
+
+                            <strong>
+
+                                {{ archivo.name }}
+
+                            </strong>
+
+                            <small>
+
+                                {{ (archivo.size / 1024 / 1024).toFixed(2) }} MB
+
+                            </small>
+
                         </div>
 
-                    </ng-template>
+                    </div>
+
+                    <button mat-icon-button color="warn" type="button" (click)="eliminarArchivo(i)">
+
+                        <mat-icon>
+
+                            delete
+
+                        </mat-icon>
+
+                    </button>
 
                 </div>
 
-                <!-- TRAZABILIDAD -->
+            </div>
 
-                <div class="detalle-card" *ngIf="correo.envios?.length">
+            <div class="acciones">
 
-                    <div class="detalle-titulo">
-                        <mat-icon>history</mat-icon>
-                        Trazabilidad
-                    </div>
+                <button mat-raised-button color="primary" type="button" [disabled]="enviando" (click)="enviarCorreo()">
 
-                    <div class="timeline">
+                    <mat-icon>send</mat-icon>
 
-                        <div class="timeline-item" *ngFor="let envio of correo.envios">
+                    Enviar correo
 
-                            <div class="timeline-circle">
-                                {{ envio.intento }}
-                            </div>
+                </button>
 
-                            <div class="timeline-info">
+                <button mat-button type="button" (click)="mostrarFormulario=false">
 
-                                <strong>
-                                    {{ envio.estado }}
-                                </strong>
+                    Cancelar
 
-                                <small>
-                                    {{ envio.fechaEnvio | date:'dd/MM/yyyy HH:mm' }}
-                                </small>
+                </button>
 
-                            </div>
+            </div>
 
-                        </div>
+            <div class="spinner" *ngIf="enviando">
 
-                    </div>
+                <mat-progress-spinner mode="indeterminate" diameter="45">
+
+                </mat-progress-spinner>
+
+                <div class="spinner-texto">
+
+                    <strong>
+
+                        Enviando correo...
+
+                    </strong>
+
 
                 </div>
 
@@ -407,26 +238,46 @@
 
         </div>
 
-    </div>
+        <!-- ====================================================== -->
+        <!-- HISTORIAL -->
+        <!-- ====================================================== -->
 
-    <ng-template #sinCorreos>
 
-        <div class="sin-correos">
+        <!-- HISTORIAL -->
+        <div class="historial-header">
 
-            <mat-icon>mail_off</mat-icon>
+            <span>{{ correos.length }} registro(s)</span>
 
-            <h3>No existen correos enviados</h3>
+        </div>        
 
-            <p>
-                Cuando se envíe un correo aparecerá en este historial.
-            </p>
+            <div class="documentos-lista" *ngIf="correos.length > 0; else sinCorreos">
+
+                <app-correo-item *ngFor="let correo of correos" [correo]="correo" [expandido]="correo.expandido"
+                    (toggle)="toggleCorreo(correo)" (toggleEnvio)="toggleEnvio($event)"
+                    (imprimir)="imprimirCorreo($event)" (abrirVentana)="abrirCorreoVentana($event)"
+                    (descargarAdjunto)="abrirAdjunto($event.id)">
+                </app-correo-item>
+
+            </div>
 
         </div>
 
-    </ng-template>
+        <ng-template #sinCorreos>
+
+            <div class="sin-correos">
+
+                <mat-icon>mail_off</mat-icon>
+
+                <h3>No existen correos enviados</h3>
+
+                <p>
+                    Cuando se envíe un correo aparecerá en este historial.
+                </p>
+
+            </div>
+
+        </ng-template>
+
+        <input #fileInput hidden type="file" multiple (change)="seleccionarArchivos($event)">
 
 </div>
-
-
-
-<input #fileInput hidden type="file" multiple (change)="seleccionarArchivos($event)">

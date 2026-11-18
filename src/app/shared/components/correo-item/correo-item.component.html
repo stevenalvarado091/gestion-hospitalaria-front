@@ -1,0 +1,272 @@
+<div class="correo-resumen-card evento-card-body">
+
+    <!-- HEADER -->
+
+    <div class="evento-header" (click)="toggle.emit()">
+
+
+        <div class="evento-icono correo">
+            <mat-icon>mail</mat-icon>
+        </div>
+
+        <div class="evento-info">
+
+            <div class="evento-info-top">
+
+                <h3>Correo enviado</h3>
+
+                <span class="evento-badge correo">
+                    CORREO
+                </span>
+
+            </div>
+
+            <div class="evento-subtitulo">
+
+                <div class="evento-subinfo">
+
+                    <div class="evento-doc-nombre">
+                        {{ correo.asunto }}
+                    </div>
+
+                    <div class="evento-doc-tipo">
+                        Para: {{ correo.destinatario }}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="evento-meta">
+
+            <div class="evento-meta-item">
+                <mat-icon>calendar_month</mat-icon>
+                <span>{{ correo.fechaCreacion | date:'dd MMM yyyy' | uppercase }}</span>
+            </div>
+
+            <div class="evento-meta-item">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ correo.fechaCreacion | date:'hh:mm a' }}</span>
+            </div>
+
+            <div class="evento-meta-item">
+                <mat-icon>person_outline</mat-icon>
+                <span>{{ correo.usuario }}</span>
+            </div>
+
+        </div>
+
+        <div class="evento-accion">
+
+            <button mat-stroked-button color="primary" type="button" (click)="$event.stopPropagation(); toggle.emit()">
+
+                <mat-icon>mail_outline</mat-icon>
+
+                {{ expandido ? 'Ocultar correo' : 'Ver correo' }}
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- BODY -->
+
+    <div class="evento-body" *ngIf="expandido">
+
+
+        <div class="correo-detalle" [attr.id]="'correo-' + correo.id">
+
+            <!-- HEADER DETALLE -->
+            <div class="correo-header-detalle">
+
+                <div class="correo-header-top">
+
+                    <div class="correo-asunto-grande">
+                        {{ correo.asunto }}
+                    </div>
+
+                    <div class="correo-acciones">
+
+                        <div class="correo-icono-wrapper" matTooltip="Imprimir todo"
+                            (click)="$event.stopPropagation(); imprimir.emit(correo)">
+
+                            <mat-icon class="correo-icono-accion">
+                                print
+                            </mat-icon>
+
+                        </div>
+
+                        <div class="correo-icono-wrapper" matTooltip="Abrir en una ventana nueva"
+                            (click)="$event.stopPropagation(); abrirVentana.emit(correo)">
+
+                            <mat-icon class="correo-icono-accion">
+                                open_in_new
+                            </mat-icon>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="correo-meta-grid">
+
+                    <div class="correo-meta-row">
+                        <strong>De:</strong>
+                        {{ correo.remitente }}
+                    </div>
+
+                    <div class="correo-meta-row">
+                        <strong>Para:</strong>
+                        {{ correo.destinatario }}
+                    </div>
+
+                    <div class="correo-meta-row">
+                        <strong>Fecha:</strong>
+                        {{ correo.fechaCreacion | date:'dd MMM yyyy · hh:mm a' }}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- MENSAJE -->
+            <div class="correo-contenido">
+
+                <div class="correo-mensaje">
+                    {{ correo.mensaje }}
+                </div>
+
+            </div>
+
+            <!-- ADJUNTOS -->
+            <div class="evento-section" *ngIf="correo.adjuntos?.length">
+
+                <div class="evento-label">
+                    Documentos adjuntos
+                </div>
+
+                <div class="adjuntos-lista">
+
+                    <div class="adjunto-card" *ngFor="let a of correo.adjuntos"
+                        (click)="descargarAdjunto.emit({ id: a.id, nombre: a.nombreArchivo })">
+
+                        <div class="adjunto-left">
+
+                            <mat-icon>description</mat-icon>
+
+                            <div>
+
+                                <div class="adjunto-nombre">
+                                    {{ a.nombreArchivo }}
+                                </div>
+
+                                <div class="adjunto-info">
+                                    {{ a.extension }} · {{ a.tamano }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <mat-icon class="adjunto-action">
+                            open_in_new
+                        </mat-icon>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- REENVIOS / TRAZABILIDAD -->
+            <div class="evento-section" *ngIf="correo.envios?.length > 1">
+
+                <div class="evento-label">
+                    Historial del correo
+                </div>
+
+                <div class="envios-lista">
+
+                    <div class="envio-card" *ngFor="let envio of correo.envios; let i = index" [hidden]="i === 0">
+
+                        <div class="envio-header" (click)="$event.stopPropagation(); toggleEnvio.emit(envio)">
+
+                            <div class="envio-header-left">
+
+                                <mat-icon>
+                                    {{ envio.expandido ? 'expand_more' : 'chevron_right' }}
+                                </mat-icon>
+
+                                <div>
+
+                                    <div class="envio-titulo">
+                                        {{ envio.estadoVisual }}
+                                    </div>
+
+                                    <div class="envio-fecha">
+                                        {{ (envio.fechaEjecutada ? envio.fechaEjecutada : envio.fechaProgramada)
+                                        | date:'dd/MM/yyyy HH:mm' }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="envio-body" *ngIf="envio.expandido">
+
+                            <div class="correo-header-detalle reenviado">
+
+                                <div class="correo-asunto-grande">
+                                    {{ envio.asunto }}
+                                </div>
+
+                                <div class="correo-meta-grid">
+
+                                    <div class="correo-meta-row">
+                                        <strong>De:</strong>
+                                        {{ correo.remitente }}
+                                    </div>
+
+                                    <div class="correo-meta-row">
+                                        <strong>Para:</strong>
+                                        {{ envio.destinatarios?.join(', ') }}
+                                    </div>
+
+                                    <div class="correo-meta-row">
+                                        <strong>Fecha:</strong>
+                                        {{ (envio.fechaEjecutada ? envio.fechaEjecutada : envio.fechaProgramada)
+                                        | date:'dd MMM yyyy · hh:mm a' }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="correo-contenido">
+
+                                <div class="correo-mensaje">
+                                    {{ envio.mensaje }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>

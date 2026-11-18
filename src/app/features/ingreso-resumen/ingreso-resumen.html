@@ -1,291 +1,487 @@
 <ng-container *ngIf="ingreso">
 
+    <div class="timeline-card">
 
-  <div class="timeline-card">
+        <div class="timeline-header">
 
-    <div class="timeline-header">
-      <mat-icon>history</mat-icon>
-      <div>
-        <h2>TRAZABILIDAD DEL INGRESO</h2>
-        <span>Historial completo</span>
-      </div>
-    </div>
+            <div class="timeline-header-icon">
+                <mat-icon>history</mat-icon>
+            </div>
 
-    <div class="timeline-body">
+            <div>
 
-      <div class="timeline-item" *ngFor="let evento of timeline">
+                <h2>Trazabilidad del ingreso</h2>
 
-        <div class="timeline-line">
-          <div class="timeline-dot" [ngClass]="getTipoClase(evento.tipo)">
-          </div>
-        </div>
-
-        <div class="timeline-content" (click)="toggleEvento(evento)">
-
-          <div class="timeline-badge" [ngClass]="getTipoClase(evento.tipo)">
-            {{ evento.tipo }}
-          </div>
-
-          <div class="timeline-description">
-            {{ evento.descripcion }}
-          </div>
-
-          <div class="timeline-meta">
-
-            <span>
-              <mat-icon>calendar_month</mat-icon>
-              {{ evento.fecha | date:'dd/MM/yyyy hh:mm a' }}
-            </span>
-
-            <span>
-              <mat-icon>person_outline</mat-icon>
-              {{ evento.usuario }}
-            </span>
-
-          </div>
-
-          <div class="timeline-action">
-            {{ evento.expandido ? 'Ocultar detalle' : 'Ver detalle' }}
-          </div>
-
-          <!-- DETALLE REAL (NO JSON) -->
-          <div class="timeline-expandido" *ngIf="evento.expandido">
-
-            <div class="detalle-evento">
-
-              <!-- CORREO -->
-              <div *ngIf="evento.tipo === 'CORREO'">
-
-                <div class="evento-section">
-                  <strong>Asunto:</strong>
-                  <div>{{ evento.detalle.asunto }}</div>
-                </div>
-
-                <div class="evento-section">
-                  <strong>Destinatarios:</strong>
-
-                  <div *ngIf="evento.detalle.destinatarios?.length">
-                    <div *ngFor="let d of evento.detalle.destinatarios">
-                      {{ d }}
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="evento-section">
-                  <strong>Mensaje:</strong>
-                  <pre>{{ evento.detalle.mensaje }}</pre>
-                </div>
-
-                <!-- ADJUNTOS -->
-                <div class="evento-section">
-
-                  <strong>Adjuntos:</strong>
-
-                  <ng-container *ngIf="evento.detalle?.adjuntos?.length > 0; else sinAdjuntos">
-
-                    <div class="adjuntos-lista">
-
-                      <div class="adjunto-item" *ngFor="let a of evento.detalle.adjuntos">
-
-                        <div class="adjunto-info">
-
-                          <mat-icon>attach_file</mat-icon>
-
-                          <div>
-
-                            <strong>{{ a.nombreArchivo }}</strong>
-
-                            <div class="adjunto-meta">
-
-                              {{ a.extension }}
-
-                              •
-
-                              {{ a.tamano }}
-
-                            </div>
-
-                          </div>
-
-                        </div>
-
-                        <button mat-flat-button color="primary"
-                          (click)="descargarAdjunto(a.id); $event.stopPropagation()">
-
-                          <mat-icon>download</mat-icon>
-
-                          Descargar
-
-                        </button>
-
-                      </div>
-
-                    </div>
-
-                  </ng-container>
-
-                  <ng-template #sinAdjuntos>
-                    <div style="color:#94a3b8; font-size:13px;">
-                      Sin adjuntos
-                    </div>
-                  </ng-template>
-
-                </div>
-
-                <div class="evento-section" *ngIf="evento.detalle.envios?.length">
-
-                  <strong>Historial del correo</strong>
-
-                  <div class="envios-lista">
-
-                    <div class="envio-item" *ngFor="let envio of evento.detalle.envios; let i = index"
-                      [hidden]="i === 0">
-
-                      <div class="envio-header" (click)="toggleEnvio(envio); $event.stopPropagation()">
-
-                        <div class="envio-left">
-
-                          <mat-icon>
-
-                            {{ envio.expandido ? 'expand_more' : 'chevron_right' }}
-
-                          </mat-icon>
-
-                          <div class="envio-info">
-
-                            <div class="envio-titulo">
-
-                              {{ envio.estadoVisual == 'PROGRAMADO'
-                              ? 'Programado'
-                              : 'Enviado' }}
-
-                            </div>
-
-                            <div class="envio-subtitulo">
-
-                              {{ envio.destinatarios?.length || 0 }}
-                              destinatario(s)
-
-                            </div>
-
-                          </div>
-
-                        </div>
-
-                        <div class="envio-right">
-
-                          {{
-                          (envio.fechaEjecutada
-                          ? envio.fechaEjecutada
-                          : envio.fechaProgramada)
-                          | date:'dd/MM/yyyy hh:mm a'
-                          }}
-
-                        </div>
-
-                      </div>
-
-                      <div class="envio-body" *ngIf="envio.expandido">
-
-                        <div class="evento-section">
-
-                          <strong>Destinatarios</strong>
-
-                          <div *ngFor="let d of envio.destinatarios">
-                            {{ d }}
-                          </div>
-
-                        </div>
-
-                        <div class="evento-section">
-
-                          <strong>Asunto</strong>
-
-                          <div>{{ envio.asunto }}</div>
-
-                        </div>
-
-                        <div class="evento-section">
-
-                          <strong>Mensaje</strong>
-
-                          <pre>{{ envio.mensaje }}</pre>
-
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              <!-- DOCUMENTO -->
-              <div *ngIf="evento.tipo === 'DOCUMENTO'">
-                <p><strong>Nombre:</strong> {{ evento.detalle.nombre }}</p>
-                <p><strong>Usuario:</strong> {{ evento.detalle.usuario }}</p>
-              </div>
-
-              <!-- OBSERVACION -->
-              <div *ngIf="evento.tipo === 'OBSERVACION'">
-                <p><strong>Usuario:</strong> {{ evento.detalle.usuario }}</p>
-                <p><strong>Detalle:</strong></p>
-                <pre>{{ evento.detalle.descripcion }}</pre>
-              </div>
-
-              <!-- AUTORIZACION -->
-              <div *ngIf="evento.tipo === 'AUTORIZACION'">
-
-                <p *ngIf="evento.detalle.numeroAutorizacion">
-                  <strong>Número autorización:</strong>
-                  {{ evento.detalle.numeroAutorizacion }}
-                </p>
-
-                <p *ngIf="evento.detalle.observacion">
-                  <strong>Observación:</strong>
-                  {{ evento.detalle.observacion }}
-                </p>
-
-                <p *ngIf="evento.detalle.nombreArchivo">
-                  <strong>Documento:</strong>
-                  {{ evento.detalle.nombreArchivo }}
-                </p>
-
-                <p *ngIf="evento.detalle.extension">
-                  <strong>Extensión:</strong>
-                  {{ evento.detalle.extension }}
-                </p>
-
-                <p *ngIf="evento.detalle.tamano">
-                  <strong>Tamaño:</strong>
-                  {{ evento.detalle.tamano }}
-                </p>
-
-                <button mat-flat-button color="primary" *ngIf="evento.detalle.nombreArchivo"
-                  (click)="descargarAutorizacion(evento.detalle.id); $event.stopPropagation()">
-
-                  <mat-icon>download</mat-icon>
-
-                  Descargar documento
-
-                </button>
-
-              </div>
+                <span>
+                    Historial completo de todas las gestiones realizadas
+                </span>
 
             </div>
 
-          </div>
+        </div>
+
+        <div class="timeline-body">
+
+            <div class="evento-card" *ngFor="let evento of timeline">
+
+                <!-- Línea -->
+
+                <div class="evento-linea">
+
+                    <div class="evento-dot" [ngClass]="getTipoClase(evento.tipo)">
+
+                    </div>
+
+                </div>
+
+                <!-- Tarjeta -->
+
+                <div class="evento-card-body">
+
+                    <!-- Cabecera -->
+
+                    <div class="evento-header" (click)="(evento.tipo === 'AUTORIZACION' || evento.tipo === 'DOCUMENTO')
+                ? $event.stopPropagation()
+                : toggleEvento(evento)">
+
+                        <!-- ICONO -->
+
+                        <div class="evento-icono" [ngClass]="getTipoClase(evento.tipo)">
+
+                            <mat-icon *ngIf="evento.tipo === 'DOCUMENTO'">description</mat-icon>
+
+                            <mat-icon *ngIf="evento.tipo === 'CORREO'">mail</mat-icon>
+
+                            <mat-icon *ngIf="evento.tipo === 'AUTORIZACION'">verified</mat-icon>
+
+                            <mat-icon *ngIf="evento.tipo === 'OBSERVACION'">chat</mat-icon>
+
+                        </div>
+
+                        <!-- INFORMACIÓN PRINCIPAL -->
+
+                        <div class="evento-info">
+
+                            <div class="evento-info-top">
+
+                                <h3>
+                                    {{ evento.tipo === 'DOCUMENTO' ? 'Documento cargado' :
+                                    evento.tipo === 'CORREO' ? 'Correo enviado' :
+                                    evento.tipo === 'AUTORIZACION' ? 'Autorización registrada' :
+                                    'Observación clínica' }}
+                                </h3>
+
+                                <span class="evento-badge" [ngClass]="getTipoClase(evento.tipo)">
+
+                                    {{ evento.tipo }}
+
+                                </span>
+
+                            </div>
+
+                            <div class="evento-subtitulo">
+
+                                <div *ngIf="evento.tipo === 'DOCUMENTO'" class="evento-subinfo">
+                                    <div class="evento-doc-nombre">
+                                        {{ evento.detalle.nombre }}
+                                    </div>
+                                    <div class="evento-doc-tipo">
+                                        Tipo: {{ evento.detalle.tipoDocumento || 'Documento adjunto' }}
+                                    </div>
+                                </div>
+
+                                <div *ngIf="evento.tipo === 'CORREO'" class="evento-subinfo">
+                                    <div class="evento-doc-nombre">
+                                        {{ evento.detalle.asunto }}
+                                    </div>
+                                    <div class="evento-doc-tipo">
+                                        Para: {{ evento.detalle.destinatarios?.[0] || 'Destinatario' }}
+                                    </div>
+                                </div>
+
+                                <div *ngIf="evento.tipo === 'AUTORIZACION'" class="evento-subinfo">
+
+                                    <div class="documento-detalles" *ngIf="evento.detalle.numeroAutorizacion">
+
+                                        <span>
+                                            <strong>Número autorización:</strong>
+                                            {{ evento.detalle.numeroAutorizacion }}
+                                        </span>
+
+                                    </div>
+
+                                    <div class="documento-detalles" *ngIf="evento.detalle.observacion">
+
+                                        <span>
+                                            <strong>Observación:</strong>
+                                            {{ evento.detalle.observacion }}
+                                        </span>
+
+                                    </div>
+
+                                    <div class="documento-detalles" *ngIf="evento.detalle.nombreArchivo">
+
+                                        <span>
+                                            <strong>Documento:</strong>
+                                            {{ evento.detalle.nombreArchivo }}
+                                        </span>
+
+
+                                    </div>
+
+                                </div>
+
+                                <span *ngIf="evento.tipo === 'OBSERVACION'" class="observacion-preview">
+
+                                    {{ evento.detalle.descripcion | slice:0:140 }}
+                                    {{ evento.detalle.descripcion.length > 140 ? '...' : '' }}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- USUARIO Y FECHA -->
+
+                        <div class="evento-meta">
+
+                            <div class="evento-meta-item">
+                                <mat-icon>calendar_month</mat-icon>
+                                <span>{{ evento.fecha | date:'dd MMM yyyy' | uppercase }}</span>
+                            </div>
+
+                            <div class="evento-meta-item">
+                                <mat-icon>schedule</mat-icon>
+                                <span>{{ evento.fecha | date:'hh:mm a' }}</span>
+                            </div>
+
+                            <div class="evento-meta-item">
+                                <mat-icon>person_outline</mat-icon>
+                                <span>{{ evento.usuario }}</span>
+                            </div>
+
+                        </div>
+
+                        <!-- ACCIÓN -->
+
+                        <div class="evento-accion">
+
+                            <button *ngIf="evento.tipo === 'DOCUMENTO'" mat-stroked-button color="primary" type="button"
+                                (click)="descargarDocumento(evento.detalle.id, evento.detalle.nombre); $event.stopPropagation()">
+
+                                <mat-icon>download</mat-icon>
+                                Descargar
+
+                            </button>
+
+                            <button *ngIf="evento.tipo === 'CORREO'" mat-stroked-button color="primary" type="button"
+                                (click)="toggleEvento(evento); $event.stopPropagation()">
+
+                                <mat-icon>mail_outline</mat-icon>
+                                {{ evento.expandido ? 'Ocultar correo' : 'Ver correo' }}
+
+                            </button>
+
+                            <button *ngIf="evento.tipo === 'AUTORIZACION' && evento.detalle.nombreArchivo"
+                                mat-stroked-button color="primary" type="button"
+                                (click)="descargarAutorizacion(evento.detalle.id, evento.detalle.nombreArchivo); $event.stopPropagation()">
+
+                                <mat-icon>download</mat-icon>
+                                Descargar
+
+                            </button>
+
+                            <button *ngIf="evento.tipo === 'OBSERVACION'" mat-stroked-button color="primary"
+                                type="button" (click)="toggleEvento(evento); $event.stopPropagation()">
+
+                                <mat-icon>visibility</mat-icon>
+                                {{ evento.expandido ? 'Ocultar detalle' : 'Ver detalle' }}
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- CONTENIDO -->
+
+                    <div class="evento-body" *ngIf="evento.expandido && evento.tipo !== 'DOCUMENTO'">
+
+                        <div class="detalle-evento">
+
+
+
+
+                            <!-- ===================== -->
+                            <!-- CORREO -->
+                            <!-- ===================== -->
+
+                            <div *ngIf="evento.tipo === 'CORREO'" class="correo-detalle"
+                                [attr.id]="'correo-' + evento.id">
+
+                                <!-- ENCABEZADO DEL MENSAJE -->
+                                <div class="correo-header-detalle">
+
+                                    <div class="correo-header-top">
+
+                                        <div class="correo-asunto-grande">
+                                            {{ evento.detalle.asunto }}
+                                        </div>
+
+                                        <div class="correo-acciones">
+
+                                            <div class="correo-icono-wrapper" matTooltip="Imprimir todo"
+                                                matTooltipPosition="below"
+                                                (click)="imprimirCorreo(evento); $event.stopPropagation()">
+
+                                                <mat-icon class="correo-icono-accion">
+                                                    print
+                                                </mat-icon>
+
+                                            </div>
+
+                                            <div class="correo-icono-wrapper" matTooltip="Abrir en una ventana nueva"
+                                                matTooltipPosition="below"
+                                                (click)="abrirCorreoVentana(evento); $event.stopPropagation()">
+
+                                                <mat-icon class="correo-icono-accion">
+                                                    open_in_new
+                                                </mat-icon>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="correo-meta-grid">
+
+                                        <div class="correo-meta-row">
+                                            <strong>De:</strong>
+                                            {{ evento.detalle.remitente }}
+                                        </div>
+
+                                        <div class="correo-meta-row">
+                                            <strong>Para:</strong>
+
+                                            <ng-container
+                                                *ngIf="evento.detalle.destinatarios?.length; else destinatarioSimple">
+                                                {{ evento.detalle.destinatarios.join(', ') }}
+                                            </ng-container>
+
+                                            <ng-template #destinatarioSimple>
+                                                {{ evento.detalle.destinatario }}
+                                            </ng-template>
+                                        </div>
+
+                                        <div class="correo-meta-row">
+                                            <strong>Fecha:</strong>
+                                            {{ evento.fecha | date:'dd MMM yyyy · hh:mm a' }}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!-- CONTENIDO DEL MENSAJE -->
+                                <div class="correo-contenido">
+
+                                    <div class="correo-mensaje">
+                                        {{ evento.detalle.mensaje }}
+                                    </div>
+
+                                </div>
+
+                                <!-- ADJUNTOS -->
+                                <div class="evento-section" *ngIf="evento.detalle.adjuntos?.length">
+
+                                    <div class="evento-label">
+                                        Documentos adjuntos
+                                    </div>
+
+                                    <div class="adjuntos-lista">
+
+                                        <div class="adjunto-card" *ngFor="let a of evento.detalle.adjuntos"
+                                            (click)="abrirAdjunto(a.id); $event.stopPropagation()">
+
+                                            <div class="adjunto-left">
+
+                                                <mat-icon>description</mat-icon>
+
+                                                <div>
+
+                                                    <div class="adjunto-nombre">
+                                                        {{ a.nombreArchivo }}
+                                                    </div>
+
+                                                    <div class="adjunto-info">
+                                                        {{ a.extension }} · {{ a.tamano }}
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <mat-icon class="adjunto-action">
+                                                open_in_new
+                                            </mat-icon>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- HISTORIAL DE ENVÍOS -->
+                                <div class="evento-section" *ngIf="evento.detalle.envios?.length">
+
+                                    <div class="evento-label">
+                                        Historial del correo
+                                    </div>
+
+                                    <div class="envios-lista">
+
+                                        <div class="envio-card" *ngFor="let envio of evento.detalle.envios; let i=index"
+                                            [hidden]="i==0">
+
+                                            <div class="envio-header"
+                                                (click)="toggleEnvio(envio); $event.stopPropagation()">
+
+                                                <div class="envio-header-left">
+
+                                                    <mat-icon>
+                                                        {{ envio.expandido ? 'expand_more' : 'chevron_right' }}
+                                                    </mat-icon>
+
+                                                    <div>
+
+                                                        <div class="envio-titulo">
+                                                            {{ envio.estadoVisual }}
+                                                        </div>
+
+                                                        <div class="envio-fecha">
+                                                            {{ (envio.fechaEjecutada ? envio.fechaEjecutada :
+                                                            envio.fechaProgramada) | date:'dd/MM/yyyy HH:mm' }}
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="envio-body" *ngIf="envio.expandido || evento.imprimiendo">
+
+                                                <div class="correo-header-detalle reenviado">
+
+                                                    <div class="correo-asunto-grande">
+                                                        {{ envio.asunto }}
+                                                    </div>
+
+                                                    <div class="correo-meta-grid">
+
+                                                        <div class="correo-meta-row">
+                                                            <strong>De:</strong>
+                                                            {{ evento.detalle.remitente }}
+                                                        </div>
+
+                                                        <div class="correo-meta-row">
+                                                            <strong>Para:</strong>
+                                                            {{ envio.destinatarios?.join(', ') }}
+                                                        </div>
+
+                                                        <div class="correo-meta-row">
+                                                            <strong>Fecha:</strong>
+                                                            {{
+                                                            (envio.fechaEjecutada
+                                                            ? envio.fechaEjecutada
+                                                            : envio.fechaProgramada)
+                                                            | date:'dd MMM yyyy · hh:mm a'
+                                                            }}
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="correo-contenido">
+
+                                                    <div class="correo-mensaje">
+                                                        {{ envio.mensaje }}
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+
+                            <!-- ===================== -->
+                            <!-- DOCUMENTO -->
+                            <!-- ===================== -->
+
+                            <!-- DOCUMENTO -->
+                            <div *ngIf="evento.tipo === 'DOCUMENTO'">
+
+                                <div class="evento-info-top">
+                                    <h3>Documento cargado</h3>
+                                    <span class="evento-badge documento">DOCUMENTO</span>
+                                </div>
+
+                                <div class="evento-subinfo">
+
+                                    <div class="evento-doc-nombre">
+                                        {{ evento.detalle.nombre }}
+                                    </div>
+
+                                    <div class="evento-doc-tipo" *ngIf="evento.detalle.tipoDocumento">
+                                        Tipo: {{ evento.detalle.tipoDocumento }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!-- ===================== -->
+                            <!-- OBSERVACION -->
+                            <!-- ===================== -->
+
+                            <div *ngIf="evento.tipo === 'OBSERVACION'">
+
+                                <div class="evento-section">
+
+                                    <div class="evento-label">
+                                        Observación completa
+                                    </div>
+
+                                    <div class="evento-observacion">
+                                        <pre>{{ evento.detalle.descripcion }}</pre>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
-      </div>
-
     </div>
 
-  </div>
 
 </ng-container>
